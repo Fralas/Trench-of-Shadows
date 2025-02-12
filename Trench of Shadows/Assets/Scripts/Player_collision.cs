@@ -1,23 +1,25 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCollision : MonoBehaviour
 {
-    public GameObject player;  // Riferimento al Player
-    public GameObject door;    // Riferimento alla Porta
+    public int goToSceneIndex;  // Indice della scena da caricare
+    public Vector2 spawnPosition; // Coordinate di spawn nella nuova scena
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject == door)
-        {
-            Debug.Log("Il Player ha toccato la porta!");
-        }
-    }
+        Debug.Log("Scene changer entered");
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject == door)
+        if (other.CompareTag("Player"))  // 🔹 Usa CompareTag per prestazioni migliori
         {
-            Debug.Log("Il Player ha colliso con la porta!");
+            Debug.Log("Player entered door. Saving spawn position: " + spawnPosition);
+            if (PlayerDatas.instance != null)
+            {
+                PlayerDatas.instance.SetSpawnPosition(spawnPosition);
+            }
+
+            Debug.Log("Switching to scene: " + goToSceneIndex);
+            SceneManager.LoadScene(goToSceneIndex, LoadSceneMode.Single); // 🔹 Corretto
         }
     }
 }

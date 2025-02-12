@@ -135,10 +135,11 @@ GameObject:
   - component: {fileID: 298188465}
   - component: {fileID: 298188468}
   - component: {fileID: 298188467}
+  - component: {fileID: 298188469}
   m_Layer: 0
-  m_Name: door
+  m_Name: SceneChange
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -281,6 +282,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &298188469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298188464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f485d2f8ba0fa1841966bbfdfe40eda0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goToSceneIndex: 1
+  spawnPosition: {x: 0, y: 0}
 --- !u!1 &453153273
 GameObject:
   m_ObjectHideFlags: 0
@@ -110650,14 +110665,15 @@ GameObject:
   m_Component:
   - component: {fileID: 2121024076}
   - component: {fileID: 2121024075}
-  - component: {fileID: 2121024077}
   - component: {fileID: 2121024078}
   - component: {fileID: 2121024080}
   - component: {fileID: 2121024081}
+  - component: {fileID: 2121024083}
+  - component: {fileID: 2121024077}
   - component: {fileID: 2121024082}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110868,8 +110884,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f485d2f8ba0fa1841966bbfdfe40eda0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2121024074}
-  door: {fileID: 298188464}
+  goToSceneIndex: 0
+  spawnPosition: {x: 0, y: 0}
+--- !u!114 &2121024083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121024074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b696ddb8f8dbc8a4bb96ac92f6914d60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastPosition: {x: 0, y: 0, z: 0}
+  spawnPosition: {x: -4, y: -4}
+  useSpawnPosition: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
