@@ -28,9 +28,10 @@ public class Movements : MonoBehaviour
                 targetPos.x += input.x;
                 targetPos.y += input.y;
 
-                if(isWalkable(targetPos)) {
+                if (isWalkable(targetPos)) {
                     StartCoroutine(Move(targetPos));
                 }
+
             }
         }
     }
@@ -48,7 +49,7 @@ public class Movements : MonoBehaviour
 
     private bool isWalkable(Vector3 targetPos)
     {
-        if(Physics2D.OverlapCircle(targetPos, 0.2f, solidObjLay) != null)
+        if(Physics2D.OverlapCircle(targetPos, 0.1f, solidObjLay) != null)
         {
             return false;
         }
