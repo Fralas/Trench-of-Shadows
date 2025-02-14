@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09d33517e0192484290cff5d954bfd9e, type: 3}
-  m_Name: sword
+  m_Script: {fileID: 11500000, guid: e9022a84db8c13e4781f7b68acc44364, type: 3}
+  m_Name: game-shop
   m_EditorClassIdentifier: 
-  itemID: Sword
-  itemImg: {fileID: 21300000, guid: eff3168beb78c904aa3e82698c58a7c3, type: 3}
-  itemAmt: 1

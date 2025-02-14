@@ -20,6 +20,21 @@ public class PlayerController : MonoBehaviour
         rb.gravityScale = 0f;
     }
 
+void Awake()
+{
+    GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+    if (players.Length > 1)
+    {
+        Destroy(gameObject); // Se esiste già un Player, distrugge il nuovo
+        return;
+    }
+
+    DontDestroyOnLoad(gameObject);
+}
+
+
+
     void Update()
     {
         // Get horizontal and vertical input (e.g., arrow keys or WASD)
