@@ -9,6 +9,7 @@ public class InventoryManager : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("InventoryManager initialized.");
         ConfigureInventory();
     }
 
@@ -23,7 +24,7 @@ public class InventoryManager : MonoBehaviour
 
     public void StackInInventory(UISlotHandler activeSlot, Item item)
     {
-        if(activeSlot.item.itemID != item.itemID) { return; }
+        if (activeSlot.item.itemID != item.itemID) { return; }
 
         activeSlot.item.itemAmt += item.itemAmt;
         activeSlot.itemCount.text = activeSlot.item.itemAmt.ToString();
@@ -42,11 +43,9 @@ public class InventoryManager : MonoBehaviour
     {
         if (messyInventory) { return; }
 
-        //Loop through each child of inventory grid
-        //Rearrange by populated items
-
+        // Loop through each child of inventory grid and rearrange by populated items
         List<Transform> uiSlots = new List<Transform>();
-        for(int i = 0; i < inventoryGrid.transform.childCount; i++)
+        for (int i = 0; i < inventoryGrid.transform.childCount; i++)
         {
             uiSlots.Add(inventoryGrid.transform.GetChild(i));
         }
@@ -62,9 +61,23 @@ public class InventoryManager : MonoBehaviour
             return hasItemB.CompareTo(hasItemA);
         });
 
-        for(int i = 0; i < uiSlots.Count; i++)
+        for (int i = 0; i < uiSlots.Count; i++)
         {
             uiSlots[i].SetSiblingIndex(i);
         }
+    }
+
+    // New method to check if the inventory contains an item with the specified itemID
+    public bool HasItem(string itemID)
+    {
+        foreach (Transform child in inventoryGrid.transform)
+        {
+            UISlotHandler slot = child.GetComponent<UISlotHandler>();
+            if (slot.item != null && slot.item.itemID == itemID)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
