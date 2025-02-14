@@ -22,6 +22,7 @@ public class MouseManager : MonoBehaviour
         // If both the held item and the slot item exist and are the same, stack them.
         if (heldItem != null && activeItem != null && heldItem.itemID == activeItem.itemID)
         {
+            Debug.Log($"Clicked on slot: {activeSlot.name}");
             activeSlot.inventoryManager.StackInInventory(activeSlot, heldItem);
             heldItem = null;
             return;
