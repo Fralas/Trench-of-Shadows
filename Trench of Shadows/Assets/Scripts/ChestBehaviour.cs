@@ -20,17 +20,9 @@ public class ChestInteraction : MonoBehaviour
 
         // Reference to the player inventory background
         playerInventoryBackground = GameObject.Find("InventoryBackground");
-        if (playerInventoryBackground == null) 
-        {
-            Debug.LogError("Player Inventory Background not found!");
-        }
 
         // Reference to the chest inventory background
         chestInventoryBackground = GameObject.Find("ChestInventoryBackground");
-        if (chestInventoryBackground == null)
-        {
-            Debug.LogError("Chest Inventory Background not found!");
-        }
     }
 
     private void Update()
@@ -91,12 +83,6 @@ public class ChestInteraction : MonoBehaviour
             // Resize both player and chest inventories
             RectTransform playerInvRect = playerInventoryBackground?.GetComponent<RectTransform>();
             RectTransform chestInvRect = chestInventoryBackground?.GetComponent<RectTransform>();  // Using chestInventoryBackground's RectTransform
-
-            // Debug: check if RectTransforms are found
-            if (playerInvRect == null)
-                Debug.LogError("Player Inventory RectTransform is null!");
-            if (chestInvRect == null)
-                Debug.LogError("Chest Inventory RectTransform is null!");
 
             if (playerInvRect != null && chestInvRect != null)
             {
