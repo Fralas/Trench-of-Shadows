@@ -1085,6 +1085,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   woodItem: {fileID: 11400000, guid: 6648bba0af6890d448899078c631af56, type: 2}
   woodAmount: 3
+  printDelay: 1
 --- !u!95 &251317256
 Animator:
   serializedVersion: 5
@@ -1282,8 +1283,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f485d2f8ba0fa1841966bbfdfe40eda0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goToSceneIndex: 1
-  spawnPosition: {x: 0, y: 0}
 --- !u!1 &301495545
 GameObject:
   m_ObjectHideFlags: 0
@@ -4494,6 +4493,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   woodItem: {fileID: 11400000, guid: 6648bba0af6890d448899078c631af56, type: 2}
   woodAmount: 3
+  printDelay: 1
 --- !u!1 &1245133132
 GameObject:
   m_ObjectHideFlags: 0
@@ -116230,6 +116230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   woodItem: {fileID: 11400000, guid: 6648bba0af6890d448899078c631af56, type: 2}
   woodAmount: 3
+  printDelay: 1
 --- !u!1 &2112355735
 GameObject:
   m_ObjectHideFlags: 0
