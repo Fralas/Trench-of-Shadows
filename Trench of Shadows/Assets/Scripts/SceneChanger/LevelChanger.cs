@@ -15,38 +15,33 @@ public class LevelChanger : MonoBehaviour
     private static bool isFirstSpawn = true;  // ✅ Controlla se è la prima volta che il gioco parte
 
     private void Start()
-    {
-        GameObject player = GameObject.FindWithTag("Player");
+{
+    GameObject player = GameObject.FindWithTag("Player");
 
-        if (player != null)
+    if (player != null)
+    {
+        if (DeathHomeButton.hasRespawned)
         {
-            if (isFirstSpawn)
+            Debug.Log("🛑 Il player è appena rinato, non cambio la posizione!");
+            DeathHomeButton.hasRespawned = false; // ✅ Resetto la variabile per il futuro
+        }
+        else if (isFirstSpawn)
+        {
+            Transform startingSpawn = GameObject.Find("StartingPoint")?.transform;
+            if (startingSpawn != null)
             {
-                // ✅ Prima volta: usa StartingPoint
-                Transform startingSpawn = GameObject.Find("StartingPoint")?.transform;
-                if (startingSpawn != null)
-                {
-                    player.transform.position = startingSpawn.position;
-                    Debug.Log("Player posizionato sullo StartingPoint: " + startingSpawn.position);
-                }
-                else
-                {
-                    Debug.LogWarning("StartingPoint non trovato nella scena!");
-                }
-                isFirstSpawn = false;  // ✅ Dopo il primo spawn, non lo usa più
+                player.transform.position = startingSpawn.position;
+                Debug.Log("Player posizionato sullo StartingPoint: " + startingSpawn.position);
             }
-            else
-            {
-                // ✅ Cambi scena: usa SpawnPoint
-                player.transform.position = _spawnPoint.position + new Vector3(1, 0, 0);
-                Debug.Log("Player posizionato su SpawnPoint: " + _spawnPoint.position);
-            }
+            isFirstSpawn = false;
         }
         else
         {
-            Debug.LogWarning("Player non trovato nella scena!");
+            player.transform.position = _spawnPoint.position + new Vector3(1, 0, 0);
         }
     }
+}
+
 
     private void Update()
     {
