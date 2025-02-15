@@ -10,7 +10,14 @@ public class InventoryToggle : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             // Toggle the active state of the inventory background
-            inventoryBackground.SetActive(!inventoryBackground.activeSelf);
+            if (inventoryBackground != null)
+            {
+                inventoryBackground.SetActive(!inventoryBackground.activeSelf);
+            }
+            else
+            {
+                Debug.LogError("InventoryBackground is not assigned.");
+            }
         }
     }
 }
