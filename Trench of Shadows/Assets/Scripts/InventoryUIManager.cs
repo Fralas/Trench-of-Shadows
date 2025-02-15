@@ -2,40 +2,58 @@ using UnityEngine;
 
 public class InventoryUIManager : MonoBehaviour
 {
-    // References to the player and chest inventory UIs
+    // Reference to the player's inventory UI
     public GameObject playerInventoryUI;
-    public GameObject chestInventoryUI;
-
-    // RectTransforms for adjusting inventory positions
     public RectTransform playerInventoryRect;
-    public RectTransform chestInventoryRect;
+
+    // List to hold references to all chest inventory UIs
+    public GameObject[] chestInventories;
+    public RectTransform[] chestInventoryRects;
 
     // Start is called before the first frame update
     void Start()
     {
-        // Position inventories and ensure they are initially set to the correct state
+        // Initialize player inventory and chest inventories
         PositionPlayerInventoryAtBottom();
-        PositionChestInventoryAtTop();
+        PositionChestInventoriesAtTop();
+
+        // Make sure all chests' inventories are hidden by default
+        foreach (var chest in chestInventories)
+        {
+            chest.SetActive(false);
+        }
     }
 
-    // Method to open both inventories at the same time
-    public void OpenInventories()
+    // Call this method when interacting with a chest
+    public void ToggleChestInventory(int chestIndex)
     {
-        // Make both inventories visible
-        playerInventoryUI.SetActive(true);
-        chestInventoryUI.SetActive(true);
+        // Ensure we stay within bounds
+        if (chestIndex < 0 || chestIndex >= chestInventories.Length)
+        {
+            Debug.LogWarning("Invalid chest index!");
+            return;
+        }
 
-        // Adjust positions of inventories to prevent overlap
-        PositionPlayerInventoryAtBottom();
-        PositionChestInventoryAtTop();
+        // Toggle the chest inventory visibility
+        bool isChestActive = chestInventories[chestIndex].activeSelf;
+
+        // Close all chests before opening the selected one
+        CloseAllChestInventories();
+
+        if (!isChestActive)
+        {
+            chestInventories[chestIndex].SetActive(true); // Open the selected chest
+            PositionChestInventoryAtTop(chestIndex);      // Position it at the top
+        }
     }
 
-    // Method to close both inventories at the same time
-    public void CloseInventories()
+    // Close all chest inventories
+    private void CloseAllChestInventories()
     {
-        // Hide both inventories
-        playerInventoryUI.SetActive(false);
-        chestInventoryUI.SetActive(false);
+        foreach (var chest in chestInventories)
+        {
+            chest.SetActive(false);  // Hide all chests' inventories
+        }
     }
 
     // Position the player inventory at the bottom of the screen
@@ -46,11 +64,25 @@ public class InventoryUIManager : MonoBehaviour
         playerInventoryRect.anchoredPosition = Vector2.zero;   // Position at the bottom of the screen
     }
 
-    // Position the chest inventory at the top of the screen
-    private void PositionChestInventoryAtTop()
+    // Position all chest inventories at the top of the screen
+    private void PositionChestInventoriesAtTop()
     {
-        chestInventoryRect.anchorMin = new Vector2(0, 1);      // Top-left corner
-        chestInventoryRect.anchorMax = new Vector2(1, 1);      // Stretch across the full width
-        chestInventoryRect.anchoredPosition = new Vector2(0, 0); // Position at the top of the screen
+        for (int i = 0; i < chestInventoryRects.Length; i++)
+        {
+            chestInventoryRects[i].anchorMin = new Vector2(0, 1);  // Top-left corner
+            chestInventoryRects[i].anchorMax = new Vector2(1, 1);  // Stretch across the full width
+            chestInventoryRects[i].anchoredPosition = new Vector2(0, 0); // Position at the top
+        }
+    }
+
+    // Position a specific chest inventory at the top
+    private void PositionChestInventoryAtTop(int chestIndex)
+    {
+        if (chestIndex >= 0 && chestIndex < chestInventoryRects.Length)
+        {
+            chestInventoryRects[chestIndex].anchorMin = new Vector2(0, 1);  // Top-left corner
+            chestInventoryRects[chestIndex].anchorMax = new Vector2(1, 1);  // Stretch across the full width
+            chestInventoryRects[chestIndex].anchoredPosition = new Vector2(0, 0); // Position at the top
+        }
     }
 }
