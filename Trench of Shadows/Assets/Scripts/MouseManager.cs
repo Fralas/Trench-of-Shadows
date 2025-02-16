@@ -38,14 +38,19 @@ public class MouseManager : MonoBehaviour
     {
         Item activeItem = activeSlot.item;
 
+        // If both held item and active item are the same, stack them.
         if (heldItem != null && activeItem != null && heldItem.itemID == activeItem.itemID)
         {
             Debug.Log($"Clicked on slot: {activeSlot.name}");
             activeSlot.inventoryManager.StackInInventory(activeSlot, heldItem);
             heldItem = null;
+
+            // Show recipe for the resulting item.
+            RecipeDisplayManager.instance?.ShowRecipe(activeSlot.item);
             return;
         }
 
+        // If there is an active item in the slot.
         if (activeItem != null)
         {
             activeSlot.inventoryManager.ClearItemSlot(activeSlot);
@@ -54,16 +59,24 @@ public class MouseManager : MonoBehaviour
                 activeSlot.inventoryManager.PlaceInInventory(activeSlot, heldItem);
             }
             heldItem = activeItem;
+            Debug.Log($"Clicked on slot: {activeSlot.name}");
+
+            // Show the recipe for this item.
+            RecipeDisplayManager.instance?.ShowRecipe(activeSlot.item);
         }
         else
         {
+            // If slot is empty, and if holding an item, place it there.
             if (heldItem != null)
             {
                 activeSlot.inventoryManager.PlaceInInventory(activeSlot, heldItem);
                 heldItem = null;
             }
+            // Optionally, clear the recipe display if an empty slot is clicked.
+            RecipeDisplayManager.instance?.ClearRecipeDisplay();
         }
     }
+
 
     public void PickupFromStack(UISlotHandler activeSlot)
     {

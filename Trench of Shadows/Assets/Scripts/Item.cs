@@ -2,12 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class Ingredient
+{
+    // The item required for the recipe (e.g., Wood, Iron, etc.)
+    public Item item;
+    // The number of this item required
+    public int requiredAmount;
+}
+
 [CreateAssetMenu(fileName = "Item", menuName = "ScriptableObjects/Items")]
 public class Item : ScriptableObject
 {
     public string itemID;
     public Sprite itemImg;
     public int itemAmt;
+    
+    // List of ingredients required to craft this item.
+    public List<Ingredient> recipe = new List<Ingredient>();
 }
 
 public static class ScriptableObjectExtension
