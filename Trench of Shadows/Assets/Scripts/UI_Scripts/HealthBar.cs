@@ -20,6 +20,7 @@ public class HealthBar : MonoBehaviour
     private float _maxRightMask;
     private float _initialRightMask;
 
+
     void Start()
     {
         //x=left, w=top, y=bottom, z=right
@@ -37,4 +38,5 @@ public class HealthBar : MonoBehaviour
         _hpIndicator.SetText($"{newValue}/{_health.MaxHp}");
     }
 
+   
 }

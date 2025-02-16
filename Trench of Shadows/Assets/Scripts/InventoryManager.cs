@@ -7,11 +7,37 @@ public class InventoryManager : MonoBehaviour
     public GameObject inventoryGrid;
     public bool messyInventory;
 
-    private void Awake()
+
+  private static InventoryManager instance;
+
+private void Awake()
+{
+    if (instance == null)
     {
-        Debug.Log("InventoryManager initialized.");
-        ConfigureInventory();
+        instance = this;
+        DontDestroyOnLoad(gameObject);
     }
+    else
+    {
+        Destroy(gameObject);
+        return;
+    }
+
+    Debug.Log("InventoryManager initialized.");
+    ConfigureInventory();
+}
+
+
+private void Update()
+{
+    if (inventoryGrid == null)
+    {
+        Debug.LogWarning("Inventory grid non trovato, provando a riassegnarlo...");
+        inventoryGrid = GameObject.Find("ContentContainer"); // Assicurati che il nome sia corretto
+    }
+}
+
+
 
     public void PlaceInInventory(UISlotHandler activeSlot, Item item)
     {
