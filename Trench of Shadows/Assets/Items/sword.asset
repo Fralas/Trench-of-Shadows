@@ -15,8 +15,3 @@ MonoBehaviour:
   itemID: Sword
   itemImg: {fileID: 21300000, guid: eff3168beb78c904aa3e82698c58a7c3, type: 3}
   itemAmt: 1
-  recipe:
-  - item: {fileID: 11400000, guid: 6648bba0af6890d448899078c631af56, type: 2}
-    requiredAmount: 1
-  - item: {fileID: 11400000, guid: 04c94f3b6e579cd41baaa3b9d145478b, type: 2}
-    requiredAmount: 1
