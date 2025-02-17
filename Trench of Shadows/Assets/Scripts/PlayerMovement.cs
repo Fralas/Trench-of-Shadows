@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     private float attackCooldown = 0.5f; // Cooldown time between attacks (in seconds)
     private float lastAttackTime = 0f; // Time of the last attack
+    private bool isEditMode = false;
 
     void Start()
     {
@@ -120,5 +121,10 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isWalkingUpwards", false); // Disable upward walk animation
             animator.SetBool("isWalkingDownwards", false); // Disable downward walk animation
         }
+    }
+
+    public bool IsEditMode()
+    {
+        return isEditMode;
     }
 }
