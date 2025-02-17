@@ -15,3 +15,5 @@ MonoBehaviour:
   itemID: Axe
   itemImg: {fileID: 21300000, guid: 3c1ced6a190060d43accf47bf6f31a9d, type: 3}
   itemAmt: 1
+  type: 2
+  recipe: []

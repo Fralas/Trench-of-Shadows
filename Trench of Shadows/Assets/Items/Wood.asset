@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: Wood
   itemImg: {fileID: 21300000, guid: 13f861d0990f8f04ebfc844a4c7d7dd7, type: 3}
-  itemAmt: 0
+  itemAmt: 1
+  type: 4
+  recipe: []

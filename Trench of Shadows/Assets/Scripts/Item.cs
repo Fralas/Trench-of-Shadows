@@ -2,12 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ItemType
+{
+    Consumable,
+    Equipment,
+    Weapon,
+    Armor,
+    Material,
+    Miscellaneous
+}
+
+[System.Serializable]
+public class RecipeIngredient {
+    public Item ingredientItem; // Reference to the ingredient item (e.g., Wheat)
+    public int amountRequired;  // How many of this ingredient are needed (e.g., 3)
+}
+
 [CreateAssetMenu(fileName = "Item", menuName = "ScriptableObjects/Items")]
 public class Item : ScriptableObject
 {
     public string itemID;
     public Sprite itemImg;
-    public int itemAmt;
+    public int itemAmt; // This is used to represent the current stack amount in inventory
+    
+    // Added item type field to be displayed in the Inspector
+    public ItemType type;
+    
+    // Use a list of RecipeIngredient instead of a list of Items.
+    public List<RecipeIngredient> recipe;
 }
 
 public static class ScriptableObjectExtension
