@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 7430328989375646356}
   m_Layer: 0
   m_Name: Grid
-  m_TagString: Untagged
+  m_TagString: solido
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

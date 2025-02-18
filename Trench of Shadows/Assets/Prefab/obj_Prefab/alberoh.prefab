@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2050716817156725773}
   m_Layer: 0
   m_Name: alberoh
-  m_TagString: Untagged
+  m_TagString: solido
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
