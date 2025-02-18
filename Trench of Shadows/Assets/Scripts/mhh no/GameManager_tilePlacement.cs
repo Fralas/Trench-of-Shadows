@@ -10,7 +10,7 @@ public class GameManager_tilePlacement : MonoBehaviour
 {
    
    enum BuildMode{construct, delete};
-   BuildMode myBuildMode = BuildMode.construct;
+   // BuildMode myBuildMode = BuildMode.construct;
    public Tilemap constructionTileMap, moutainTilemap, treeTileMap;
    private TileBase tileToPlace;
    //public NavMeshSurface2d navMeshSurface;
