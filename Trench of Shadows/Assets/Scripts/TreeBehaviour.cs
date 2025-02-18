@@ -8,7 +8,6 @@ public class TreeBehavior : MonoBehaviour
     private Transform player;
     private Animator animator;
     public InventoryManager playerInventory; // Reference to the player's inventory
-    public InventoryManager chestInventory;  // Reference to the chest inventory
 
     private float timeSinceLastPrint = 0f;
     public float printDelay = 1f;  // Delay in seconds for prints
@@ -18,11 +17,9 @@ public class TreeBehavior : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         animator = GetComponent<Animator>();
 
+        // Ensure we are correctly referencing the player's inventory
         playerInventory = GameObject.Find("Manager").GetComponent<InventoryManager>();
-        chestInventory = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
-
     }
-
 
     private void Update()
     {
@@ -69,7 +66,7 @@ public class TreeBehavior : MonoBehaviour
         Debug.Log("Cutting tree...");
         animator.SetTrigger("isCut");
 
-        // **Add wood to the chest inventory instead of the player's inventory**
+        // Add wood to the player's inventory
         if (playerInventory != null)
         {
             for (int i = 0; i < woodAmount; i++)
@@ -96,11 +93,11 @@ public class TreeBehavior : MonoBehaviour
         if (emptySlot != null)
         {
             inventory.PlaceInInventory(emptySlot, woodCopy);
-            Debug.Log("Wood added to an empty slot in the chest.");
+            Debug.Log("Wood added to an empty slot in the player's inventory.");
         }
         else
         {
-            Debug.Log("Chest inventory is full!");
+            Debug.Log("Player's inventory is full!");
         }
     }
 

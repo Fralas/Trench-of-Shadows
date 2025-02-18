@@ -15,16 +15,7 @@ public class InventoryManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
+        DontDestroyOnLoad(gameObject);
 
         Debug.Log("InventoryManager initialized.");
         ConfigureInventory();
@@ -237,6 +228,5 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
-
 
 }

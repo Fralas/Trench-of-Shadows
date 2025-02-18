@@ -23,12 +23,9 @@ public class Item : ScriptableObject
 {
     public string itemID;
     public Sprite itemImg;
-    public int itemAmt; // This is used to represent the current stack amount in inventory
-    
-    // Added item type field to be displayed in the Inspector
+    public int itemAmt;
     public ItemType type;
-    
-    // Use a list of RecipeIngredient instead of a list of Items.
+    public int durability; 
     public List<RecipeIngredient> recipe;
 }
 
