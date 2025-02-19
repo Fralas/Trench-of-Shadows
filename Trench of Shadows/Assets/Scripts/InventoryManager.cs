@@ -10,15 +10,25 @@ public class InventoryManager : MonoBehaviour
     public RecipeSlotHandler RecipeSlot_2;
     public RecipeSlotHandler RecipeSlot_3;
 
+    // New: Reference to the held slot's UISlotHandler.
+    public UISlotHandler heldSlot;
 
     private static InventoryManager instance;
 
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-
         Debug.Log("InventoryManager initialized.");
         ConfigureInventory();
+
+        if (heldSlot != null)
+        {
+            Debug.Log("HeldSlot assigned: " + heldSlot.name);
+        }
+        else
+        {
+            Debug.LogWarning("HeldSlot is not assigned in InventoryManager.");
+        }
     }
 
     private void Update()
@@ -27,6 +37,13 @@ public class InventoryManager : MonoBehaviour
         {
             Debug.LogWarning("Inventory grid not found, trying to reassign...");
             inventoryGrid = GameObject.Find("ContentContainer"); // Ensure this name is correct
+        }
+
+        // Debug test: When T is pressed, call GetHeldSlotItem() to log its status.
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Debug.Log("T key pressed - Testing GetHeldSlotItem...");
+            GetHeldSlotItem();
         }
     }
 
@@ -150,7 +167,7 @@ public class InventoryManager : MonoBehaviour
         ConfigureInventory();
         return true;
     }
-    
+
     // New method: Add the crafted item by stacking or placing in an empty slot.
     public bool AddItemToInventory(Item newItem)
     {
@@ -228,5 +245,24 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
-
+    public Item GetHeldSlotItem()
+    {
+        if (heldSlot != null)
+        {
+            if (heldSlot.item != null)
+            {
+                Debug.Log("GetHeldSlotItem: Held slot contains item: " + heldSlot.item.itemID + ", Amount: " + heldSlot.item.itemAmt);
+            }
+            else
+            {
+                Debug.Log("GetHeldSlotItem: Held slot is empty.");
+            }
+            return heldSlot.item;
+        }
+        else
+        {
+            Debug.LogWarning("GetHeldSlotItem: HeldSlot reference is not set in InventoryManager.");
+            return null;
+        }
+    }
 }
