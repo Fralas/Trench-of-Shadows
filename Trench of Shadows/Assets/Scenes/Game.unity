@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8544421121ec40b4888798dd7f157a13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
+  item: {fileID: 11400000, guid: 6b28d6f51d2a8cd4791ce6978e6b5f11, type: 2}
   slotImg: {fileID: 863257393}
   itemCount: {fileID: 1472487188}
   inventoryManager: {fileID: 259166160}
@@ -1218,7 +1218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8544421121ec40b4888798dd7f157a13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
+  item: {fileID: 11400000, guid: a6d88a739aa09f849a596cb77629dc60, type: 2}
   slotImg: {fileID: 24299672}
   itemCount: {fileID: 1933715670}
   inventoryManager: {fileID: 259166160}
@@ -4493,6 +4493,7 @@ GameObject:
   - component: {fileID: 1148543078}
   - component: {fileID: 1148543071}
   - component: {fileID: 1148543069}
+  - component: {fileID: 1148543079}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4733,6 +4734,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryBackground: {fileID: 598758881}
+--- !u!114 &1148543079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148543068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd99f432e1a75449b587e72a0a95503, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInventory: {fileID: 259166160}
+  groundTilemap: {fileID: 1531247185}
+  hoedTile: {fileID: 11400000, guid: 58bc7323f96c5784ba8e5f05f599ca66, type: 2}
+  wateredTile: {fileID: 11400000, guid: 6b25b2dffd4085a45bdcd903dfb34d1a, type: 2}
+  seedTile: {fileID: 11400000, guid: e7e2dda6fbcee684db3001a38e384361, type: 2}
 --- !u!4 &1149612870 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6635844636189707510, guid: 8980e56be7ab05948aacf1db29b2e54d, type: 3}
@@ -5342,7 +5360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8544421121ec40b4888798dd7f157a13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
+  item: {fileID: 11400000, guid: e774c5428de5b214798a55cc0b7758ba, type: 2}
   slotImg: {fileID: 1540557551}
   itemCount: {fileID: 773516533}
   inventoryManager: {fileID: 259166160}
@@ -6401,7 +6419,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1499251181
 Transform:
   m_ObjectHideFlags: 0
