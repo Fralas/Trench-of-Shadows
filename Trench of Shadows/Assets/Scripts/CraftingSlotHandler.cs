@@ -16,11 +16,19 @@ public class CraftingSlotHandler : MonoBehaviour, IPointerClickHandler
     public Image icon1;
     public Image icon2;
     public Image icon3;
+
+    public Image backgroundImage;
     public TextMeshProUGUI count1;
     public TextMeshProUGUI count2;
     public TextMeshProUGUI count3;
 
     void Awake()
+    {
+        UpdateSlotUI();
+    }
+
+    // Called each time the GameObject is enabled (for example, when opening the crafting inventory)
+    void OnEnable()
     {
         UpdateSlotUI();
     }
@@ -33,15 +41,41 @@ public class CraftingSlotHandler : MonoBehaviour, IPointerClickHandler
             itemCount.text = item.itemAmt.ToString();
             slotImg.gameObject.SetActive(true);
 
-            // Update Recipe UI
+            // Update the Recipe UI
             UpdateRecipeUI();
+
+            // Check if the inventory has the required ingredients
+            if (item.recipe != null && item.recipe.Count > 0)
+            {
+                if (!inventoryManager.HasRequiredIngredientsFor(item))
+                {
+                    // Change the background to red if any ingredient is missing
+                    if (backgroundImage != null)
+                        backgroundImage.color = Color.red;
+                    else
+                        slotImg.color = Color.red; // Fallback: tint the slot image red
+                }
+                else
+                {
+                    // Reset to the default color (white) when all ingredients are present
+                    if (backgroundImage != null)
+                        backgroundImage.color = Color.white;
+                    else
+                        slotImg.color = Color.white;
+                }
+            }
         }
         else
         {
             itemCount.text = string.Empty;
             slotImg.gameObject.SetActive(false);
 
-            // Clear Recipe UI
+            // Clear any colored feedback
+            if (backgroundImage != null)
+                backgroundImage.color = Color.white;
+            else
+                slotImg.color = Color.white;
+
             ClearRecipeUI();
         }
     }

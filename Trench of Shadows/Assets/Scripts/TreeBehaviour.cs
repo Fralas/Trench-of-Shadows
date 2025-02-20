@@ -13,7 +13,7 @@ public class TreeBehavior : MonoBehaviour
     private float timeSinceLastPrint = 0f;
     public float printDelay = 1f;  // Delay in seconds for prints
 
-    // New fields for sprite swapping
+    // Fields for sprite swapping
     public Sprite treeIdleSprite;
     public Sprite stumpSprite;
     private SpriteRenderer spriteRenderer;
@@ -87,13 +87,13 @@ public class TreeBehavior : MonoBehaviour
             Debug.LogWarning("Player inventory not found!");
         }
 
-        // Start the coroutine that will wait and then update the state.
+        // Start the coroutine to handle state transitions.
         StartCoroutine(TreeStateCoroutine());
     }
 
     private IEnumerator TreeStateCoroutine()
     {
-        // Wait for 2 seconds.
+        // Wait for 2 seconds before updating the state.
         yield return new WaitForSeconds(2f);
 
         // Set "isCut" to false and "TreeDead" to true.
@@ -107,6 +107,24 @@ public class TreeBehavior : MonoBehaviour
             spriteRenderer.sprite = stumpSprite;
             Debug.Log("Tree sprite changed to stump.");
         }
+
+        // Wait for f seconds while in the TreeDead state.
+        yield return new WaitForSeconds(5f);
+
+        // Reset the animator's booleans back to idle (both false).
+        animator.SetBool("TreeDead", false);
+        animator.SetBool("isCut", false);
+        Debug.Log("Tree state reset: 'TreeDead' and 'isCut' set to false.");
+
+        // Reset the sprite back to the idle tree sprite.
+        if (spriteRenderer != null && treeIdleSprite != null)
+        {
+            spriteRenderer.sprite = treeIdleSprite;
+            Debug.Log("Tree sprite reset to idle.");
+        }
+
+        // Allow the tree to be cut again.
+        isCutDown = false;
     }
 
     private void AddWoodToInventory(InventoryManager inventory)

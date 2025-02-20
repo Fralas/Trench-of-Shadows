@@ -131,6 +131,8 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
+        
+
         // Remove the required ingredients from inventory.
         foreach (RecipeIngredient ingredient in craftedItem.recipe)
         {
@@ -165,6 +167,29 @@ public class InventoryManager : MonoBehaviour
         }
 
         ConfigureInventory();
+        return true;
+    }
+
+    public bool HasRequiredIngredientsFor(Item craftedItem)
+    {
+        if (craftedItem.recipe == null || craftedItem.recipe.Count == 0)
+            return true; // No recipe means nothing to check
+
+        foreach (RecipeIngredient ingredient in craftedItem.recipe)
+        {
+            int requiredAmount = ingredient.amountRequired;
+            int availableAmount = 0;
+            foreach (Transform child in inventoryGrid.transform)
+            {
+                UISlotHandler slot = child.GetComponent<UISlotHandler>();
+                if (slot.item != null && slot.item.itemID == ingredient.ingredientItem.itemID)
+                {
+                    availableAmount += slot.item.itemAmt;
+                }
+            }
+            if (availableAmount < requiredAmount)
+                return false;
+        }
         return true;
     }
 

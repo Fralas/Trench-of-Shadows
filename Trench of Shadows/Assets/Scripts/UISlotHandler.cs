@@ -10,32 +10,54 @@ public class UISlotHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHand
     public Item item;
     public Image slotImg;
     public TextMeshProUGUI itemCount;
+    public Slider healthBar;  // Reference to HealthBar Slider
     public InventoryManager inventoryManager;
 
-    // For drag-and-drop support
     private CanvasGroup canvasGroup;
     private Transform originalParent;
     private Vector3 originalPosition;
 
     void Awake()
     {
+        if (healthBar == null) 
+        {
+            // Try to find the HealthBar GameObject automatically
+            healthBar = transform.Find("HealthBar")?.GetComponent<Slider>();
+        }
+
         if (item != null)
         {
             item = item.Clone();
+        }
+
+        UpdateSlotUI();
+
+        canvasGroup = GetComponent<CanvasGroup>() ?? gameObject.AddComponent<CanvasGroup>();
+    }
+
+    public void UpdateSlotUI()
+    {
+        if (item != null)
+        {
             slotImg.sprite = item.itemImg;
+            slotImg.gameObject.SetActive(true);
             itemCount.text = item.itemAmt.ToString();
+
+            if (healthBar != null)
+            {
+                healthBar.gameObject.SetActive(true);  // Show HealthBar
+                healthBar.value = (float)item.durability / 100f; // Normalize durability
+            }
         }
         else
         {
-            itemCount.text = string.Empty;
             slotImg.gameObject.SetActive(false);
-        }
-        
-        // Add or get a CanvasGroup component for drag handling.
-        canvasGroup = GetComponent<CanvasGroup>();
-        if (canvasGroup == null)
-        {
-            canvasGroup = gameObject.AddComponent<CanvasGroup>();
+            itemCount.text = string.Empty;
+
+            if (healthBar != null)
+            {
+                healthBar.gameObject.SetActive(false);  // Hide HealthBar
+            }
         }
     }
 
@@ -43,32 +65,28 @@ public class UISlotHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHand
     {
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            if (item == null) { return; }
+            if (item == null) return;
 
             MouseManager.instance.PickupFromStack(this);
-            return;
+            item = null;
+            UpdateSlotUI();
         }
-
-        MouseManager.instance.UpdateHeldItem(this);
+        else
+        {
+            MouseManager.instance.UpdateHeldItem(this);
+        }
     }
 
-    // Drag-and-drop methods
-
-    // Called when the drag starts.
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (item != null)
-        {
-            // Remember original parent and position to return to if needed.
-            originalParent = transform.parent;
-            originalPosition = transform.position;
-            // Bring the dragged slot to the top of the hierarchy.
-            transform.SetParent(transform.root);
-            canvasGroup.blocksRaycasts = false;
-        }
+        if (item == null) return;
+
+        originalParent = transform.parent;
+        originalPosition = transform.position;
+        transform.SetParent(transform.root);
+        canvasGroup.blocksRaycasts = false;
     }
 
-    // Called while dragging.
     public void OnDrag(PointerEventData eventData)
     {
         if (item != null)
@@ -77,11 +95,9 @@ public class UISlotHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHand
         }
     }
 
-    // Called when the drag ends.
     public void OnEndDrag(PointerEventData eventData)
     {
         canvasGroup.blocksRaycasts = true;
-        // If the item wasn’t dropped onto a valid slot, return it to its original position.
         if (transform.parent == transform.root)
         {
             transform.SetParent(originalParent);
@@ -89,16 +105,42 @@ public class UISlotHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHand
         }
     }
 
-    // Called when another draggable item is dropped on this slot.
     public void OnDrop(PointerEventData eventData)
     {
         UISlotHandler sourceSlot = eventData.pointerDrag.GetComponent<UISlotHandler>();
         if (sourceSlot != null && sourceSlot != this)
         {
-            // Swap items between the source slot and this slot.
+            // Swap items between slots
             Item temp = this.item;
             inventoryManager.PlaceInInventory(this, sourceSlot.item);
             sourceSlot.inventoryManager.PlaceInInventory(sourceSlot, temp);
+
+            // Update both slots UI
+            UpdateSlotUI();
+            sourceSlot.UpdateSlotUI();
+
+            // Refresh health bar for both slots
+            RefreshHealthBar();
+            sourceSlot.RefreshHealthBar();
         }
     }
+
+
+    // Ensure the health bar is updated correctly
+    public void RefreshHealthBar()
+    {
+        if (healthBar != null)
+        {
+            if (item != null)
+            {
+                healthBar.gameObject.SetActive(true);
+                healthBar.value = (float)item.durability / 100f;
+            }
+            else
+            {
+                healthBar.gameObject.SetActive(false);
+            }
+        }
+    }
+
 }
