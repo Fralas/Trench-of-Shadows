@@ -69,10 +69,11 @@ public class TreeBehavior : MonoBehaviour
         if (woodItem == null || isCutDown) return;
 
         isCutDown = true;
-        Debug.Log("Cutting tree...");
-        animator.SetTrigger("isCut");
+        // Immediately set the tree's "isCut" state to true.
+        animator.SetBool("isCut", true);
+        Debug.Log("Tree is now in 'isCut' state.");
 
-        // Add wood to the player's inventory
+        // Add wood to the player's inventory.
         if (playerInventory != null)
         {
             for (int i = 0; i < woodAmount; i++)
@@ -86,38 +87,26 @@ public class TreeBehavior : MonoBehaviour
             Debug.LogWarning("Player inventory not found!");
         }
 
-        // Instead of destroying the tree, start the coroutine to change its state and sprite
-        StartCoroutine(TreeResetCoroutine());
+        // Start the coroutine that will wait and then update the state.
+        StartCoroutine(TreeStateCoroutine());
     }
 
-    private IEnumerator TreeResetCoroutine()
+    private IEnumerator TreeStateCoroutine()
     {
-        // Wait for the cutting animation to finish (adjust timing as needed)
+        // Wait for 2 seconds.
         yield return new WaitForSeconds(2f);
 
-        // Trigger the transition to the "TreeDead" state in the Animator using the "Die" trigger.
-        animator.SetTrigger("Die");
-        Debug.Log("Animator trigger 'Die' set to transition to TreeDead state.");
+        // Set "isCut" to false and "TreeDead" to true.
+        animator.SetBool("isCut", false);
+        animator.SetBool("TreeDead", true);
+        Debug.Log("Tree state updated: 'isCut' = false, 'TreeDead' = true.");
 
-        // Change the sprite to the stump
+        // Change the sprite to the stump.
         if (spriteRenderer != null && stumpSprite != null)
         {
             spriteRenderer.sprite = stumpSprite;
             Debug.Log("Tree sprite changed to stump.");
         }
-
-        // Wait for 5 seconds while in the TreeDead state.
-        yield return new WaitForSeconds(5f);
-
-        // Reset the sprite back to the idle tree sprite.
-        if (spriteRenderer != null && treeIdleSprite != null)
-        {
-            spriteRenderer.sprite = treeIdleSprite;
-            Debug.Log("Tree sprite reset to tree idle.");
-        }
-
-        // Optionally, allow the tree to be cut again.
-        isCutDown = false;
     }
 
     private void AddWoodToInventory(InventoryManager inventory)
