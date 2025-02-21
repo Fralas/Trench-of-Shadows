@@ -115,7 +115,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -152,3 +152,5 @@ MonoBehaviour:
   - {fileID: -279058507, guid: 070039080a36a1248a494a8e58a1822f, type: 3}
   - {fileID: 1517280318, guid: 070039080a36a1248a494a8e58a1822f, type: 3}
   growthTime: 2
+  playerInventory: {fileID: 0}
+  cornItem: {fileID: 11400000, guid: 7fd711f771e26dd4fbc5afad8c7271a6, type: 2}

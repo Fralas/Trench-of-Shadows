@@ -7,11 +7,11 @@ public class HarvestManager : MonoBehaviour
 {
     public InventoryManager playerInventory;
     public Tilemap groundTilemap;
-    public TileBase hoedTile;       // Tile del terreno zappato
-    public TileBase wateredTile;    // Tile del terreno innaffiato
-    public GameObject seedPrefab;   // Prefab della piantina
+    public TileBase hoedTile;
+    public TileBase wateredTile;
+    public GameObject seedPrefab;
 
-
+    private Dictionary<Vector3Int, bool> plantedCrops = new Dictionary<Vector3Int, bool>();
 
     void Update()
     {
@@ -47,12 +47,6 @@ public class HarvestManager : MonoBehaviour
 
     private void HoeGround(Vector3Int position, TileBase currentTile)
     {
-        if (groundTilemap == null || hoedTile == null)
-        {
-            Debug.LogError("Errore: GroundTilemap o HoedTile non assegnato!");
-            return;
-        }
-
         if (currentTile != hoedTile && currentTile != wateredTile)
         {
             groundTilemap.SetTile(position, hoedTile);
@@ -65,56 +59,50 @@ public class HarvestManager : MonoBehaviour
 
     private void WaterGround(Vector3Int position, TileBase currentTile)
     {
-        if (groundTilemap == null || wateredTile == null)
-        {
-            Debug.LogError("Errore: GroundTilemap o WateredTile non assegnato!");
-            return;
-        }
-
         if (currentTile == hoedTile)
         {
             groundTilemap.SetTile(position, wateredTile);
         }
         else
         {
-            Debug.Log("Puoi innaffiare solo terreno zappato! (Tile attuale: " + (currentTile != null ? currentTile.name : "Nessuna") + ")");
+            Debug.Log("Puoi innaffiare solo terreno zappato!");
         }
     }
 
     private void PlantSeed(Vector3Int position, TileBase currentTile)
-{
-    if (seedPrefab == null)
     {
-        Debug.LogError("Errore: SeedPrefab non assegnato!");
-        return;
-    }
-
-    if (currentTile == wateredTile)
-    {
-        Vector3 spawnPosition = groundTilemap.GetCellCenterWorld(position);
-        GameObject newCrop = Instantiate(seedPrefab, spawnPosition, Quaternion.identity);
-
-        Crop cropScript = newCrop.GetComponent<Crop>(); // Recupera lo script della pianta
-        if (cropScript == null)
+        if (plantedCrops.ContainsKey(position))
         {
-            Debug.LogError("Errore: Il prefab del seme non ha lo script Crop!");
+            Debug.Log("Ci sono già dei semi piantati qui!");
+            return;
         }
 
-        Debug.Log("Semi piantati in posizione: " + spawnPosition);
+        if (currentTile == wateredTile)
+        {
+            Vector3 spawnPosition = groundTilemap.GetCellCenterWorld(position);
+            GameObject newCrop = Instantiate(seedPrefab, spawnPosition, Quaternion.identity);
+            plantedCrops[position] = true;
+            Debug.Log("Semi piantati in posizione: " + spawnPosition);
+        }
+        else
+        {
+            Debug.Log("Puoi piantare solo su terreno bagnato!");
+        }
     }
-    else
+
+    public void ResetTile(Vector3Int position)
     {
-        Debug.Log("Puoi piantare solo su terreno bagnato!");
+        if (plantedCrops.ContainsKey(position))
+        {
+            plantedCrops.Remove(position);
+            groundTilemap.SetTile(position, hoedTile);
+            Debug.Log("Terreno ripristinato dopo il raccolto.");
+        }
     }
-}
-
-
 
     private Vector3Int GetPlayerTilePosition()
     {
         Vector3 playerWorldPos = transform.position;
         return groundTilemap.WorldToCell(playerWorldPos);
     }
-
-
 }
