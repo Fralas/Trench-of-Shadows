@@ -11,105 +11,63 @@ public class PlayerController : MonoBehaviour
     private float lastAttackTime = 0f;    
     private bool isEditMode = false;
     private InventoryManager playerInventory;
-    // Ensure you have a playerInventory reference defined if needed:
+    
+    [SerializeField] private int attackDamage = 10;  // Danno inflitto ai nemici
+    [SerializeField] private float attackRange = 1f; // Distanza massima per colpire il nemico
+
     void Start()
     {
         animator = GetComponent<Animator>();        
         rb = GetComponent<Rigidbody2D>();              
         spriteRenderer = GetComponent<SpriteRenderer>(); 
         rb.gravityScale = 0f;
-        // Initialize playerInventory if it's attached to the same GameObject
         playerInventory = GameObject.Find("Manager").GetComponent<InventoryManager>();
     }
 
     void Update()
     {
-        // --- Movement Code ---
         float horizontalInput = Input.GetAxis("Horizontal");  
         float verticalInput = Input.GetAxis("Vertical");        
 
-        // Move the player using Rigidbody2D
         Vector2 movement = new Vector2(horizontalInput, verticalInput).normalized * moveSpeed;
         rb.velocity = movement;
 
-        // Flip the sprite based on horizontal input
-        if (horizontalInput < 0)
-        {
-            spriteRenderer.flipX = true;
-        }
-        else if (horizontalInput > 0)
-        {
-            spriteRenderer.flipX = false;
-        }
+        if (horizontalInput < 0) spriteRenderer.flipX = true;
+        else if (horizontalInput > 0) spriteRenderer.flipX = false;
 
-        // Set walking animation based on movement
         animator.SetBool("isWalking", horizontalInput != 0 || verticalInput != 0);
 
-        // --- Attack Code ---
         if (Time.time - lastAttackTime >= attackCooldown)
         {
-            if (Input.GetKeyDown(KeyCode.Space) && PlayerHasSword())  // Corrected: added parentheses to call method
+            if (Input.GetKeyDown(KeyCode.Space) && PlayerHasSword())
             {
                 animator.SetBool("isAttackingHorizontal", true);
-                animator.SetBool("isAttackingVertical", false);
-
-                // Flip the sprite during horizontal attack
-                if (spriteRenderer.flipX)
-                {
-                    animator.SetBool("isAttackingHorizontal", true);
-                }
-                else
-                {
-                    spriteRenderer.flipX = true;
-                }
-
                 lastAttackTime = Time.time;
+                Attack();
             }
             else if (Input.GetKeyDown(KeyCode.Z) && PlayerHasSword())
             {
                 animator.SetBool("isAttackingVertical", true);
-                animator.SetBool("isAttackingHorizontal", false);
-
                 lastAttackTime = Time.time;
+                Attack();
             }
         }
 
-        // Reset attack parameters after attack ends
-        if (Input.GetKeyUp(KeyCode.Space) && PlayerHasSword())
-        {
-            animator.SetBool("isAttackingHorizontal", false);
-            if (spriteRenderer.flipX)
-            {
-                spriteRenderer.flipX = false;
-            }
-        }
+        if (Input.GetKeyUp(KeyCode.Space)) animator.SetBool("isAttackingHorizontal", false);
+        if (Input.GetKeyUp(KeyCode.Z)) animator.SetBool("isAttackingVertical", false);
+    }
 
-        if (Input.GetKeyUp(KeyCode.Z) && PlayerHasSword())
-        {
-            animator.SetBool("isAttackingVertical", false);
-        }
-
-        // --- Vertical Movement Animations ---
-        if (verticalInput > 0) // Moving up
-        {
-            animator.SetBool("isWalkingUpwards", true);
-            animator.SetBool("isWalkingDownwards", false);
-        }
-        else if (verticalInput < 0) // Moving down
-        {
-            animator.SetBool("isWalkingDownwards", true);
-            animator.SetBool("isWalkingUpwards", false);
-        }
-        else // No vertical movement
-        {
-            animator.SetBool("isWalkingUpwards", false);
-            animator.SetBool("isWalkingDownwards", false);
-        }
-    } // <-- Properly closing Update() here
-
-    public bool IsEditMode()
+    private void Attack()
     {
-        return isEditMode;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, attackRange);
+        if (hit.collider != null)
+        {
+            EnemyHealth enemy = hit.collider.GetComponent<EnemyHealth>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(attackDamage);
+            }
+        }
     }
 
     private bool PlayerHasSword()
@@ -117,9 +75,7 @@ public class PlayerController : MonoBehaviour
         if (playerInventory != null)
         {
             Item heldItem = playerInventory.GetHeldSlotItem();
-            bool hasSword = heldItem != null && heldItem.itemID == "Sword";
-            Debug.Log("Held slot item: " + (heldItem != null ? heldItem.itemID : "None") + " | Has Sword: " + hasSword);
-            return hasSword;
+            return heldItem != null && heldItem.itemID == "Sword";
         }
         return false;
     }
