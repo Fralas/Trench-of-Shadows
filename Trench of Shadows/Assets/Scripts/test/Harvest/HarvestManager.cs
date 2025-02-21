@@ -11,6 +11,8 @@ public class HarvestManager : MonoBehaviour
     public TileBase wateredTile;    // Tile del terreno innaffiato
     public GameObject seedPrefab;   // Prefab della piantina
 
+
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -92,8 +94,11 @@ public class HarvestManager : MonoBehaviour
         Vector3 spawnPosition = groundTilemap.GetCellCenterWorld(position);
         GameObject newCrop = Instantiate(seedPrefab, spawnPosition, Quaternion.identity);
 
-        // Avvia una coroutine per ignorare la collisione dopo un frame
-        StartCoroutine(IgnoreCollisionWithPlayer(newCrop));
+        Crop cropScript = newCrop.GetComponent<Crop>(); // Recupera lo script della pianta
+        if (cropScript == null)
+        {
+            Debug.LogError("Errore: Il prefab del seme non ha lo script Crop!");
+        }
 
         Debug.Log("Semi piantati in posizione: " + spawnPosition);
     }
@@ -103,22 +108,13 @@ public class HarvestManager : MonoBehaviour
     }
 }
 
-private IEnumerator IgnoreCollisionWithPlayer(GameObject crop)
-{
-    yield return null; // Aspetta un frame per assicurarsi che il collider sia inizializzato
 
-    Collider2D cropCollider = crop.GetComponent<Collider2D>();
-    Collider2D playerCollider = GameObject.FindGameObjectWithTag("Player")?.GetComponent<Collider2D>();
-    if (cropCollider != null && playerCollider != null)
-    {
-        Physics2D.IgnoreCollision(cropCollider, playerCollider);
-        Debug.Log("Collisione ignorata tra il seme e il Player.");
-    }
-}
 
     private Vector3Int GetPlayerTilePosition()
     {
         Vector3 playerWorldPos = transform.position;
         return groundTilemap.WorldToCell(playerWorldPos);
     }
+
+
 }

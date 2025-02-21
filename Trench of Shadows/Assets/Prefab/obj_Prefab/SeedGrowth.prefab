@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3235430749960975400}
   - component: {fileID: 9208698886976660559}
   - component: {fileID: 702692215961091644}
-  m_Layer: 0
+  - component: {fileID: 9210032666640420493}
+  m_Layer: 8
   m_Name: SeedGrowth
-  m_TagString: Untagged
+  m_TagString: Plant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.4243321, y: 1.2305977, z: 0.26058197}
-  m_LocalScale: {x: 3.1694188, y: 3.1694188, z: 3.1694188}
+  m_LocalScale: {x: 2.1609097, y: 2.1609097, z: 2.1609097}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -121,7 +122,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.28, y: 0.1}
+    oldSize: {x: 0.52, y: 0.5}
     newSize: {x: 0.28, y: 0.1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -130,3 +131,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.28, y: 0.1}
   m_EdgeRadius: 0
+--- !u!114 &9210032666640420493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288178392398763960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0c2cfbcfe5878c4f98a0780acb9f92a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  growthStages:
+  - {fileID: -803634938, guid: 070039080a36a1248a494a8e58a1822f, type: 3}
+  - {fileID: 2093940742, guid: 070039080a36a1248a494a8e58a1822f, type: 3}
+  - {fileID: 1088747999, guid: 070039080a36a1248a494a8e58a1822f, type: 3}
+  - {fileID: 253941310, guid: 070039080a36a1248a494a8e58a1822f, type: 3}
+  - {fileID: 253941310, guid: 070039080a36a1248a494a8e58a1822f, type: 3}
+  - {fileID: -279058507, guid: 070039080a36a1248a494a8e58a1822f, type: 3}
+  - {fileID: 1517280318, guid: 070039080a36a1248a494a8e58a1822f, type: 3}
+  growthTime: 2
