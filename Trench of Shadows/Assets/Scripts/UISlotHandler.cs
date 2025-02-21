@@ -22,7 +22,7 @@ public class UISlotHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHand
         if (healthBar == null) 
         {
             // Try to find the HealthBar GameObject automatically
-            healthBar = transform.Find("HealthBar")?.GetComponent<Slider>();
+            healthBar = GetComponentInChildren<Slider>();
         }
 
         if (item != null)
@@ -45,8 +45,24 @@ public class UISlotHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHand
 
             if (healthBar != null)
             {
-                healthBar.gameObject.SetActive(true);  // Show HealthBar
-                healthBar.value = (float)item.durability / 100f; // Normalize durability
+                healthBar.gameObject.SetActive(true);
+                float normalizedDurability = (float)item.durability / 100f;
+                healthBar.value = normalizedDurability;
+
+                // Update the color of the slider based on durability percentage.
+                Image fillImage = healthBar.fillRect.GetComponent<Image>();
+                if (normalizedDurability > 0.66f)
+                {
+                    fillImage.color = Color.green;
+                }
+                else if (normalizedDurability > 0.33f)
+                {
+                    fillImage.color = Color.yellow;
+                }
+                else
+                {
+                    fillImage.color = Color.red;
+                }
             }
         }
         else
@@ -56,10 +72,11 @@ public class UISlotHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHand
 
             if (healthBar != null)
             {
-                healthBar.gameObject.SetActive(false);  // Hide HealthBar
+                healthBar.gameObject.SetActive(false);
             }
         }
     }
+
 
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -69,41 +86,25 @@ public class UISlotHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHand
 
             MouseManager.instance.PickupFromStack(this);
             item = null;
-            UpdateSlotUI();
         }
         else
         {
             MouseManager.instance.UpdateHeldItem(this);
         }
+        
+        // Refresh the slot UI (including the health bar) on every click
+        UpdateSlotUI();
     }
+
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (item == null) return;
-
-        originalParent = transform.parent;
-        originalPosition = transform.position;
-        transform.SetParent(transform.root);
-        canvasGroup.blocksRaycasts = false;
+        // Prevent dragging completely
+        eventData.pointerDrag = null;
     }
 
-    public void OnDrag(PointerEventData eventData)
-    {
-        if (item != null)
-        {
-            transform.position = eventData.position;
-        }
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        canvasGroup.blocksRaycasts = true;
-        if (transform.parent == transform.root)
-        {
-            transform.SetParent(originalParent);
-            transform.position = originalPosition;
-        }
-    }
+    public void OnDrag(PointerEventData eventData) { }
+    public void OnEndDrag(PointerEventData eventData) { }
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -134,7 +135,22 @@ public class UISlotHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHand
             if (item != null)
             {
                 healthBar.gameObject.SetActive(true);
-                healthBar.value = (float)item.durability / 100f;
+                float normalizedDurability = (float)item.durability / 100f;
+                healthBar.value = normalizedDurability;
+                
+                Image fillImage = healthBar.fillRect.GetComponent<Image>();
+                if (normalizedDurability > 0.66f)
+                {
+                    fillImage.color = Color.green;
+                }
+                else if (normalizedDurability > 0.33f)
+                {
+                    fillImage.color = Color.yellow;
+                }
+                else
+                {
+                    fillImage.color = Color.red;
+                }
             }
             else
             {
@@ -142,5 +158,6 @@ public class UISlotHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHand
             }
         }
     }
+
 
 }

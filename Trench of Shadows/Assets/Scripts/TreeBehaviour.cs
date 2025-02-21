@@ -81,6 +81,9 @@ public class TreeBehavior : MonoBehaviour
                 AddWoodToInventory(playerInventory);
             }
             Debug.Log($"{woodAmount} Wood added to the player's inventory.");
+
+            // Decrease axe durability by 20 when cutting the tree.
+            DecreaseAxeDurability();
         }
         else
         {
@@ -94,7 +97,7 @@ public class TreeBehavior : MonoBehaviour
     private IEnumerator TreeStateCoroutine()
     {
         // Wait for 2 seconds before updating the state.
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.8f);
 
         // Set "isCut" to false and "TreeDead" to true.
         animator.SetBool("isCut", false);
@@ -108,7 +111,7 @@ public class TreeBehavior : MonoBehaviour
             Debug.Log("Tree sprite changed to stump.");
         }
 
-        // Wait for f seconds while in the TreeDead state.
+        // Wait for 5 seconds while in the TreeDead state.
         yield return new WaitForSeconds(5f);
 
         // Reset the animator's booleans back to idle (both false).
@@ -129,9 +132,24 @@ public class TreeBehavior : MonoBehaviour
 
     private void AddWoodToInventory(InventoryManager inventory)
     {
+        // Check if the inventory already contains the wood item.
         Item woodCopy = woodItem.Clone();
         woodCopy.itemAmt = 1;
 
+        // Search for an existing slot with the same wood item
+        foreach (Transform child in inventory.inventoryGrid.transform)
+        {
+            UISlotHandler slot = child.GetComponent<UISlotHandler>();
+            if (slot.item != null && slot.item.itemID == woodCopy.itemID)
+            {
+                // If found, stack the wood in that slot.
+                inventory.StackInInventory(slot, woodCopy);
+                Debug.Log("Wood stacked in existing slot.");
+                return; // Exit after stacking
+            }
+        }
+
+        // If no existing wood item is found, add it to an empty slot
         UISlotHandler emptySlot = FindEmptySlot(inventory);
 
         if (emptySlot != null)
@@ -145,6 +163,7 @@ public class TreeBehavior : MonoBehaviour
         }
     }
 
+
     private UISlotHandler FindEmptySlot(InventoryManager inventory)
     {
         foreach (Transform child in inventory.inventoryGrid.transform)
@@ -156,5 +175,25 @@ public class TreeBehavior : MonoBehaviour
             }
         }
         return null;
+    }
+
+    // New method: Decrease the axe's durability by 20 each time the tree is cut.
+    private void DecreaseAxeDurability()
+    {
+        Item heldItem = playerInventory.GetHeldSlotItem();
+        if (heldItem != null && heldItem.itemID == "Axe")
+        {
+            heldItem.durability -= 20;
+            Debug.Log("Axe durability decreased to: " + heldItem.durability);
+            if (heldItem.durability <= 0)
+            {
+                playerInventory.RemoveHeldItem();
+                Debug.Log("Axe broke and has been removed from the inventory.");
+            }
+            else
+            {
+                playerInventory.UpdateHeldSlotUI();
+            }
+        }
     }
 }

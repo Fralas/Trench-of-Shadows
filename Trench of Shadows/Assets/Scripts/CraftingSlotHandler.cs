@@ -24,6 +24,10 @@ public class CraftingSlotHandler : MonoBehaviour, IPointerClickHandler
 
     void Awake()
     {
+        if (inventoryManager == null)
+        {
+            Debug.LogError("InventoryManager reference is not assigned in " + gameObject.name);
+        }
         UpdateSlotUI();
     }
 

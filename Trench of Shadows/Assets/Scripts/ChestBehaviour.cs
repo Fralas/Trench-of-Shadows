@@ -9,8 +9,6 @@ public class ChestInteraction : MonoBehaviour
     public float printDelay = 1f;  // Delay for showing messages
     public float interactionRange = 2f; // Distance required to interact
 
-    private Vector2 chestInitialPosition; // Store the initial position of the chest UI
-
     private GameObject playerInventoryBackground; // Reference to the player inventory background
     private GameObject chestInventoryBackground; // Reference to the chest inventory background
 
@@ -68,7 +66,7 @@ public class ChestInteraction : MonoBehaviour
             chestInventoryUI.SetActive(true);
             Debug.Log("Chest inventory opened.");
 
-            // Ensure both player and chest inventories are active before resizing
+            // Ensure both player and chest inventories are active
             if (playerInventoryBackground != null && !playerInventoryBackground.activeSelf)
             {
                 playerInventoryBackground.SetActive(true);
@@ -79,47 +77,6 @@ public class ChestInteraction : MonoBehaviour
                 chestInventoryBackground.SetActive(true);
                 Debug.Log("Chest inventory activated.");
             }
-
-            // Resize both player and chest inventories
-            RectTransform playerInvRect = playerInventoryBackground?.GetComponent<RectTransform>();
-            RectTransform chestInvRect = chestInventoryBackground?.GetComponent<RectTransform>();  // Using chestInventoryBackground's RectTransform
-
-            if (playerInvRect != null && chestInvRect != null)
-            {
-                // Resize both inventories
-                ResizeInventory(playerInvRect);
-                ResizeInventory(chestInvRect);
-
-                // Optionally move the chest inventory relative to the player inventory
-                if (chestInitialPosition == Vector2.zero)
-                {
-                    float additionalOffset = 40f; // Adjust this value to control the distance
-                    chestInitialPosition = new Vector2(
-                        playerInvRect.anchoredPosition.x + playerInvRect.rect.width + 20 + additionalOffset, // Added offset
-                        playerInvRect.anchoredPosition.y
-                    );
-                    chestInvRect.anchoredPosition = chestInitialPosition;
-                    Debug.Log($"Chest UI moved to: {chestInvRect.anchoredPosition}");
-                }
-            }
-            else
-            {
-                Debug.LogWarning("Failed to find Player Inventory or Chest Inventory RectTransforms.");
-            }
-        }
-    }
-
-    private void ResizeInventory(RectTransform inventoryRect)
-    {
-        if (inventoryRect != null)
-        {
-            // Resize to a smaller UI size (adjust values as needed)
-            inventoryRect.sizeDelta = new Vector2(80, 85); // Example size for both inventories
-            Debug.Log($"Resized inventory to: {inventoryRect.sizeDelta} on {inventoryRect.gameObject.name}");
-        }
-        else
-        {
-            Debug.LogError("Inventory RectTransform is null!");
         }
     }
 }

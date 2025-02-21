@@ -27,24 +27,6 @@ public class CraftingInteraction : MonoBehaviour
 
         // Reference to the recipe inventory background
         recipeBackground = GameObject.Find("RecipeBackground");
-
-        // Debug log for any missing references
-        if (craftInventoryUI == null)
-        {
-            Debug.LogError("Craft Inventory UI is not assigned!");
-        }
-        if (playerInventoryBackground == null)
-        {
-            Debug.LogError("Player Inventory Background is not found!");
-        }
-        if (craftingInventoryBackground == null)
-        {
-            Debug.LogError("Crafting Background is not found!");
-        }
-        if (recipeBackground == null)
-        {
-            Debug.LogError("Recipe Background is not found!");
-        }
     }
 
     private void Update()

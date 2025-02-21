@@ -170,6 +170,25 @@ public class InventoryManager : MonoBehaviour
         return true;
     }
 
+    public void RemoveHeldItem()
+    {
+        if (heldSlot != null)
+        {
+            ClearItemSlot(heldSlot);
+            heldSlot.UpdateSlotUI(); 
+            Debug.Log("Held item removed from inventory.");
+        }
+    }
+
+
+    public void UpdateHeldSlotUI()
+    {
+        if (heldSlot != null)
+        {
+            heldSlot.UpdateSlotUI();
+        }
+    }
+
     public bool HasRequiredIngredientsFor(Item craftedItem)
     {
         if (craftedItem.recipe == null || craftedItem.recipe.Count == 0)
@@ -290,4 +309,43 @@ public class InventoryManager : MonoBehaviour
             return null;
         }
     }
+
+    public int GetItemCount(string itemID)
+    {
+        int totalAmount = 0;
+        foreach (Transform child in inventoryGrid.transform)
+        {
+            UISlotHandler slot = child.GetComponent<UISlotHandler>();
+            if (slot.item != null && slot.item.itemID == itemID)
+            {
+                totalAmount += slot.item.itemAmt;
+            }
+        }
+        return totalAmount;
+    }
+
+    public void RemoveItem(string itemID, int amountToRemove)
+    {
+        foreach (Transform child in inventoryGrid.transform)
+        {
+            UISlotHandler slot = child.GetComponent<UISlotHandler>();
+            if (slot.item != null && slot.item.itemID == itemID)
+            {
+                if (slot.item.itemAmt >= amountToRemove)
+                {
+                    slot.item.itemAmt -= amountToRemove;
+                    slot.itemCount.text = slot.item.itemAmt.ToString();
+                    if (slot.item.itemAmt == 0) ClearItemSlot(slot);
+                    return;
+                }
+                else
+                {
+                    amountToRemove -= slot.item.itemAmt;
+                    ClearItemSlot(slot);
+                }
+            }
+        }
+    }
+
+
 }

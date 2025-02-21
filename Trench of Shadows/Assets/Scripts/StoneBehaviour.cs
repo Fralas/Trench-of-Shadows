@@ -14,7 +14,6 @@ public class StoneBehavior : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-
         // Ensure we are correctly referencing the player's inventory
         playerInventory = GameObject.Find("Manager").GetComponent<InventoryManager>();
     }
@@ -71,6 +70,9 @@ public class StoneBehavior : MonoBehaviour
                 AddStoneToInventory(playerInventory);
             }
             Debug.Log($"{stoneAmount} Stone added to the player's inventory.");
+
+            // Decrease the pickaxe durability by 20 for mining the stone
+            DecreasePickaxeDurability();
         }
         else
         {
@@ -82,9 +84,24 @@ public class StoneBehavior : MonoBehaviour
 
     private void AddStoneToInventory(InventoryManager inventory)
     {
+        // Check if the inventory already contains the stone item.
         Item stoneCopy = stoneItem.Clone();
         stoneCopy.itemAmt = 1;
 
+        // Search for an existing slot with the same stone item
+        foreach (Transform child in inventory.inventoryGrid.transform)
+        {
+            UISlotHandler slot = child.GetComponent<UISlotHandler>();
+            if (slot.item != null && slot.item.itemID == stoneCopy.itemID)
+            {
+                // If found, stack the stone in that slot.
+                inventory.StackInInventory(slot, stoneCopy);
+                Debug.Log("Stone stacked in existing slot.");
+                return; // Exit after stacking
+            }
+        }
+
+        // If no existing stone item is found, add it to an empty slot
         UISlotHandler emptySlot = FindEmptySlot(inventory);
 
         if (emptySlot != null)
@@ -109,5 +126,25 @@ public class StoneBehavior : MonoBehaviour
             }
         }
         return null;
+    }
+
+    // New method: Decrease pickaxe durability by 20 each time the stone is mined.
+    private void DecreasePickaxeDurability()
+    {
+        Item heldItem = playerInventory.GetHeldSlotItem();
+        if (heldItem != null && heldItem.itemID == "Pickaxe")
+        {
+            heldItem.durability -= 20;
+            Debug.Log("Pickaxe durability decreased to: " + heldItem.durability);
+            if (heldItem.durability <= 0)
+            {
+                playerInventory.RemoveHeldItem();
+                Debug.Log("Pickaxe broke and has been removed from the inventory.");
+            }
+            else
+            {
+                playerInventory.UpdateHeldSlotUI();
+            }
+        }
     }
 }
