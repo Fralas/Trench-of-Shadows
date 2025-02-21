@@ -9,7 +9,7 @@ public class HarvestManager : MonoBehaviour
     public Tilemap groundTilemap;
     public TileBase hoedTile;       // Tile del terreno zappato
     public TileBase wateredTile;    // Tile del terreno innaffiato
-    public TileBase seedTile;       // Tile della piantina sopra il terreno bagnato
+    public GameObject seedPrefab;   // Prefab della piantina
 
     void Update()
     {
@@ -51,7 +51,7 @@ public class HarvestManager : MonoBehaviour
             return;
         }
 
-        if (currentTile != hoedTile && currentTile != wateredTile) // Evita di zappare un terreno già lavorato
+        if (currentTile != hoedTile && currentTile != wateredTile)
         {
             groundTilemap.SetTile(position, hoedTile);
         }
@@ -69,7 +69,7 @@ public class HarvestManager : MonoBehaviour
             return;
         }
 
-        if (currentTile == hoedTile) // Controlla se la tile è già zappata
+        if (currentTile == hoedTile)
         {
             groundTilemap.SetTile(position, wateredTile);
         }
@@ -80,23 +80,41 @@ public class HarvestManager : MonoBehaviour
     }
 
     private void PlantSeed(Vector3Int position, TileBase currentTile)
+{
+    if (seedPrefab == null)
     {
-        if (groundTilemap == null || seedTile == null)
-        {
-            Debug.LogError("Errore: GroundTilemap o SeedTile non assegnato!");
-            return;
-        }
-
-        if (currentTile == wateredTile) // Controlla se la tile è bagnata prima di piantare
-        {
-            groundTilemap.SetTile(position, seedTile);
-            Debug.Log("Semi piantati in posizione: " + position);
-        }
-        else
-        {
-            Debug.Log("Puoi piantare solo su terreno bagnato!");
-        }
+        Debug.LogError("Errore: SeedPrefab non assegnato!");
+        return;
     }
+
+    if (currentTile == wateredTile)
+    {
+        Vector3 spawnPosition = groundTilemap.GetCellCenterWorld(position);
+        GameObject newCrop = Instantiate(seedPrefab, spawnPosition, Quaternion.identity);
+
+        // Avvia una coroutine per ignorare la collisione dopo un frame
+        StartCoroutine(IgnoreCollisionWithPlayer(newCrop));
+
+        Debug.Log("Semi piantati in posizione: " + spawnPosition);
+    }
+    else
+    {
+        Debug.Log("Puoi piantare solo su terreno bagnato!");
+    }
+}
+
+private IEnumerator IgnoreCollisionWithPlayer(GameObject crop)
+{
+    yield return null; // Aspetta un frame per assicurarsi che il collider sia inizializzato
+
+    Collider2D cropCollider = crop.GetComponent<Collider2D>();
+    Collider2D playerCollider = GameObject.FindGameObjectWithTag("Player")?.GetComponent<Collider2D>();
+    if (cropCollider != null && playerCollider != null)
+    {
+        Physics2D.IgnoreCollision(cropCollider, playerCollider);
+        Debug.Log("Collisione ignorata tra il seme e il Player.");
+    }
+}
 
     private Vector3Int GetPlayerTilePosition()
     {

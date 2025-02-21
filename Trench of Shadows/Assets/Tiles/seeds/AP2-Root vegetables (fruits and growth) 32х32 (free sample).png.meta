@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 50
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -640,13 +640,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "AP2-Root vegetables (fruits and growth) 32\u044532 (free sample)_24"
+      name: 0 - OnionPlant
       rect:
         serializedVersion: 2
-        x: 227
+        x: 231
         y: 3
-        width: 22
-        height: 20
+        width: 14
+        height: 5
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -860,6 +860,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      0 - OnionPlant: -803634938
       "AP2-Root vegetables (fruits and growth) 32\u044532 (free sample)_0": 1383135271
       "AP2-Root vegetables (fruits and growth) 32\u044532 (free sample)_1": 2085412098
       "AP2-Root vegetables (fruits and growth) 32\u044532 (free sample)_10": 739701955
@@ -877,7 +878,6 @@ TextureImporter:
       "AP2-Root vegetables (fruits and growth) 32\u044532 (free sample)_21": 274686133
       "AP2-Root vegetables (fruits and growth) 32\u044532 (free sample)_22": -1573377859
       "AP2-Root vegetables (fruits and growth) 32\u044532 (free sample)_23": -198394472
-      "AP2-Root vegetables (fruits and growth) 32\u044532 (free sample)_24": -803634938
       "AP2-Root vegetables (fruits and growth) 32\u044532 (free sample)_25": 2093940742
       "AP2-Root vegetables (fruits and growth) 32\u044532 (free sample)_26": 1088747999
       "AP2-Root vegetables (fruits and growth) 32\u044532 (free sample)_27": 253941310

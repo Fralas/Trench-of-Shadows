@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: "AP2-Root vegetables (fruits and growth) 32\u044532 (free sample)_17"
+  m_Name: OnionPack
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 105247068, guid: 070039080a36a1248a494a8e58a1822f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

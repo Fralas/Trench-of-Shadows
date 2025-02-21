@@ -253,6 +253,7 @@ MonoBehaviour:
   item: {fileID: 11400000, guid: 6b28d6f51d2a8cd4791ce6978e6b5f11, type: 2}
   slotImg: {fileID: 863257393}
   itemCount: {fileID: 1472487188}
+  healthBar: {fileID: 0}
   inventoryManager: {fileID: 259166160}
 --- !u!114 &30536911
 MonoBehaviour:
@@ -347,6 +348,7 @@ MonoBehaviour:
   item: {fileID: 11400000, guid: 99f8c857687f5f4479c2c7cf593cebff, type: 2}
   slotImg: {fileID: 1847532109}
   itemCount: {fileID: 506274283}
+  healthBar: {fileID: 0}
   inventoryManager: {fileID: 259166160}
 --- !u!114 &36233721
 MonoBehaviour:
@@ -1093,6 +1095,7 @@ MonoBehaviour:
   item: {fileID: 11400000, guid: 7fd711f771e26dd4fbc5afad8c7271a6, type: 2}
   slotImg: {fileID: 1065218095}
   itemCount: {fileID: 1320558266}
+  healthBar: {fileID: 0}
   inventoryManager: {fileID: 259166160}
 --- !u!114 &400811384
 MonoBehaviour:
@@ -1221,6 +1224,7 @@ MonoBehaviour:
   item: {fileID: 11400000, guid: a6d88a739aa09f849a596cb77629dc60, type: 2}
   slotImg: {fileID: 24299672}
   itemCount: {fileID: 1933715670}
+  healthBar: {fileID: 0}
   inventoryManager: {fileID: 259166160}
 --- !u!114 &438304703
 MonoBehaviour:
@@ -2280,6 +2284,7 @@ MonoBehaviour:
   item: {fileID: 0}
   slotImg: {fileID: 1763882540}
   itemCount: {fileID: 1874618234}
+  healthBar: {fileID: 0}
   inventoryManager: {fileID: 259166160}
 --- !u!114 &533259245
 MonoBehaviour:
@@ -2560,6 +2565,7 @@ MonoBehaviour:
   item: {fileID: 0}
   slotImg: {fileID: 123531637}
   itemCount: {fileID: 1771712664}
+  healthBar: {fileID: 0}
   inventoryManager: {fileID: 259166160}
 --- !u!224 &652391207
 RectTransform:
@@ -3198,6 +3204,7 @@ MonoBehaviour:
   item: {fileID: 0}
   slotImg: {fileID: 635629245}
   itemCount: {fileID: 1199860249}
+  healthBar: {fileID: 0}
   inventoryManager: {fileID: 259166160}
 --- !u!114 &851682540
 MonoBehaviour:
@@ -3662,6 +3669,7 @@ MonoBehaviour:
   item: {fileID: 11400000, guid: f9bf212b40ecc8749b7aafce7980cd82, type: 2}
   slotImg: {fileID: 1282866553}
   itemCount: {fileID: 1728894427}
+  healthBar: {fileID: 0}
   inventoryManager: {fileID: 259166160}
 --- !u!114 &1018402220
 MonoBehaviour:
@@ -3906,6 +3914,7 @@ MonoBehaviour:
   item: {fileID: 11400000, guid: 04c94f3b6e579cd41baaa3b9d145478b, type: 2}
   slotImg: {fileID: 1173698005}
   itemCount: {fileID: 1154908815}
+  healthBar: {fileID: 0}
   inventoryManager: {fileID: 259166160}
 --- !u!114 &1041495394
 MonoBehaviour:
@@ -4491,9 +4500,9 @@ GameObject:
   - component: {fileID: 1148543076}
   - component: {fileID: 1148543077}
   - component: {fileID: 1148543078}
+  - component: {fileID: 1148543079}
   - component: {fileID: 1148543071}
   - component: {fileID: 1148543069}
-  - component: {fileID: 1148543079}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4750,7 +4759,7 @@ MonoBehaviour:
   groundTilemap: {fileID: 1531247185}
   hoedTile: {fileID: 11400000, guid: 58bc7323f96c5784ba8e5f05f599ca66, type: 2}
   wateredTile: {fileID: 11400000, guid: 6b25b2dffd4085a45bdcd903dfb34d1a, type: 2}
-  seedTile: {fileID: 11400000, guid: e7e2dda6fbcee684db3001a38e384361, type: 2}
+  seedPrefab: {fileID: 288178392398763960, guid: 754b5815934a543d38768c7f390c288c, type: 3}
 --- !u!4 &1149612870 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6635844636189707510, guid: 8980e56be7ab05948aacf1db29b2e54d, type: 3}
@@ -5363,6 +5372,7 @@ MonoBehaviour:
   item: {fileID: 11400000, guid: e774c5428de5b214798a55cc0b7758ba, type: 2}
   slotImg: {fileID: 1540557551}
   itemCount: {fileID: 773516533}
+  healthBar: {fileID: 0}
   inventoryManager: {fileID: 259166160}
 --- !u!114 &1253005190
 MonoBehaviour:
@@ -6167,6 +6177,7 @@ MonoBehaviour:
   item: {fileID: 0}
   slotImg: {fileID: 1010386082}
   itemCount: {fileID: 2097106147}
+  healthBar: {fileID: 0}
   inventoryManager: {fileID: 259166160}
 --- !u!114 &1469774743
 MonoBehaviour:
@@ -115918,6 +115929,7 @@ MonoBehaviour:
   item: {fileID: 11400000, guid: 0e84b2fa63d7edd47863157cd5d04465, type: 2}
   slotImg: {fileID: 2073126038}
   itemCount: {fileID: 1794651436}
+  healthBar: {fileID: 0}
   inventoryManager: {fileID: 259166160}
 --- !u!114 &1605690674
 MonoBehaviour:
@@ -116087,6 +116099,7 @@ MonoBehaviour:
   item: {fileID: 0}
   slotImg: {fileID: 1609415625}
   itemCount: {fileID: 937808108}
+  healthBar: {fileID: 0}
   inventoryManager: {fileID: 259166160}
 --- !u!114 &1646402569
 MonoBehaviour:
@@ -118031,6 +118044,7 @@ MonoBehaviour:
   item: {fileID: 11400000, guid: 7fd711f771e26dd4fbc5afad8c7271a6, type: 2}
   slotImg: {fileID: 1039296351}
   itemCount: {fileID: 1137697348}
+  healthBar: {fileID: 0}
   inventoryManager: {fileID: 259166160}
 --- !u!114 &1843270745
 MonoBehaviour:
@@ -118334,6 +118348,7 @@ MonoBehaviour:
   item: {fileID: 0}
   slotImg: {fileID: 319147748}
   itemCount: {fileID: 521072094}
+  healthBar: {fileID: 0}
   inventoryManager: {fileID: 259166160}
 --- !u!114 &1877649745
 MonoBehaviour:
@@ -119832,6 +119847,7 @@ MonoBehaviour:
   item: {fileID: 11400000, guid: 6648bba0af6890d448899078c631af56, type: 2}
   slotImg: {fileID: 1509928920}
   itemCount: {fileID: 1704893655}
+  healthBar: {fileID: 0}
   inventoryManager: {fileID: 259166160}
 --- !u!114 &1998185278
 MonoBehaviour:
@@ -120140,6 +120156,7 @@ MonoBehaviour:
   item: {fileID: 11400000, guid: 7fd711f771e26dd4fbc5afad8c7271a6, type: 2}
   slotImg: {fileID: 1037221013}
   itemCount: {fileID: 1154923920}
+  healthBar: {fileID: 0}
   inventoryManager: {fileID: 259166160}
 --- !u!114 &2123718057
 MonoBehaviour:
@@ -120741,6 +120758,79 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8470182753946187272, guid: 17883a6c39d96854098f34899e9a4c32, type: 3}
   m_PrefabInstance: {fileID: 667377677025609441}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6110779731090954814
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 288178392398763960, guid: 754b5815934a543d38768c7f390c288c, type: 3}
+      propertyPath: m_Name
+      value: SeedGrowth
+      objectReference: {fileID: 0}
+    - target: {fileID: 288178392398763960, guid: 754b5815934a543d38768c7f390c288c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 288178392398763960, guid: 754b5815934a543d38768c7f390c288c, type: 3}
+      propertyPath: m_TagString
+      value: Plant
+      objectReference: {fileID: 0}
+    - target: {fileID: 3235430749960975400, guid: 754b5815934a543d38768c7f390c288c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.4243321
+      objectReference: {fileID: 0}
+    - target: {fileID: 3235430749960975400, guid: 754b5815934a543d38768c7f390c288c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.2305977
+      objectReference: {fileID: 0}
+    - target: {fileID: 3235430749960975400, guid: 754b5815934a543d38768c7f390c288c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.26058197
+      objectReference: {fileID: 0}
+    - target: {fileID: 3235430749960975400, guid: 754b5815934a543d38768c7f390c288c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3235430749960975400, guid: 754b5815934a543d38768c7f390c288c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3235430749960975400, guid: 754b5815934a543d38768c7f390c288c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3235430749960975400, guid: 754b5815934a543d38768c7f390c288c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3235430749960975400, guid: 754b5815934a543d38768c7f390c288c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3235430749960975400, guid: 754b5815934a543d38768c7f390c288c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3235430749960975400, guid: 754b5815934a543d38768c7f390c288c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9208698886976660559, guid: 754b5815934a543d38768c7f390c288c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9208698886976660559, guid: 754b5815934a543d38768c7f390c288c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1851835783
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 754b5815934a543d38768c7f390c288c, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -120755,3 +120845,4 @@ SceneRoots:
   - {fileID: 1109647587}
   - {fileID: 992108582}
   - {fileID: 1499251181}
+  - {fileID: 6110779731090954814}
