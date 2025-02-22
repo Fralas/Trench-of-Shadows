@@ -11,12 +11,15 @@ namespace WorldTime
         [SerializeField]
         private float _dayLength;
 
+        [SerializeField]
+        private int _startHour = 6;
+
         private TimeSpan _currentTime;
         private float _minuteLength => _dayLength / WorldTimeConstants.MinutesInDay;
 
         private void Start()
         {
-            //_currentTime = TimeSpan.FromHours(6);
+            _currentTime = TimeSpan.FromHours(_startHour);
             StartCoroutine(AddMinute());
         }
 

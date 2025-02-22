@@ -2,32 +2,32 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Animator animator;            
-    private Rigidbody2D rb;               
-    public float moveSpeed = 5f;          
-    private SpriteRenderer spriteRenderer; 
+    private Animator animator;
+    private Rigidbody2D rb;
+    public float moveSpeed = 5f;
+    private SpriteRenderer spriteRenderer;
 
-    private float attackCooldown = 1f;  
-    private float lastAttackTime = 0f;    
+    private float attackCooldown = 1f;
+    private float lastAttackTime = 0f;
     private bool isEditMode = false;
     private InventoryManager playerInventory;
-    
+
     [SerializeField] private int attackDamage = 10;  // Danno inflitto ai nemici
     [SerializeField] private float attackRange = 1f; // Distanza massima per colpire il nemico
 
     void Start()
     {
-        animator = GetComponent<Animator>();        
-        rb = GetComponent<Rigidbody2D>();              
-        spriteRenderer = GetComponent<SpriteRenderer>(); 
+        animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         rb.gravityScale = 0f;
         playerInventory = GameObject.Find("Manager").GetComponent<InventoryManager>();
     }
 
     void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");  
-        float verticalInput = Input.GetAxis("Vertical");        
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
 
         Vector2 movement = new Vector2(horizontalInput, verticalInput).normalized * moveSpeed;
         rb.velocity = movement;
@@ -58,24 +58,26 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Attack()
-{
-    Vector2 attackDirection = spriteRenderer.flipX ? Vector2.left : Vector2.right;
-    RaycastHit2D hit = Physics2D.Raycast(transform.position, attackDirection, attackRange);
-    
-    Debug.DrawRay(transform.position, attackDirection * attackRange, Color.red, 0.5f); // Debug per controllare il raycast
-    
-    if (hit.collider != null)
     {
-        Debug.Log("Colpito: " + hit.collider.name); // Controllo in console
+        Vector2 attackDirection = spriteRenderer.flipX ? Vector2.left : Vector2.right;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, attackDirection, attackRange);
 
-        EnemyHealth enemy = hit.collider.GetComponent<EnemyHealth>();
-        if (enemy != null)
+        Debug.DrawRay(transform.position, attackDirection * attackRange, Color.red, 0.5f); // Debug per controllare il raycast
+
+        if (hit.collider != null)
         {
-            enemy.TakeDamage(attackDamage);
-            Debug.Log("Danno inflitto: " + attackDamage);
+            Debug.Log("Colpito: " + hit.collider.name); // Controllo in console
+
+            EnemyHealth enemy = hit.collider.GetComponent<EnemyHealth>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(attackDamage, transform.position); // Passa la posizione del player
+                Debug.Log("Danno inflitto: " + attackDamage);
+            }
+
+
         }
     }
-}
 
 
     private bool PlayerHasSword()

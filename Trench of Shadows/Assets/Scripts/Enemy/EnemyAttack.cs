@@ -6,7 +6,7 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] private int damageAmount = 10;  
     [SerializeField] private float attackInterval = 1f; 
 
-    private bool isAttacking = false;  
+    private bool isAttacking = false;
     private Coroutine attackCoroutine;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -21,13 +21,12 @@ public class EnemyAttack : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        PlayerDatas player = collision.GetComponent<PlayerDatas>();
-        if (player != null)
+        if (collision.GetComponent<PlayerDatas>() != null)
         {
             isAttacking = false;
             if (attackCoroutine != null)
             {
-                StopCoroutine(attackCoroutine); // Ferma la Coroutine
+                StopCoroutine(attackCoroutine);
                 attackCoroutine = null;
             }
         }

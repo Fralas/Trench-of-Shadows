@@ -1,13 +1,13 @@
-using System.Collections;
 using UnityEngine;
 
 public class AIChase : MonoBehaviour
 {
-    public float moveSpeed = 2f;         // Velocità del nemico
-    public float detectionRadius = 5f;   // Raggio di visione
-    public LayerMask playerLayer;        // Layer del player
+    [SerializeField] private float moveSpeed = 2f;
+    [SerializeField] private float detectionRadius = 5f;
+    [SerializeField] private float stopDistance = 0.5f; // Distanza a cui il nemico si ferma prima di toccare il player
+    [SerializeField] private LayerMask playerLayer;
 
-    private Transform player;            // Riferimento al player
+    private Transform player;
     private Rigidbody2D rb;
     private bool isChasing = false;
 
@@ -48,13 +48,25 @@ public class AIChase : MonoBehaviour
     {
         if (player == null) return;
 
-        Vector2 direction = (player.position - transform.position).normalized;
-        rb.velocity = direction * moveSpeed;
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+
+        // Se il nemico è più vicino della stopDistance, si ferma
+        if (distanceToPlayer > stopDistance)
+        {
+            Vector2 direction = (player.position - transform.position).normalized;
+            rb.velocity = direction * moveSpeed;
+        }
+        else
+        {
+            rb.velocity = Vector2.zero; // Il nemico si ferma
+        }
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, stopDistance); // Disegna anche la distanza di stop
     }
 }
