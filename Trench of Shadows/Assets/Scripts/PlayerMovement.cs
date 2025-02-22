@@ -58,17 +58,25 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Attack()
+{
+    Vector2 attackDirection = spriteRenderer.flipX ? Vector2.left : Vector2.right;
+    RaycastHit2D hit = Physics2D.Raycast(transform.position, attackDirection, attackRange);
+    
+    Debug.DrawRay(transform.position, attackDirection * attackRange, Color.red, 0.5f); // Debug per controllare il raycast
+    
+    if (hit.collider != null)
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, attackRange);
-        if (hit.collider != null)
+        Debug.Log("Colpito: " + hit.collider.name); // Controllo in console
+
+        EnemyHealth enemy = hit.collider.GetComponent<EnemyHealth>();
+        if (enemy != null)
         {
-            EnemyHealth enemy = hit.collider.GetComponent<EnemyHealth>();
-            if (enemy != null)
-            {
-                enemy.TakeDamage(attackDamage);
-            }
+            enemy.TakeDamage(attackDamage);
+            Debug.Log("Danno inflitto: " + attackDamage);
         }
     }
+}
+
 
     private bool PlayerHasSword()
     {

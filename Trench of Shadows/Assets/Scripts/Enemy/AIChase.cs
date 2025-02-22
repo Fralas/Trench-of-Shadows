@@ -1,47 +1,60 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AIChase : MonoBehaviour
 {
-    public GameObject player;
-    public float speed;
-    public float distanceBetween;
-    private float distance;
+    public float moveSpeed = 2f;         // Velocità del nemico
+    public float detectionRadius = 5f;   // Raggio di visione
+    public LayerMask playerLayer;        // Layer del player
 
+    private Transform player;            // Riferimento al player
+    private Rigidbody2D rb;
+    private bool isChasing = false;
 
     void Start()
     {
-        // Se il player non è assegnato manualmente, prova a trovarlo
-        if (player == null)
-        {
-            player = GameObject.FindGameObjectWithTag("Player");
-        }
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        // Se ancora non trova il Player, prova a riassegnarlo una volta
-        if (player == null)
+        DetectPlayer();
+    }
+
+    private void FixedUpdate()
+    {
+        if (isChasing && player != null)
         {
-            player = GameObject.FindGameObjectWithTag("Player");
-
-            // Se ancora non lo trova, interrompi il codice
-            if (player == null)
-            {
-                return;
-            }
+            ChasePlayer();
         }
+    }
 
-        // Segue il player solo se esiste
-        distance = Vector2.Distance(transform.position, player.transform.position);
-        Vector2 direction = player.transform.position - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+    private void DetectPlayer()
+    {
+        Collider2D playerCollider = Physics2D.OverlapCircle(transform.position, detectionRadius, playerLayer);
 
-        if (distance < distanceBetween)
+        if (playerCollider != null)
         {
-            transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
-            transform.rotation = Quaternion.Euler(Vector3.forward * angle);
+            player = playerCollider.transform;
+            isChasing = true;
         }
+        else
+        {
+            isChasing = false;
+        }
+    }
+
+    private void ChasePlayer()
+    {
+        if (player == null) return;
+
+        Vector2 direction = (player.position - transform.position).normalized;
+        rb.velocity = direction * moveSpeed;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 }

@@ -3,17 +3,19 @@ using System.Collections;
 
 public class EnemyAttack : MonoBehaviour
 {
-    [SerializeField] private int damageAmount = 10;  // Danno inflitto al player
-    [SerializeField] private float attackInterval = 1f; // Tempo tra un attacco e l'altro
+    [SerializeField] private int damageAmount = 10;  
+    [SerializeField] private float attackInterval = 1f; 
 
-    private bool isAttacking = false;  // Controllo per evitare più coroutine attive
+    private bool isAttacking = false;  
+    private Coroutine attackCoroutine;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         PlayerDatas player = collision.GetComponent<PlayerDatas>();
         if (player != null && !isAttacking)
         {
-            StartCoroutine(AttackPlayer(player));
+            isAttacking = true;
+            attackCoroutine = StartCoroutine(AttackPlayer(player));
         }
     }
 
@@ -22,15 +24,18 @@ public class EnemyAttack : MonoBehaviour
         PlayerDatas player = collision.GetComponent<PlayerDatas>();
         if (player != null)
         {
-            isAttacking = false; // Ferma l'attacco se il player si allontana
+            isAttacking = false;
+            if (attackCoroutine != null)
+            {
+                StopCoroutine(attackCoroutine); // Ferma la Coroutine
+                attackCoroutine = null;
+            }
         }
     }
 
     private IEnumerator AttackPlayer(PlayerDatas player)
     {
-        isAttacking = true;
-
-        while (isAttacking) // Continua finché il player è nel trigger
+        while (isAttacking) 
         {
             player.Damage(damageAmount);
             Debug.Log($"{gameObject.name} ha inflitto {damageAmount} danni a {player.gameObject.name}!");
