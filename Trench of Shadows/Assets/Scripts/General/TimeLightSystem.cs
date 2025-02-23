@@ -9,23 +9,37 @@ namespace WorldTime
     {
         [SerializeField] private WorldTime _worldTime;
         [SerializeField] private Light2D _lampLight;
-        [SerializeField] private int turnOnHour = 18;  // Ora di accensione (es. 18:00)
-        [SerializeField] private int turnOffHour = 6;  // Ora di spegnimento (es. 06:00)
-        [SerializeField] private float transitionDuration = 3f; // Durata transizione (es. 3 secondi)
-        [SerializeField] private float flickerIntensity = 0.2f; // Intensità dello sfarfallio
-        [SerializeField] private float flickerSpeed = 0.1f; // Velocità dello sfarfallio
+        [SerializeField] private int turnOnHour = 18; 
+        [SerializeField] private int turnOffHour = 6;  
+        [SerializeField] private float transitionDuration = 3f; 
+        [SerializeField] private float flickerIntensity = 0.2f; 
+        [SerializeField] private float flickerSpeed = 0.1f; 
 
         private Coroutine _lightTransitionCoroutine;
         private Coroutine _flickerCoroutine;
         private bool _isOn = false;
 
         private void Awake()
+{
+    if (_worldTime != null)
+    {
+        _lampLight.intensity = 0f;
+        _isOn = false; 
+
+        TimeSpan currentTime = _worldTime.GetCurrentTime();
+        bool shouldBeOn = IsNightTime(currentTime.Hours);
+
+        if (shouldBeOn)
         {
-            if (_worldTime != null)
-            {
-                _worldTime.WorldTimeChanged += OnWorldTimeChanged;
-            }
+            _isOn = true;
+            _lampLight.intensity = 1f; 
+            _flickerCoroutine = StartCoroutine(FlickerEffect());
         }
+
+        _worldTime.WorldTimeChanged += OnWorldTimeChanged;
+    }
+}
+
 
         private void OnDestroy()
         {

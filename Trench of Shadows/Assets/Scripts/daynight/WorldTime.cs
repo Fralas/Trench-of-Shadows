@@ -23,11 +23,18 @@ namespace WorldTime
             StartCoroutine(AddMinute());
         }
 
-        private IEnumerator AddMinute(){
+        private IEnumerator AddMinute()
+        {
             _currentTime += TimeSpan.FromMinutes(1);
             WorldTimeChanged?.Invoke(this, _currentTime);
             yield return new WaitForSeconds(_minuteLength);
             StartCoroutine(AddMinute());
+        }
+
+        // ➤ Metodo aggiunto per ottenere l'ora corrente
+        public TimeSpan GetCurrentTime()
+        {
+            return _currentTime;
         }
     }
 }

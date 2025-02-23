@@ -306,7 +306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _worldTime: {fileID: 0}
   _lampLight: {fileID: 7220943024144212195}
-  turnOnHour: 0
+  turnOnHour: 19
   turnOffHour: 6
   transitionDuration: 3
   flickerIntensity: 2
