@@ -1,21 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PersistentObj : MonoBehaviour
+public class PersistentManager : MonoBehaviour
 {
-    public static PersistentObj Instance { get; private set; }
-    
+    private static PersistentManager instance;
+
     private void Awake()
     {
-        if (Instance == null)  
+        if (instance == null)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject); // Mantiene il player tra le scene
+            instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(gameObject); // Evita duplicati nei nuovi livelli
+            Destroy(gameObject);
         }
     }
 }
