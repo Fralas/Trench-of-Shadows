@@ -5,7 +5,7 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private int _maxHp = 50;
     private int _hp;
-    private EnemyKnockback _knockback; // Aggiunto riferimento allo script di knockback
+    private EnemyKnockback _knockback;
 
     public int MaxHp => _maxHp;
     public int Hp
@@ -26,7 +26,7 @@ public class EnemyHealth : MonoBehaviour
     private void Awake()
     {
         _hp = _maxHp;
-        _knockback = GetComponent<EnemyKnockback>(); // Ottieni il riferimento al knockback
+        _knockback = GetComponent<EnemyKnockback>();
     }
 
     public void TakeDamage(int amount, Vector2 attackerPosition)
@@ -35,7 +35,6 @@ public class EnemyHealth : MonoBehaviour
         Hp -= amount;
         Debug.Log($"Nemico colpito! Vita rimanente: {Hp}");
 
-        // Applica il knockback se lo script è presente
         if (_knockback != null)
         {
             _knockback.ApplyKnockback(attackerPosition);
@@ -46,6 +45,16 @@ public class EnemyHealth : MonoBehaviour
     {
         Died?.Invoke();
         Debug.Log($"{gameObject.name} è morto!");
+
+        // Check if the AIRoam component exists and call DropRawMeat if it does.
+        AIRoam aiRoam = GetComponent<AIRoam>();
+        if (aiRoam != null)
+        {
+            aiRoam.DropRawMeat(); // Drop RawMeat first
+        }
+
+        // Now, destroy the enemy object after handling the drop.
         Destroy(gameObject);
     }
+
 }
