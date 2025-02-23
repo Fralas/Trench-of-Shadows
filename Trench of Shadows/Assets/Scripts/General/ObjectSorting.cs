@@ -1,63 +1,63 @@
+using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class ObjectSorting : MonoBehaviour
 {
-    [SerializeField] private Transform player;
-    
-    [Header("Seleziona il tipo di Renderer")]
-    [SerializeField] private bool useTilemapRenderer = true; // Se true usa TilemapRenderer, altrimenti SpriteRenderer
-    [SerializeField] private TilemapRenderer tilemapRenderer;
-    [SerializeField] private SpriteRenderer spriteRenderer;
-
+    private Transform player;
+    private SpriteRenderer spriteRenderer;
+    private TilemapRenderer tilemapRenderer;
     private float objectY;
+    
+    [SerializeField] private bool useTilemapRenderer = false; // Se usi una tilemap
 
     private void Start()
     {
-        // Seleziona automaticamente il renderer se non è assegnato
+        FindPlayer(); // Trova il player automaticamente
+
         if (useTilemapRenderer)
         {
-            if (tilemapRenderer == null) tilemapRenderer = GetComponent<TilemapRenderer>();
-            if (tilemapRenderer == null)
-            {
-                Debug.LogError("[ObjectSorting] TilemapRenderer non trovato!");
-                return;
-            }
+            tilemapRenderer = GetComponent<TilemapRenderer>();
         }
         else
         {
-            if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
-            if (spriteRenderer == null)
-            {
-                Debug.LogError("[ObjectSorting] SpriteRenderer non trovato!");
-                return;
-            }
+            spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
-        // Recupera la posizione dal centro del BoxCollider2D, se presente
+        // Recupera la posizione dell'oggetto per il sorting
         BoxCollider2D collider = GetComponent<BoxCollider2D>();
-        if (collider != null)
-        {
-            objectY = collider.bounds.center.y;
-        }
-        else
-        {
-            objectY = transform.position.y; // Se non c'è un collider, usa la posizione dell'oggetto
-        }
+        objectY = (collider != null) ? collider.bounds.center.y : transform.position.y;
 
-        Debug.Log($"[ObjectSorting] Oggetto Y: {objectY}");
+        UpdateSortingLayer();
     }
 
     private void Update()
     {
+        if (player == null) FindPlayer(); // Riconnetti il player se è stato perso
         if (player == null) return;
 
-        Debug.Log($"[ObjectSorting] Player Y: {player.position.y}, Oggetto Y: {objectY}");
+        UpdateSortingLayer();
+    }
 
-        // Determina se l'oggetto deve stare sopra o sotto il player
+    private void FindPlayer()
+    {
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
+        {
+            player = playerObject.transform;
+        }
+        else
+        {
+            Debug.LogWarning("[ObjectSorting] Nessun oggetto con tag 'Player' trovato!");
+        }
+    }
+
+    private void UpdateSortingLayer()
+    {
+        if (player == null) return;
+
         string newSortingLayer = player.position.y < objectY ? "behindPlayer" : "abovePlayer";
 
-        // Applica il sorting layer corretto al renderer selezionato
         if (useTilemapRenderer && tilemapRenderer != null)
         {
             tilemapRenderer.sortingLayerName = newSortingLayer;

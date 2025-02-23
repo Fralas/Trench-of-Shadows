@@ -119,11 +119,24 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Beach_Tile_0
+      name: Beach_Tile_TL
       rect:
         serializedVersion: 2
         x: 0
@@ -131,7 +144,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -144,7 +157,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Beach_Tile_1
+      name: Beach_Tile_T
       rect:
         serializedVersion: 2
         x: 16
@@ -152,7 +165,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -165,7 +178,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Beach_Tile_2
+      name: Beach_Tile_TR
       rect:
         serializedVersion: 2
         x: 32
@@ -173,7 +186,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -186,7 +199,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Beach_Tile_3
+      name: Beach_Tile_ITL
       rect:
         serializedVersion: 2
         x: 48
@@ -194,7 +207,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -207,7 +220,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Beach_Tile_4
+      name: Beach_Tile_ITR
       rect:
         serializedVersion: 2
         x: 64
@@ -215,7 +228,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -228,7 +241,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Beach_Tile_5
+      name: Beach_Tile_CL
       rect:
         serializedVersion: 2
         x: 0
@@ -236,7 +249,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -249,7 +262,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Beach_Tile_6
+      name: Beach_Tile_C
       rect:
         serializedVersion: 2
         x: 16
@@ -257,7 +270,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -270,7 +283,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Beach_Tile_7
+      name: Beach_Tile_CR
       rect:
         serializedVersion: 2
         x: 32
@@ -278,7 +291,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -291,7 +304,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Beach_Tile_8
+      name: Beach_Tile_IBL
       rect:
         serializedVersion: 2
         x: 48
@@ -299,7 +312,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -312,7 +325,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Beach_Tile_9
+      name: Beach_Tile_IBR
       rect:
         serializedVersion: 2
         x: 64
@@ -320,7 +333,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -333,7 +346,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Beach_Tile_10
+      name: Beach_Tile_BL
       rect:
         serializedVersion: 2
         x: 0
@@ -341,7 +354,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -354,7 +367,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Beach_Tile_11
+      name: Beach_Tile_B
       rect:
         serializedVersion: 2
         x: 16
@@ -362,7 +375,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -375,7 +388,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Beach_Tile_12
+      name: Beach_Tile_BR
       rect:
         serializedVersion: 2
         x: 32
@@ -383,7 +396,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -406,19 +419,19 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Beach_Tile_0: 1314928151
-      Beach_Tile_1: -1836355533
-      Beach_Tile_10: -1015122905
-      Beach_Tile_11: -1094739122
-      Beach_Tile_12: -858130296
-      Beach_Tile_2: -1520294059
-      Beach_Tile_3: -1683115456
-      Beach_Tile_4: 1702766653
-      Beach_Tile_5: -1871875126
-      Beach_Tile_6: -1262306631
-      Beach_Tile_7: -1498836604
-      Beach_Tile_8: -1820207099
-      Beach_Tile_9: -1016188661
+      Beach_Tile_B: -1094739122
+      Beach_Tile_BL: -1015122905
+      Beach_Tile_BR: -858130296
+      Beach_Tile_C: -1262306631
+      Beach_Tile_CL: -1871875126
+      Beach_Tile_CR: -1498836604
+      Beach_Tile_IBL: -1820207099
+      Beach_Tile_IBR: -1016188661
+      Beach_Tile_ITL: -1683115456
+      Beach_Tile_ITR: 1702766653
+      Beach_Tile_T: -1836355533
+      Beach_Tile_TL: 1314928151
+      Beach_Tile_TR: -1520294059
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

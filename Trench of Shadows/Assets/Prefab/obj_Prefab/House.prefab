@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5133804315075476933}
   - component: {fileID: 5980646752582992137}
-  - component: {fileID: 6184561090444455921}
+  - component: {fileID: 1563354929978017241}
+  - component: {fileID: 9011041301175682236}
   m_Layer: 0
   m_Name: House
   m_TagString: solido
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3800649086057696253}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -26.65, y: 9.47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -72,7 +73,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1851835783
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 44f399fbd69a04547bf2e914609208e6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -85,8 +86,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &6184561090444455921
-PolygonCollider2D:
+--- !u!114 &1563354929978017241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3800649086057696253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e938ab4cc4eb2448bb83832c8ca4dbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  useTilemapRenderer: 0
+  tilemapRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 5980646752582992137}
+--- !u!61 &9011041301175682236
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -117,7 +134,7 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.029273987, y: -0.6293969}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -127,16 +144,6 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.26081467, y: 2.9292717}
-      - {x: 0.25035286, y: 3.2193289}
-      - {x: -0.2373085, y: 3.2453527}
-      - {x: -0.2776699, y: 3.004922}
-      - {x: -2.108549, y: 1.2030859}
-      - {x: -2.0899658, y: -1.2804642}
-      - {x: -1.8005753, y: -1.6566572}
-      - {x: 1.8762398, y: -1.6465487}
-      - {x: 2.086666, y: -0.9453697}
-      - {x: 2.0882397, y: 1.2015123}
-  m_UseDelaunayMesh: 0
+  serializedVersion: 2
+  m_Size: {x: 3.5167694, y: 3.5944223}
+  m_EdgeRadius: 0
