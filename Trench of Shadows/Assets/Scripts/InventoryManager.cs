@@ -12,6 +12,11 @@ public class InventoryManager : MonoBehaviour
 
     // New: Reference to the held slot's UISlotHandler.
     public UISlotHandler heldSlot;
+    public GameObject playerInventoryGrid;  // Reference to the player's inventory grid
+
+    // Add public references for hotbar grid and held item slot
+    public GameObject hotbarGrid;  // Reference to the hotbar grid
+    public UISlotHandler heldItemSlot;  // Reference to the held item slot (if separate from heldSlot)
 
     private static InventoryManager instance;
 
@@ -29,6 +34,24 @@ public class InventoryManager : MonoBehaviour
         {
             Debug.LogWarning("HeldSlot is not assigned in InventoryManager.");
         }
+
+        if (hotbarGrid != null)
+        {
+            Debug.Log("HotbarGrid assigned: " + hotbarGrid.name);
+        }
+        else
+        {
+            Debug.LogWarning("HotbarGrid is not assigned in InventoryManager.");
+        }
+
+        if (heldItemSlot != null)
+        {
+            Debug.Log("HeldItemSlot assigned: " + heldItemSlot.name);
+        }
+        else
+        {
+            Debug.LogWarning("HeldItemSlot is not assigned in InventoryManager.");
+        }
     }
 
     private void Update()
@@ -44,6 +67,13 @@ public class InventoryManager : MonoBehaviour
         {
             Debug.Log("T key pressed - Testing GetHeldSlotItem...");
             GetHeldSlotItem();
+        }
+
+        // When U is pressed, wipe the player's inventory (not the chest).
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            Debug.Log("U key pressed - Clearing player's inventory...");
+            ClearPlayerInventory();
         }
     }
 
@@ -100,6 +130,80 @@ public class InventoryManager : MonoBehaviour
             uiSlots[i].SetSiblingIndex(i);
         }
     }
+    public void ClearInventory()
+    {
+        foreach (Transform child in inventoryGrid.transform)
+        {
+            UISlotHandler slot = child.GetComponent<UISlotHandler>();
+            ClearItemSlot(slot);
+        }
+        Debug.Log("Inventory wiped.");
+    }
+
+    public void RefreshHealthBars()
+    {
+        foreach (Transform child in playerInventoryGrid.transform)
+        {
+            UISlotHandler slot = child.GetComponent<UISlotHandler>();
+            if (slot != null)
+            {
+                slot.RefreshHealthBar();  // This method updates the health bar in each slot
+            }
+        }
+    }
+
+    public void ClearPlayerInventory()
+    {
+        if (playerInventoryGrid == null)
+        {
+            Debug.LogWarning("Player inventory grid is not assigned.");
+            return;
+        }
+
+        // Clear the player's inventory
+        foreach (Transform child in playerInventoryGrid.transform)
+        {
+            UISlotHandler slot = child.GetComponent<UISlotHandler>();
+            ClearItemSlot(slot);
+        }
+        Debug.Log("Player inventory wiped.");
+
+        // Clear the hotbar (if assigned)
+        if (hotbarGrid != null)
+        {
+            foreach (Transform child in hotbarGrid.transform)
+            {
+                UISlotHandler slot = child.GetComponent<UISlotHandler>();
+                ClearItemSlot(slot);
+            }
+            Debug.Log("Hotbar wiped.");
+        }
+        else
+        {
+            Debug.LogWarning("Hotbar grid is not assigned.");
+        }
+
+        // Clear the held item slot (if assigned)
+        if (heldSlot != null)
+        {
+            ClearItemSlot(heldSlot);
+            Debug.Log("Held item wiped.");
+        }
+        else
+        {
+            Debug.LogWarning("Held slot is not assigned.");
+        }
+
+        // Optionally, clear heldItemSlot if it's a separate object
+        if (heldItemSlot != null)
+        {
+            ClearItemSlot(heldItemSlot);
+            Debug.Log("Held item (separate slot) wiped.");
+        }
+
+        // Refresh health bars after clearing the inventory
+        RefreshHealthBars();
+    }
 
     // New method: attempt to craft an item.
     public bool CraftItem(Item craftedItem)
@@ -130,8 +234,6 @@ public class InventoryManager : MonoBehaviour
                 return false;
             }
         }
-
-        
 
         // Remove the required ingredients from inventory.
         foreach (RecipeIngredient ingredient in craftedItem.recipe)
@@ -179,7 +281,6 @@ public class InventoryManager : MonoBehaviour
             Debug.Log("Held item removed from inventory.");
         }
     }
-
 
     public void UpdateHeldSlotUI()
     {

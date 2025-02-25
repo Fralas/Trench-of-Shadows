@@ -1,24 +1,25 @@
 using UnityEngine;
-
 public class DeathScreenManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject deathScreenUI; // Il pannello UI della schermata di morte
+    private GameObject deathScreenUI; // The death screen UI panel
 
     [SerializeField]
-    private PlayerDatas player; // Riferimento al PlayerDatas
+    private PlayerDatas player; // Reference to PlayerDatas
+
+    [SerializeField] private InventoryManager inventoryManager; // Reference to InventoryManager
+    [SerializeField] private PlayerRespawn playerRespawn; // Reference to PlayerRespawn script
 
     private void Start()
     {
-        // Assicuriamoci che la schermata di morte sia inizialmente disattivata
         deathScreenUI.SetActive(false);
 
-        // Iscriviamo la funzione alla morte del player
         player.Died.AddListener(ShowDeathScreen);
     }
 
     private void ShowDeathScreen()
     {
         deathScreenUI.SetActive(true);
+        Time.timeScale = 0f; // Freeze the game when the player dies
     }
 }

@@ -12,7 +12,7 @@ public class PlayerDatas : MonoBehaviour
     [SerializeField] private int _maxHunger = 100;  
     private int _hunger;
 
-    [Header("Hunger Settings")]
+    [Header("Hunger Settings")] 
     public float HungerDecayRate = 1f; // Di quanto diminuisce la fame
     public float HungerDecayInterval = 5f; // Ogni quanti secondi diminuisce
     public int HungerDamageAmount = 5; // Danno ricevuto per fame 0
