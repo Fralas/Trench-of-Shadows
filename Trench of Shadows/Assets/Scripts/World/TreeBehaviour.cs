@@ -9,6 +9,7 @@ public class TreeBehavior : MonoBehaviour
     private Transform player;
     private Animator animator;
     public InventoryManager playerInventory; // Reference to the player's inventory
+    private PlayerController playerController;
 
     private float timeSinceLastPrint = 0f;
     public float printDelay = 1f;  // Delay in seconds for prints
@@ -24,8 +25,9 @@ public class TreeBehavior : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        // Ensure we are correctly referencing the player's inventory
+        // Ensure we are correctly referencing the player's inventory and controller
         playerInventory = GameObject.Find("Manager").GetComponent<InventoryManager>();
+        playerController = player.GetComponent<PlayerController>();
     }
 
     private void Update()
@@ -69,6 +71,12 @@ public class TreeBehavior : MonoBehaviour
         if (woodItem == null || isCutDown) return;
 
         isCutDown = true;
+        // Set player cutting animation
+        if (playerController != null)
+        {
+            playerController.animator.SetBool("isCutting", true);
+        }
+
         // Immediately set the tree's "isCut" state to true.
         animator.SetBool("isCut", true);
         Debug.Log("Tree is now in 'isCut' state.");
@@ -100,7 +108,7 @@ public class TreeBehavior : MonoBehaviour
         yield return new WaitForSeconds(1.8f);
 
         // Set "isCut" to false and "TreeDead" to true.
-        animator.SetBool("isCut", false);
+        animator.SetBool("isCut", false); // This line should now be here to stop the cutting animation.
         animator.SetBool("TreeDead", true);
         Debug.Log("Tree state updated: 'isCut' = false, 'TreeDead' = true.");
 
@@ -109,6 +117,13 @@ public class TreeBehavior : MonoBehaviour
         {
             spriteRenderer.sprite = stumpSprite;
             Debug.Log("Tree sprite changed to stump.");
+        }
+
+        // Reset player cutting animation immediately after the tree sprite changes.
+        if (playerController != null)
+        {
+            playerController.animator.SetBool("isCutting", false);
+            Debug.Log("Player cutting animation stopped.");
         }
 
         // Wait for 5 seconds while in the TreeDead state.
@@ -132,24 +147,20 @@ public class TreeBehavior : MonoBehaviour
 
     private void AddWoodToInventory(InventoryManager inventory)
     {
-        // Check if the inventory already contains the wood item.
         Item woodCopy = woodItem.Clone();
         woodCopy.itemAmt = 1;
 
-        // Search for an existing slot with the same wood item
         foreach (Transform child in inventory.inventoryGrid.transform)
         {
             UISlotHandler slot = child.GetComponent<UISlotHandler>();
             if (slot.item != null && slot.item.itemID == woodCopy.itemID)
             {
-                // If found, stack the wood in that slot.
                 inventory.StackInInventory(slot, woodCopy);
                 Debug.Log("Wood stacked in existing slot.");
-                return; // Exit after stacking
+                return;
             }
         }
 
-        // If no existing wood item is found, add it to an empty slot
         UISlotHandler emptySlot = FindEmptySlot(inventory);
 
         if (emptySlot != null)
@@ -162,7 +173,6 @@ public class TreeBehavior : MonoBehaviour
             Debug.Log("Player's inventory is full!");
         }
     }
-
 
     private UISlotHandler FindEmptySlot(InventoryManager inventory)
     {
@@ -177,7 +187,6 @@ public class TreeBehavior : MonoBehaviour
         return null;
     }
 
-    // New method: Decrease the axe's durability by 20 each time the tree is cut.
     private void DecreaseAxeDurability()
     {
         Item heldItem = playerInventory.GetHeldSlotItem();

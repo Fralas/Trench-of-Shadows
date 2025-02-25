@@ -11,11 +11,15 @@ public class StoneBehavior : MonoBehaviour
     private float timeSinceLastPrint = 0f;
     public float printDelay = 1f;  // Delay in seconds for prints
 
+    private Animator playerAnimator;
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        // Ensure we are correctly referencing the player's inventory
         playerInventory = GameObject.Find("Manager").GetComponent<InventoryManager>();
+
+        // Get the player's animator
+        playerAnimator = player.GetComponent<Animator>();
     }
 
     private void Update()
@@ -37,7 +41,7 @@ public class StoneBehavior : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E) && PlayerHasPickaxe())
             {
                 Debug.Log("Player pressed 'E'. Mining the stone...");
-                MineStone();
+                StartMining();
             }
         }
     }
@@ -52,6 +56,29 @@ public class StoneBehavior : MonoBehaviour
             return hasPickaxe;
         }
         return false;
+    }
+
+    private void StartMining()
+    {
+        // Set the player's animator to mining state
+        if (playerAnimator != null)
+        {
+            playerAnimator.SetBool("isMining", true);
+        }
+
+        // Begin mining stone
+        MineStone();
+
+        // After a short time, stop the mining animation
+        Invoke("StopMining", 1f); // Assuming the mining takes 1 second
+    }
+
+    private void StopMining()
+    {
+        if (playerAnimator != null)
+        {
+            playerAnimator.SetBool("isMining", false);
+        }
     }
 
     private void MineStone()

@@ -13,6 +13,14 @@ public class HarvestManager : MonoBehaviour
 
     private Dictionary<Vector3Int, bool> plantedCrops = new Dictionary<Vector3Int, bool>();
 
+    private Animator playerAnimator;
+
+    void Start()
+    {
+        // Get the player's animator to trigger harvesting and watering animations
+        playerAnimator = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -32,6 +40,7 @@ public class HarvestManager : MonoBehaviour
 
             if (heldItem.itemID == "Hoe")
             {
+                StartHarvesting();
                 HoeGround(playerTilePos, currentTile);
             }
             else if (heldItem.itemID == "Wateringcan")
@@ -43,6 +52,58 @@ public class HarvestManager : MonoBehaviour
                 PlantSeed(playerTilePos, currentTile);
             }
         }
+    }
+
+    private void StartHarvesting()
+    {
+        // Set the player's animator to harvesting state
+        if (playerAnimator != null)
+        {
+            playerAnimator.SetBool("isHarvesting", true);
+        }
+
+        // Disable movement
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().SetHarvestingOrWateringState(true);
+
+        // After a short delay, stop the harvesting animation and enable movement
+        Invoke("StopHarvesting", 1f); // Assuming harvesting takes 1 second
+    }
+
+    private void StopHarvesting()
+    {
+        if (playerAnimator != null)
+        {
+            playerAnimator.SetBool("isHarvesting", false);
+        }
+
+        // Enable movement again
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().SetHarvestingOrWateringState(false);
+    }
+
+    private void StartWatering()
+    {
+        // Set the player's animator to watering state
+        if (playerAnimator != null)
+        {
+            playerAnimator.SetBool("isWatering", true);
+        }
+
+        // Disable movement
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().SetHarvestingOrWateringState(true);
+
+        // After a short delay, stop the watering animation and enable movement
+        Invoke("StopWatering", 1f); // Assuming watering takes 1 second
+    }
+
+    private void StopWatering()
+    {
+        if (playerAnimator != null)
+        {
+            playerAnimator.SetBool("isWatering", false);
+        }
+
+        // Enable movement again
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().SetHarvestingOrWateringState(false);
     }
 
     private void HoeGround(Vector3Int position, TileBase currentTile)
@@ -61,7 +122,9 @@ public class HarvestManager : MonoBehaviour
     {
         if (currentTile == hoedTile)
         {
+            StartWatering();
             groundTilemap.SetTile(position, wateredTile);
+
         }
         else
         {

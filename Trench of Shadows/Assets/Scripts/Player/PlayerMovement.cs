@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Animator animator;
+    public Animator animator;
     private Rigidbody2D rb;
     public float moveSpeed = 5f;
     private SpriteRenderer spriteRenderer;
@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int attackDamage = 10;  // Danno inflitto ai nemici
     [SerializeField] private float attackRange = 1f; // Distanza massima per colpire il nemico
 
+    private bool isHarvestingOrWatering = false; // Flag to check if the player is harvesting or watering
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -26,6 +28,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        // Check if player is harvesting or watering, and if true, disable movement
+        if (isHarvestingOrWatering) return;
+
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
@@ -74,11 +79,8 @@ public class PlayerController : MonoBehaviour
                 enemy.TakeDamage(attackDamage, transform.position); // Passa la posizione del player
                 Debug.Log("Danno inflitto: " + attackDamage);
             }
-
-
         }
     }
-
 
     private bool PlayerHasSword()
     {
@@ -88,5 +90,11 @@ public class PlayerController : MonoBehaviour
             return heldItem != null && heldItem.itemID == "Sword";
         }
         return false;
+    }
+
+    // Method to set the harvesting/watering state
+    public void SetHarvestingOrWateringState(bool state)
+    {
+        isHarvestingOrWatering = state;
     }
 }

@@ -31,10 +31,19 @@ namespace WorldTime
             StartCoroutine(AddMinute());
         }
 
-        // ➤ Metodo aggiunto per ottenere l'ora corrente
         public TimeSpan GetCurrentTime()
         {
             return _currentTime;
+        }
+
+        // ➤ Skip the night and reset time to 06:00 AM
+        public void SkipNight()
+        {
+            if (_currentTime.Hours >= 18 || _currentTime.Hours < 6)
+            {
+                _currentTime = TimeSpan.FromHours(6);
+                WorldTimeChanged?.Invoke(this, _currentTime);
+            }
         }
     }
 }
