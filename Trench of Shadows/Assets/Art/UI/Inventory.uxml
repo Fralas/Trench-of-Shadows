@@ -1,0 +1,27 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Art/UI/InventoryStyle.uss?fileID=7433441132597879392&amp;guid=2388276cff4ffb74bbf3113792eca825&amp;type=3#InventoryStyle" />
+    <ui:VisualElement name="InventoryRoot" style="flex-grow: 1; width: 100%;">
+        <ui:VisualElement name="ItemGrid" style="flex-grow: 1; flex-wrap: wrap; width: 30%; height: 30%; align-items: stretch; justify-content: space-around; align-self: center; flex-direction: row;">
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemSlot_1" style="width: 64px; height: 64px; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; background-color: rgb(226, 226, 226);" />
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemSlot_2" style="width: 64px; height: 64px; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; background-color: rgb(226, 226, 226);" />
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemSlot_3" style="width: 64px; height: 64px; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; background-color: rgb(226, 226, 226);" />
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemSlot_4" style="width: 64px; height: 64px; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; background-color: rgb(226, 226, 226);" />
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemSlot_5" style="width: 64px; height: 64px; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; background-color: rgb(226, 226, 226);" />
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemSlot_6" style="width: 64px; height: 64px; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; background-color: rgb(226, 226, 226);" />
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemSlot_7" style="width: 64px; height: 64px; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; background-color: rgb(226, 226, 226);" />
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemSlot_8" style="width: 64px; height: 64px; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; background-color: rgb(226, 226, 226);" />
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemSlot_9" style="width: 64px; height: 64px; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; background-color: rgb(226, 226, 226);" />
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemSlot_10" style="width: 64px; height: 64px; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; background-color: rgb(226, 226, 226);" />
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemSlot_11" style="width: 64px; height: 64px; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; background-color: rgb(226, 226, 226);" />
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemSlot_12" style="width: 64px; height: 64px; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; background-color: rgb(226, 226, 226);" />
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemSlot_13" style="width: 64px; height: 64px; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; background-color: rgb(226, 226, 226);" />
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemSlot_14" style="width: 64px; height: 64px; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; background-color: rgb(226, 226, 226);" />
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemSlot_15" style="width: 64px; height: 64px; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; background-color: rgb(226, 226, 226);" />
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemSlot_16" style="width: 64px; height: 64px; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; background-color: rgb(226, 226, 226);" />
+        </ui:VisualElement>
+        <ui:VisualElement name="ItemDetails" style="flex-grow: 1; width: 30%; height: 30%;">
+            <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemNameLabel" />
+            <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemDescriptionLabel" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
