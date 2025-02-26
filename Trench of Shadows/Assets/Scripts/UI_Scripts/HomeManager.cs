@@ -7,12 +7,15 @@ public class MainMenu : MonoBehaviour
     public GameObject homeUI;
     public GameObject settingsUI;
     public GameObject keybindsUI;
+    public GameObject savesUI;
     public Button playBox;
     public Button exitBox;
     public Button settingsButton;
     public Button returnButton;
     public Button keyBindBox;
     public Button keybindsReturnButton;
+    public Button savesButton;
+    public Button savesReturnButton;
 
     [SerializeField] private string targetSceneName; // Set this in Inspector
 
@@ -24,6 +27,8 @@ public class MainMenu : MonoBehaviour
         returnButton.onClick.AddListener(CloseSettings);
         keyBindBox.onClick.AddListener(OpenKeybinds);
         keybindsReturnButton.onClick.AddListener(CloseKeybinds);
+        savesButton.onClick.AddListener(OpenSaves);
+        savesReturnButton.onClick.AddListener(CloseSaves);
     }
 
     void PlayGame()
@@ -70,5 +75,17 @@ public class MainMenu : MonoBehaviour
     {
         keybindsUI.SetActive(false);
         settingsUI.SetActive(true);
+    }
+
+    void OpenSaves()
+    {
+        homeUI.SetActive(false);
+        savesUI.SetActive(true);
+    }
+
+    void CloseSaves()
+    {
+        savesUI.SetActive(false);
+        homeUI.SetActive(true);
     }
 }
