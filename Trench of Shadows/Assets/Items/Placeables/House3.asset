@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09d33517e0192484290cff5d954bfd9e, type: 3}
-  m_Name: House
+  m_Name: House3
   m_EditorClassIdentifier: 
-  itemID: Casa
-  itemImg: {fileID: 21300000, guid: 44f399fbd69a04547bf2e914609208e6, type: 3}
+  itemID: Casa_3
+  itemImg: {fileID: 1250373611, guid: c2e4ef39cf3088f42a8f96a206f58217, type: 3}
   itemAmt: 1
   type: 0
   durability: 100
   recipe:
   - ingredientItem: {fileID: 11400000, guid: d597be2556668cb4cb5ae171b0df6523, type: 2}
-    amountRequired: 25
+    amountRequired: 200
