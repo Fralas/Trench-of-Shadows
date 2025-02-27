@@ -8,6 +8,12 @@ public class EnemyAttack : MonoBehaviour
 
     private bool isAttacking = false;
     private Coroutine attackCoroutine;
+    private Animator animator;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -15,6 +21,7 @@ public class EnemyAttack : MonoBehaviour
         if (player != null && !isAttacking)
         {
             isAttacking = true;
+            animator.SetBool("isAttacking", true);
             attackCoroutine = StartCoroutine(AttackPlayer(player));
         }
     }
@@ -24,6 +31,7 @@ public class EnemyAttack : MonoBehaviour
         if (collision.GetComponent<PlayerDatas>() != null)
         {
             isAttacking = false;
+            animator.SetBool("isAttacking", false);
             if (attackCoroutine != null)
             {
                 StopCoroutine(attackCoroutine);
