@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Game.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Shop.unity
+    path: Assets/Scenes/Test/ShopTest.unity
     guid: f9c72bb07a0a57b41a68021009ad02de
   - enabled: 1
     path: Assets/Scenes/Home.unity
@@ -26,4 +26,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Save3.unity
     guid: 677ef5b24d29a314baf6e12c45dd3c0a
+  - enabled: 1
+    path: Assets/Scenes/Cave/Cave.unity
+    guid: 1d52d47dd095b1c44a71d499f5649b54
+  - enabled: 1
+    path: Assets/Scenes/Shop/Grocery_Shop.unity
+    guid: cff9169c852c8ab45b3f270263c7eed1
+  - enabled: 1
+    path: Assets/Scenes/Shop/Carpenter_Shop.unity
+    guid: 06fb90dede5fb6440803de6402d003c1
+  - enabled: 1
+    path: Assets/Scenes/Shop/Blacksmith_Shop.unity
+    guid: 348fbb4b5fead0f4aaa678ad5180497d
   m_configObjects: {}
