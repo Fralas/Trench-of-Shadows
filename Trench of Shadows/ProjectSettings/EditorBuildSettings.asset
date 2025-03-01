@@ -15,16 +15,16 @@ EditorBuildSettings:
     path: Assets/Scenes/Home.unity
     guid: c3e69b5251b864447b7d25024c6829d4
   - enabled: 1
-    path: Assets/Scenes/Game_fra_nuovo.unity
+    path: Assets/Scenes/Test/Game_fra_nuovo.unity
     guid: ca46b4a2cf50da745aabea1511ba2bf1
   - enabled: 1
-    path: Assets/Scenes/Save2.unity
+    path: Assets/Scenes/Saves/Save2.unity
     guid: d62fb2c0d1c23594198e5f0533f83626
   - enabled: 1
-    path: Assets/Scenes/Save1.unity
+    path: Assets/Scenes/Saves/Save1.unity
     guid: 3e01244eda4a25443a8314f8952d451f
   - enabled: 1
-    path: Assets/Scenes/Save3.unity
+    path: Assets/Scenes/Saves/Save3.unity
     guid: 677ef5b24d29a314baf6e12c45dd3c0a
   - enabled: 1
     path: Assets/Scenes/Cave/Cave.unity
