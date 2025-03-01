@@ -511,6 +511,8 @@ GameObject:
   - component: {fileID: 3096250167946368372}
   - component: {fileID: 7235638950485455551}
   - component: {fileID: 8971416312504787211}
+  - component: {fileID: -2746669890808697310}
+  - component: {fileID: 3683984162477522566}
   m_Layer: 10
   m_Name: EnemyVioletSlime
   m_TagString: Enemy
@@ -756,6 +758,36 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-2746669890808697310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7413165772384974801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 247e3a1819c42984194f7194c57b063e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3683984162477522566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7413165772384974801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 085d95d8a0203114d9d32605459239a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 2
+  minRoamTime: 3
+  maxRoamTime: 8
+  minStopTime: 2
+  maxStopTime: 5
+  roamRadius: 3
 --- !u!1 &7436273719341756671
 GameObject:
   m_ObjectHideFlags: 0

@@ -63,9 +63,9 @@ public class InventoryManager : MonoBehaviour
         }
 
         // Debug test: When T is pressed, call GetHeldSlotItem() to log its status.
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.L))
         {
-            Debug.Log("T key pressed - Testing GetHeldSlotItem...");
+            Debug.Log("L key pressed - Testing GetHeldSlotItem...");
             GetHeldSlotItem();
         }
 

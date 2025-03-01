@@ -425,7 +425,7 @@ Transform:
   m_GameObject: {fileID: 7556419960061379776}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.053, y: 1.46, z: 0}
+  m_LocalPosition: {x: 0.04, y: -0.1, z: 0}
   m_LocalScale: {x: 5.494965, y: 5.494965, z: 5.494965}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -502,6 +502,10 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 512
+  roamRadius: 11
+  minRoamTime: 3
+  maxRoamTime: 6
+  stopDuration: 2
 --- !u!114 &5640023134245689910
 MonoBehaviour:
   m_ObjectHideFlags: 0

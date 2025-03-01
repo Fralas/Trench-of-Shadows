@@ -2948,74 +2948,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 251953870}
   m_CullTransparentMesh: 1
---- !u!1 &259166159
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 259166162}
-  - component: {fileID: 259166161}
-  - component: {fileID: 259166160}
-  m_Layer: 0
-  m_Name: ManagerVecchio
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &259166160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 259166159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a969630f59b604469c0129eaa9e549a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryGrid: {fileID: 0}
-  messyInventory: 1
-  RecipeSlot_1: {fileID: 0}
-  RecipeSlot_2: {fileID: 0}
-  RecipeSlot_3: {fileID: 0}
-  heldSlot: {fileID: 0}
-  playerInventoryGrid: {fileID: 0}
-  hotbarGrid: {fileID: 0}
-  heldItemSlot: {fileID: 0}
---- !u!114 &259166161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 259166159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6f6ed27b33caa1438a515643e5f5621, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Manager: {fileID: 259166159}
-  heldItem: {fileID: 0}
---- !u!4 &259166162
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 259166159}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.6781999, y: -0.32498205, z: -0.015457291}
-  m_LocalScale: {x: 0.18665422, y: 0.18665422, z: 0.18665422}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1148543074}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &264545421
 GameObject:
   m_ObjectHideFlags: 0
@@ -6534,6 +6466,88 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 523048266}
   m_CullTransparentMesh: 1
+--- !u!1 &550153539
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 550153540}
+  - component: {fileID: 550153541}
+  m_Layer: 9
+  m_Name: LightPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &550153540
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550153539}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.009, y: -0.031, z: 0.00032076528}
+  m_LocalScale: {x: 0.18665421, y: 0.18665421, z: 0.18665421}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1148543074}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &550153541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550153539}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 1
+  m_LightType: 3
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.445
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 5.74
+  m_LightVolumeIntensity: 1
+  m_LightVolumeIntensityEnabled: 0
+  m_ApplyToSortingLayers: 0000000081b947d5793a9f911f3ef120f17d228b83d10d98
+  m_LightCookieSprite: {fileID: 0}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 0
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 1
+  m_UseNormalMap: 0
+  m_ShadowIntensityEnabled: 0
+  m_ShadowIntensity: 0.75
+  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensity: 0.75
+  m_LocalBounds:
+    m_Center: {x: 0, y: -0.00000011920929, z: 0}
+    m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
+  m_PointLightInnerAngle: 0
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 3.28
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
 --- !u!1 &561451485
 GameObject:
   m_ObjectHideFlags: 0
@@ -10207,7 +10221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8544421121ec40b4888798dd7f157a13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
+  item: {fileID: 11400000, guid: c1a1800cc1f103347b5c168dc15663b1, type: 2}
   slotImg: {fileID: 1054879630}
   itemCount: {fileID: 786840015}
   healthBar: {fileID: 4601205}
@@ -12592,6 +12606,7 @@ GameObject:
   - component: {fileID: 1148543080}
   - component: {fileID: 1148543071}
   - component: {fileID: 1148543069}
+  - component: {fileID: 1148543081}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -12753,12 +12768,12 @@ Transform:
   m_GameObject: {fileID: 1148543068}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.7683263, y: 0.071064115, z: -0.0017185}
+  m_LocalPosition: {x: -3.9, y: 0.071064115, z: -0.0017185}
   m_LocalScale: {x: 5.3575, y: 5.3575, z: 5.3575}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 550153540}
   - {fileID: 519420032}
-  - {fileID: 259166162}
   m_Father: {fileID: 937187534}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1148543076
@@ -12874,6 +12889,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   respawnPoint: {fileID: 2018737958}
+  inventoryManager: {fileID: 1812644308}
+--- !u!114 &1148543081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148543068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667bf284eaced50458b7da3d99a0533a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  torchLightObject: {fileID: 550153539}
   inventoryManager: {fileID: 1812644308}
 --- !u!4 &1149612870 stripped
 Transform:

@@ -198,6 +198,8 @@ GameObject:
   - component: {fileID: 6654506454528336146}
   - component: {fileID: 7597409293647810008}
   - component: {fileID: 6997009181022801863}
+  - component: {fileID: 2191480521081727521}
+  - component: {fileID: 2904536380994616954}
   m_Layer: 10
   m_Name: 'EnemyGreenSlime '
   m_TagString: Enemy
@@ -443,6 +445,36 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2191480521081727521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5730994619237106047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 247e3a1819c42984194f7194c57b063e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2904536380994616954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5730994619237106047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 085d95d8a0203114d9d32605459239a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 2
+  minRoamTime: 3
+  maxRoamTime: 8
+  minStopTime: 2
+  maxStopTime: 5
+  roamRadius: 3
 --- !u!1 &5980070733383559003
 GameObject:
   m_ObjectHideFlags: 0
