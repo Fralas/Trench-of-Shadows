@@ -400,7 +400,7 @@ public class InventoryManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("GetHeldSlotItem: Held slot is empty.");
+                //Debug.Log("GetHeldSlotItem: Held slot is empty.");
             }
             return heldSlot.item;
         }
