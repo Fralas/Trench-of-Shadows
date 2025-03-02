@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: House4
   m_EditorClassIdentifier: 
   itemID: Casa_4
-  itemImg: {fileID: 562331327, guid: 23180ee8b4c8ffe4cbd6b832c510a35a, type: 3}
+  itemImg: {fileID: 21300000, guid: 7a426af5c4e8e374ab12de0a3ca159cb, type: 3}
   itemAmt: 1
   type: 0
   durability: 100

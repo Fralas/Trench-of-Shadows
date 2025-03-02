@@ -106,6 +106,7 @@ public class RealEstateActivation : MonoBehaviour, IPointerClickHandler
         UpdateSlotUI();
     }
 
+
     public void OnPointerClick(PointerEventData eventData)
     {
         if (objectToActivate != null)
@@ -118,4 +119,26 @@ public class RealEstateActivation : MonoBehaviour, IPointerClickHandler
             Debug.LogWarning("No GameObject assigned to activate.");
         }
     }
+
+   /* public void OnPointerClick(PointerEventData eventData)
+{
+    if (objectToActivate != null)
+    {
+        objectToActivate.SetActive(true);
+        Debug.Log("Activated: " + objectToActivate.name);
+
+        // Segna la casa come comprata nel HouseStateManager
+        HouseStateManager houseManager = objectToActivate.GetComponent<HouseStateManager>();
+        if (houseManager != null)
+        {
+            houseManager.SetBought();
+        }
+    }
+    else
+    {
+        Debug.LogWarning("No GameObject assigned to activate.");
+    }
+}*/
+
+
 }
