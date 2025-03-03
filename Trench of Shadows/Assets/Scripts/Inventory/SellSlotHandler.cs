@@ -12,6 +12,7 @@ public class SellSlotHandler : MonoBehaviour, IPointerClickHandler
 
     private MerchBehaviour merchantBehaviour; // Reference to the merchant's behavior
 
+/*
     void Awake()
     {
         if (inventoryManager == null)
@@ -23,7 +24,33 @@ public class SellSlotHandler : MonoBehaviour, IPointerClickHandler
             Debug.LogError("MerchantBehaviour reference is not assigned in " + gameObject.name);
         }
         UpdateSlotUI();
+    }*/
+
+    void Awake()
+{
+    // Cerca InventoryManager nella scena se non è assegnato
+    if (inventoryManager == null)
+    {
+        inventoryManager = FindObjectOfType<InventoryManager>();
+        if (inventoryManager == null)
+        {
+            Debug.LogError("rcavacca InventoryManager non trovato nella scena!");
+        }
     }
+
+    // Cerca MerchBehaviour nella scena se non è assegnato
+    if (merchantBehaviour == null)
+    {
+        merchantBehaviour = FindObjectOfType<MerchBehaviour>();
+        if (merchantBehaviour == null)
+        {
+            Debug.LogError("rcavacca MerchantBehaviour non trovato nella scena!");
+        }
+    }
+
+    UpdateSlotUI();
+}
+
 
     // Update the UI for this sell slot
     private void UpdateSlotUI()

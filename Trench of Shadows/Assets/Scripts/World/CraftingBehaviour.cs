@@ -15,7 +15,7 @@ public class CraftingInteraction : MonoBehaviour
     private GameObject craftingInventoryBackground; // Reference to the crafting table inventory background
     private GameObject recipeBackground; // Reference to the recipe background
 
-    private void Start()
+    /*private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -27,7 +27,33 @@ public class CraftingInteraction : MonoBehaviour
 
         // Reference to the recipe inventory background
         recipeBackground = GameObject.Find("RecipeBackground");
-    }
+    }*/
+
+    private void Start()
+{
+    player = GameObject.FindGameObjectWithTag("Player")?.transform;
+
+    // Trova dinamicamente i GameObject nella scena corrente
+    FindUIElements();
+}
+
+private void FindUIElements()
+{
+    playerInventoryBackground = GameObject.Find("InventoryBackground");
+    craftingInventoryBackground = GameObject.Find("CraftingBackground");
+    recipeBackground = GameObject.Find("RecipeBackground");
+
+    // Debug log per verificare che gli elementi siano stati trovati
+    if (playerInventoryBackground == null)
+        Debug.LogWarning("InventoryBackground non trovato nella scena.");
+    
+    if (craftingInventoryBackground == null)
+        Debug.LogWarning("CraftingBackground non trovato nella scena.");
+    
+    if (recipeBackground == null)
+        Debug.LogWarning("RecipeBackground non trovato nella scena.");
+}
+
 
     private void Update()
     {

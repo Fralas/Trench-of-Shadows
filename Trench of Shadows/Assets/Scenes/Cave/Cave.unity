@@ -44942,6 +44942,14 @@ PrefabInstance:
       propertyPath: _targetSceneName
       value: Game
       objectReference: {fileID: 0}
+    - target: {fileID: 2395478447941312818, guid: 8980e56be7ab05948aacf1db29b2e54d, type: 3}
+      propertyPath: _targetSceneSpawnName
+      value: SP_Cave
+      objectReference: {fileID: 0}
+    - target: {fileID: 2395478447941312818, guid: 8980e56be7ab05948aacf1db29b2e54d, type: 3}
+      propertyPath: _currentSceneSpawnName
+      value: SpawnPoint
+      objectReference: {fileID: 0}
     - target: {fileID: 3238492299528957159, guid: 8980e56be7ab05948aacf1db29b2e54d, type: 3}
       propertyPath: m_LocalPosition.y
       value: -1.64
