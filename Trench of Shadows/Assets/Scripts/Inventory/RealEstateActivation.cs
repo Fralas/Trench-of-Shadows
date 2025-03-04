@@ -107,7 +107,7 @@ public class RealEstateActivation : MonoBehaviour, IPointerClickHandler
     }
 
 
-    public void OnPointerClick(PointerEventData eventData)
+   public void OnPointerClick(PointerEventData eventData)
     {
         if (objectToActivate != null)
         {
@@ -120,7 +120,7 @@ public class RealEstateActivation : MonoBehaviour, IPointerClickHandler
         }
     }
 
-   /* public void OnPointerClick(PointerEventData eventData)
+ /*    public void OnPointerClick(PointerEventData eventData)
 {
     if (objectToActivate != null)
     {
