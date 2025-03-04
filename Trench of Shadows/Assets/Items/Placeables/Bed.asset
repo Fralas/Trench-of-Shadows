@@ -15,7 +15,7 @@ MonoBehaviour:
   itemID: Bed
   itemImg: {fileID: 21300000, guid: 4c13434a34eff9e49bc3875663b6f850, type: 3}
   itemAmt: 1
-  type: 0
+  type: 5
   durability: 100
   recipe:
   - ingredientItem: {fileID: 11400000, guid: 17c07ab7cfa69ea4494516bcf51f37d2, type: 2}

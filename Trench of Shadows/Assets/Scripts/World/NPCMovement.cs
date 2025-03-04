@@ -83,7 +83,6 @@ public class NPCMovement : MonoBehaviour
             {
                 movement = newDirection;
                 timer = changeDirectionTime;
-                Debug.Log("NPC moving in direction: " + movement); // Debug
                 return;
             }
         }

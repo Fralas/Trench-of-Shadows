@@ -110,6 +110,4 @@ public class PlayerDatas : MonoBehaviour
         isStarving = false;
     }
 
-
-
 }

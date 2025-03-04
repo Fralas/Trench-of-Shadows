@@ -135709,6 +135709,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7499447497364058505, guid: 2d631e712fcb0a7469d87ac6c1453e78, type: 3}
+      propertyPath: stopDistance
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7499447497364058505, guid: 2d631e712fcb0a7469d87ac6c1453e78, type: 3}
+      propertyPath: detectionRadius
+      value: 6.75
+      objectReference: {fileID: 0}
     - target: {fileID: 7556419960061379776, guid: 2d631e712fcb0a7469d87ac6c1453e78, type: 3}
       propertyPath: m_Name
       value: EnemyWizard
