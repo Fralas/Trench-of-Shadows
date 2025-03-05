@@ -13,7 +13,8 @@ public enum ItemType
 }
 
 [System.Serializable]
-public class RecipeIngredient {
+public class RecipeIngredient
+{
     public Item ingredientItem; // Reference to the ingredient item (e.g., Wheat)
     public int amountRequired;  // How many of this ingredient are needed (e.g., 3)
 }
@@ -27,7 +28,28 @@ public class Item : ScriptableObject
     public ItemType type;
     public int durability; 
     public List<RecipeIngredient> recipe;
-    public int bonusHealth;  
+    
+    [Header("Armor Specific")]
+    public int bonusHealth;  // Bonus health provided by armor items
+
+    // Method to equip/unequip an armor item
+    public void Equip(PlayerDatas player)
+    {
+        if (type == ItemType.Armor)
+        {
+            // Increase max health when equipping armor
+            player.UpdateBonusHealth(bonusHealth);
+        }
+    }
+
+    public void Unequip(PlayerDatas player)
+    {
+        if (type == ItemType.Armor)
+        {
+            // Decrease max health when unequipping armor
+            player.UpdateBonusHealth(-bonusHealth);
+        }
+    }
 }
 
 public static class ScriptableObjectExtension

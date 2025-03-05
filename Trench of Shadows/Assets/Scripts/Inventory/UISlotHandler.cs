@@ -14,6 +14,9 @@ public class UISlotHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHand
     
     [Header("Allowed Items (Leave empty for no restriction)")]
     public List<Item> allowedItems; // List of allowed items
+    
+    [Header("Armor Slot Flag")]
+    public bool isArmorSlot = false;  // Flag to indicate if this is an armor slot
 
     private CanvasGroup canvasGroup;
     private Transform originalParent;
@@ -82,17 +85,29 @@ public class UISlotHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHand
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             if (item == null) return;
-            
+
+            // Check if the slot is a reserved armor slot and there is an item in it
+            if (isArmorSlot && item != null)
+            {
+                // Decrease health when the item is removed from a reserved armor slot
+                int bonusHealth = item.bonusHealth;
+                PlayerDatas.Instance.UpdateBonusHealth(-bonusHealth); // Decrease max HP
+                Debug.Log("Armor item removed: " + item.name + " with bonus health: " + bonusHealth);
+            }
+
             MouseManager.instance.PickupFromStack(this);
-            item = null;
+            item = null; // Clear the item from the slot
         }
         else
         {
             MouseManager.instance.UpdateHeldItem(this);
         }
-        
-        UpdateSlotUI();
+
+        UpdateSlotUI(); // Update the UI to reflect the changes
     }
+
+
+
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -104,30 +119,60 @@ public class UISlotHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHand
 
     public virtual void OnDrop(PointerEventData eventData)
     {
+        Debug.Log("OnDrop triggered");
+
         UISlotHandler sourceSlot = eventData.pointerDrag?.GetComponent<UISlotHandler>();
-        
-        // Check if item is allowed and the source slot is not the same as the target slot
-        if (sourceSlot != null && sourceSlot != this && IsItemAllowed(sourceSlot.item))
+
+        if (sourceSlot != null)
         {
-            // Swap items between slots if allowed
-            Item temp = this.item;
-            inventoryManager.PlaceInInventory(this, sourceSlot.item);
-            sourceSlot.inventoryManager.PlaceInInventory(sourceSlot, temp);
+            Debug.Log("Source Slot found, Item: " + sourceSlot.item.name);
 
-            // Update UI
-            UpdateSlotUI();
-            sourceSlot.UpdateSlotUI();
+            if (sourceSlot != this)
+            {
+                // Check if the item is allowed
+                if (IsItemAllowed(sourceSlot.item))
+                {
+                    Debug.Log("Item allowed: " + sourceSlot.item.name); // Log allowed item
 
-            RefreshHealthBar();
-            sourceSlot.RefreshHealthBar();
+                    // If the item is armor, increase max health
+                    if (sourceSlot.item.type == ItemType.Armor)
+                    {
+                        int bonusHealth = sourceSlot.item.bonusHealth;
+                        PlayerDatas.Instance.UpdateBonusHealth(bonusHealth); // Update max HP
+                        Debug.Log("Armor item dropped: " + sourceSlot.item.name + " with bonus health: " + bonusHealth);
+                    }
 
-            // Only reset the held item if the item was successfully placed
-            MouseManager.instance.heldItem = null;  // Only clear held item when drop is successful
+                    // Swap the items between source and this slot
+                    Item temp = this.item;
+                    inventoryManager.PlaceInInventory(this, sourceSlot.item);
+                    sourceSlot.inventoryManager.PlaceInInventory(sourceSlot, temp);
+
+                    // Update UI for both slots
+                    UpdateSlotUI();
+                    sourceSlot.UpdateSlotUI();
+
+                    // Refresh health bars
+                    RefreshHealthBar();
+                    sourceSlot.RefreshHealthBar();
+
+                    // Clear the held item (if the drop is successful)
+                    MouseManager.instance.heldItem = null;  // Reset the held item
+
+                    Debug.Log("Drop successful!");
+                }
+                else
+                {
+                    Debug.Log("Item not allowed: " + sourceSlot.item.name);  // Log when item is not allowed
+                }
+            }
+            else
+            {
+                Debug.Log("Source slot is the same as the target slot!");  // Log when source and target are the same
+            }
         }
         else
         {
-            Debug.Log("Item not allowed in this slot: " + (sourceSlot?.item?.name ?? "null"));
-            // Do not clear the held item here, since the drop is invalid
+            Debug.Log("No valid source slot found in the drop event.");  // Log if sourceSlot is null
         }
     }
 
@@ -140,14 +185,24 @@ public class UISlotHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHand
         {
             if (allowedItem.itemID == itemToCheck.itemID)
             {
+                Debug.Log("Item allowed: " + itemToCheck.name);  // Add log here
+
+                // If the item is armor, increase the player's max health
+                if (itemToCheck.type == ItemType.Armor)
+                {
+                    int bonusHealth = itemToCheck.bonusHealth;
+                    PlayerDatas.Instance.UpdateBonusHealth(bonusHealth); // Update max HP
+                    Debug.Log("Armor item: " + itemToCheck.name + " with bonus health: " + bonusHealth);
+                }
+
                 return true;
             }
         }
 
-        // Log to debug why the item is not allowed
         Debug.Log("Item not allowed: " + itemToCheck.name);
         return false;
     }
+
 
     public void RefreshHealthBar()
     {
