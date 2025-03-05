@@ -79,12 +79,20 @@ public class InventoryManager : MonoBehaviour
 
     public void PlaceInInventory(UISlotHandler activeSlot, Item item)
     {
+        // Check if the slot allows this item
+        if (activeSlot != null && !activeSlot.IsItemAllowed(item))
+        {
+            Debug.Log($"Item '{item.name}' is not allowed in slot: {activeSlot.name}");
+            return; // Prevent placing restricted items
+        }
+
         activeSlot.item = item;
         activeSlot.slotImg.sprite = item.itemImg;
         activeSlot.itemCount.text = item.itemAmt.ToString();
         activeSlot.slotImg.gameObject.SetActive(true);
         ConfigureInventory();
     }
+
 
     public void StackInInventory(UISlotHandler activeSlot, Item item)
     {

@@ -27,6 +27,7 @@ public class Item : ScriptableObject
     public ItemType type;
     public int durability; 
     public List<RecipeIngredient> recipe;
+    public int bonusHealth;  
 }
 
 public static class ScriptableObjectExtension

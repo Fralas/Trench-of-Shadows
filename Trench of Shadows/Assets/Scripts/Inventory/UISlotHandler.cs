@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,8 +9,11 @@ public class UISlotHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHand
     public Item item;
     public Image slotImg;
     public TextMeshProUGUI itemCount;
-    public Slider healthBar;  // Reference to HealthBar Slider
+    public Slider healthBar;
     public InventoryManager inventoryManager;
+    
+    [Header("Allowed Items (Leave empty for no restriction)")]
+    public List<Item> allowedItems; // List of allowed items
 
     private CanvasGroup canvasGroup;
     private Transform originalParent;
@@ -19,9 +21,8 @@ public class UISlotHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHand
 
     void Awake()
     {
-        if (healthBar == null) 
+        if (healthBar == null)
         {
-            // Try to find the HealthBar GameObject automatically
             healthBar = GetComponentInChildren<Slider>();
         }
 
@@ -35,7 +36,7 @@ public class UISlotHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHand
         canvasGroup = GetComponent<CanvasGroup>() ?? gameObject.AddComponent<CanvasGroup>();
     }
 
-    public void UpdateSlotUI()
+    public virtual void UpdateSlotUI()
     {
         if (item != null)
         {
@@ -49,7 +50,6 @@ public class UISlotHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHand
                 float normalizedDurability = (float)item.durability / 100f;
                 healthBar.value = normalizedDurability;
 
-                // Update the color of the slider based on durability percentage.
                 Image fillImage = healthBar.fillRect.GetComponent<Image>();
                 if (normalizedDurability > 0.66f)
                 {
@@ -69,7 +69,7 @@ public class UISlotHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHand
         {
             slotImg.gameObject.SetActive(false);
             itemCount.text = string.Empty;
-
+            
             if (healthBar != null)
             {
                 healthBar.gameObject.SetActive(false);
@@ -77,13 +77,12 @@ public class UISlotHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHand
         }
     }
 
-
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             if (item == null) return;
-
+            
             MouseManager.instance.PickupFromStack(this);
             item = null;
         }
@@ -92,42 +91,64 @@ public class UISlotHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHand
             MouseManager.instance.UpdateHeldItem(this);
         }
         
-        // Refresh the slot UI (including the health bar) on every click
         UpdateSlotUI();
     }
 
-
     public void OnBeginDrag(PointerEventData eventData)
     {
-        // Prevent dragging completely
-        eventData.pointerDrag = null;
+        eventData.pointerDrag = null; // Prevent dragging
     }
-
+    
     public void OnDrag(PointerEventData eventData) { }
     public void OnEndDrag(PointerEventData eventData) { }
 
-    public void OnDrop(PointerEventData eventData)
+    public virtual void OnDrop(PointerEventData eventData)
     {
-        UISlotHandler sourceSlot = eventData.pointerDrag.GetComponent<UISlotHandler>();
-        if (sourceSlot != null && sourceSlot != this)
+        UISlotHandler sourceSlot = eventData.pointerDrag?.GetComponent<UISlotHandler>();
+        
+        // Check if item is allowed and the source slot is not the same as the target slot
+        if (sourceSlot != null && sourceSlot != this && IsItemAllowed(sourceSlot.item))
         {
-            // Swap items between slots
+            // Swap items between slots if allowed
             Item temp = this.item;
             inventoryManager.PlaceInInventory(this, sourceSlot.item);
             sourceSlot.inventoryManager.PlaceInInventory(sourceSlot, temp);
 
-            // Update both slots UI
+            // Update UI
             UpdateSlotUI();
             sourceSlot.UpdateSlotUI();
 
-            // Refresh health bar for both slots
             RefreshHealthBar();
             sourceSlot.RefreshHealthBar();
+
+            // Only reset the held item if the item was successfully placed
+            MouseManager.instance.heldItem = null;  // Only clear held item when drop is successful
+        }
+        else
+        {
+            Debug.Log("Item not allowed in this slot: " + (sourceSlot?.item?.name ?? "null"));
+            // Do not clear the held item here, since the drop is invalid
         }
     }
 
+    public bool IsItemAllowed(Item itemToCheck)
+    {
+        if (itemToCheck == null) return false;
+        if (allowedItems == null || allowedItems.Count == 0) return true; // No restrictions
 
-    // Ensure the health bar is updated correctly
+        foreach (Item allowedItem in allowedItems)
+        {
+            if (allowedItem.itemID == itemToCheck.itemID)
+            {
+                return true;
+            }
+        }
+
+        // Log to debug why the item is not allowed
+        Debug.Log("Item not allowed: " + itemToCheck.name);
+        return false;
+    }
+
     public void RefreshHealthBar()
     {
         if (healthBar != null)
@@ -158,6 +179,4 @@ public class UISlotHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHand
             }
         }
     }
-
-
 }

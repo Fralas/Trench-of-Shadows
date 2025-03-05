@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09d33517e0192484290cff5d954bfd9e, type: 3}
   m_Name: FeetArmour
   m_EditorClassIdentifier: 
-  itemID: 
+  itemID: FeetArmour
   itemImg: {fileID: 21300000, guid: 6be24be930e38ff4581c60acdc180c25, type: 3}
   itemAmt: 1
   type: 3
@@ -20,3 +20,4 @@ MonoBehaviour:
   recipe:
   - ingredientItem: {fileID: 11400000, guid: d597be2556668cb4cb5ae171b0df6523, type: 2}
     amountRequired: 25
+  bonusHealth: 10
