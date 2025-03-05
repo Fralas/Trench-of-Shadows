@@ -16,6 +16,8 @@ public class HarvestManager : MonoBehaviour
 
     private Animator playerAnimator;
 
+    
+
      void Awake()
     {
         if (Instance == null)

@@ -31,7 +31,7 @@ public class EnemySpawner : MonoBehaviour
                 Vector2 randomPosition = (Vector2)spawnPoint.position + Random.insideUnitCircle * spawnRadius;
                 GameObject newEnemy = Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
                 spawnedEnemies.Add(newEnemy);
-                Debug.Log($"Spawner {gameObject.name}: Spawned a new enemy at {randomPosition}! Current count: {spawnedEnemies.Count}");
+                //Debug.Log($"Spawner {gameObject.name}: Spawned a new enemy at {randomPosition}! Current count: {spawnedEnemies.Count}");
             }
             else
             {
