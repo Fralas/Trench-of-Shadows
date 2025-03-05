@@ -73,7 +73,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1851835783
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -803634938, guid: 070039080a36a1248a494a8e58a1822f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -152,5 +152,7 @@ MonoBehaviour:
   - {fileID: -279058507, guid: 070039080a36a1248a494a8e58a1822f, type: 3}
   - {fileID: 1517280318, guid: 070039080a36a1248a494a8e58a1822f, type: 3}
   growthTime: 2
-  playerInventory: {fileID: 0}
   cornItem: {fileID: 11400000, guid: 7fd711f771e26dd4fbc5afad8c7271a6, type: 2}
+  playerInventory: {fileID: 0}
+  cornItemPrefab: {fileID: 0}
+  ParentReference: {fileID: 0}

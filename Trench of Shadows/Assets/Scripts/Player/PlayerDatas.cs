@@ -9,6 +9,8 @@ public class PlayerDatas : MonoBehaviour
     [SerializeField] private int _maxHp = 100;
     private int _hp;
 
+    private int _bonusMaxHp = 0;  // This will store the bonus health from armor
+
     [SerializeField] private int _maxHunger = 100;  
     private int _hunger;
 
@@ -20,7 +22,7 @@ public class PlayerDatas : MonoBehaviour
 
     private bool isStarving = false; // Controlla se il player sta prendendo danno per fame
 
-    public int MaxHp => _maxHp;
+    public int MaxHp => _maxHp + _bonusMaxHp;  // Base health + bonus from armor
     public int MaxHunger => _maxHunger;
 
     public int Hp
@@ -29,7 +31,7 @@ public class PlayerDatas : MonoBehaviour
         private set
         {
             var isDamage = value < _hp;
-            _hp = Mathf.Clamp(value, 0, _maxHp);
+            _hp = Mathf.Clamp(value, 0, MaxHp);  // Use MaxHp, including bonus health
 
             if (isDamage)
                 Damaged?.Invoke(_hp);
@@ -60,6 +62,8 @@ public class PlayerDatas : MonoBehaviour
     public UnityEvent<int> Damaged;
     public UnityEvent Died;
     public UnityEvent<int> HungerChanged;
+    public UnityEvent<int> MaxHealthChanged;  
+
 
     private void Awake()
     {
@@ -77,9 +81,29 @@ public class PlayerDatas : MonoBehaviour
         }
     }
 
+    public void UpdateBonusHealth(int bonusDelta)
+    {
+        Debug.Log("UpdateBonusHealth called with value: " + bonusDelta);
+
+        // Add or subtract the bonus health based on the bonusDelta value
+        _bonusMaxHp += bonusDelta;
+
+        // Ensure current health does not exceed the new MaxHp
+        _hp = Mathf.Clamp(_hp, 0, MaxHp);
+
+        // Log the updated values
+        Debug.Log("Updated max HP: " + MaxHp);
+        Debug.Log("Updated current HP: " + _hp);
+
+        // Notify about the change in max HP
+        MaxHealthChanged?.Invoke(MaxHp);
+    }
+
+
+
     public void Damage(int amount) => Hp -= amount;
     public void Heal(int amount) => Hp += amount;
-    public void HealFull() => Hp = _maxHp;
+    public void HealFull() => Hp = MaxHp;  // Use MaxHp here to account for bonus health
     public void Kill() => Hp = 0;
     public void Adjust(int value) => Hp = value;
 
@@ -109,7 +133,4 @@ public class PlayerDatas : MonoBehaviour
 
         isStarving = false;
     }
-
-
-
 }

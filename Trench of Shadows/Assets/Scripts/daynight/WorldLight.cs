@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using System;
+using UnityEngine.SceneManagement; // Import necessario per gestire le scene
 
 namespace WorldTime
 {
@@ -21,8 +22,6 @@ namespace WorldTime
             _worldTime.WorldTimeChanged += OnWorldTimeChanged;
         }
 
-
-
         private void OnDestroy()
         {
             _worldTime.WorldTimeChanged -= OnWorldTimeChanged;
@@ -30,16 +29,17 @@ namespace WorldTime
 
         private void OnWorldTimeChanged(object sender, TimeSpan newTime)
         {
-            _light.color = _gradient.Evaluate(PercentOfDay(newTime));
-            //UnityEditor.EditorUtility.SetDirty(_light);
-
+            // Controllo se la scena attiva è "Game"
+            if (SceneManager.GetActiveScene().name == "Game")
+            {
+                _light.color = _gradient.Evaluate(PercentOfDay(newTime));
+                //UnityEditor.EditorUtility.SetDirty(_light);
+            }
         }
 
         private float PercentOfDay(TimeSpan timeSpan)
         {
-            return (float) timeSpan.TotalMinutes % WorldTimeConstants.MinutesInDay / WorldTimeConstants.MinutesInDay;
+            return (float)timeSpan.TotalMinutes % WorldTimeConstants.MinutesInDay / WorldTimeConstants.MinutesInDay;
         }
-
     }
-
 }

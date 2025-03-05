@@ -5,6 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class HarvestManager : MonoBehaviour
 {
+    public static HarvestManager Instance;
     public InventoryManager playerInventory;
     public Tilemap groundTilemap;
     public TileBase hoedTile;
@@ -14,6 +15,21 @@ public class HarvestManager : MonoBehaviour
     private Dictionary<Vector3Int, bool> plantedCrops = new Dictionary<Vector3Int, bool>();
 
     private Animator playerAnimator;
+
+    
+
+     void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {

@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private float lastAttackTime = 0f;
     private bool isEditMode = false;
     private InventoryManager playerInventory;
+    private int enemyLayer; // ✅ Fixed missing semicolon
 
     [SerializeField] private int attackDamage = 10;  // Danno inflitto ai nemici
     [SerializeField] private float attackRange = 1f; // Distanza massima per colpire il nemico
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb.gravityScale = 0f;
         playerInventory = GameObject.Find("Manager").GetComponent<InventoryManager>();
+        enemyLayer = LayerMask.GetMask("Enemy");
     }
 
     void Update()
@@ -42,19 +44,19 @@ public class PlayerController : MonoBehaviour
 
         animator.SetBool("isWalking", horizontalInput != 0 || verticalInput != 0);
 
-        if (Time.time - lastAttackTime >= attackCooldown)
+        if (Time.time - lastAttackTime >= attackCooldown && PlayerHasSword())
         {
-            if (Input.GetKeyDown(KeyCode.Space) && PlayerHasSword())
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 animator.SetBool("isAttackingHorizontal", true);
                 lastAttackTime = Time.time;
-                Attack();
+                Attack(Vector2.right * (spriteRenderer.flipX ? -1 : 1)); // Attack left or right
             }
-            else if (Input.GetKeyDown(KeyCode.Z) && PlayerHasSword())
+            else if (Input.GetKeyDown(KeyCode.Z))
             {
                 animator.SetBool("isAttackingVertical", true);
                 lastAttackTime = Time.time;
-                Attack();
+                Attack(Vector2.up); // Attack upward
             }
         }
 
@@ -62,21 +64,21 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Z)) animator.SetBool("isAttackingVertical", false);
     }
 
-    private void Attack()
+    private void Attack(Vector2 attackDirection)
     {
-        Vector2 attackDirection = spriteRenderer.flipX ? Vector2.left : Vector2.right;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, attackDirection, attackRange);
+        Vector2 attackStartPosition = (Vector2)transform.position + attackDirection * 0.5f; // ✅ Offset start position
+        RaycastHit2D hit = Physics2D.Raycast(attackStartPosition, attackDirection, attackRange, enemyLayer);
 
-        Debug.DrawRay(transform.position, attackDirection * attackRange, Color.red, 0.5f); // Debug per controllare il raycast
+        Debug.DrawRay(attackStartPosition, attackDirection * attackRange, Color.red, 0.5f); // Debug for raycast
 
         if (hit.collider != null)
         {
-            Debug.Log("Colpito: " + hit.collider.name); // Controllo in console
+            Debug.Log("Colpito: " + hit.collider.name); // Debug log
 
             EnemyHealth enemy = hit.collider.GetComponent<EnemyHealth>();
             if (enemy != null)
             {
-                enemy.TakeDamage(attackDamage, transform.position); // Passa la posizione del player
+                enemy.TakeDamage(attackDamage, transform.position); // Pass player's position
                 Debug.Log("Danno inflitto: " + attackDamage);
             }
         }

@@ -38,17 +38,20 @@ public class MouseManager : MonoBehaviour
     {
         Item activeItem = activeSlot.item;
 
+        // If the held item is the same as the item in the slot, try to stack it
         if (heldItem != null && activeItem != null && heldItem.itemID == activeItem.itemID)
         {
             Debug.Log($"Clicked on slot: {activeSlot.name}");
             activeSlot.inventoryManager.StackInInventory(activeSlot, heldItem);
-            heldItem = null;
+            heldItem = null;  // Clear held item after stacking
             return;
         }
 
-        if (activeItem != null)
+        // If the item exists in the active slot, swap items only if the item is allowed
+        if (activeItem != null && activeSlot.IsItemAllowed(activeItem))
         {
             activeSlot.inventoryManager.ClearItemSlot(activeSlot);
+            
             if (heldItem != null)
             {
                 activeSlot.inventoryManager.PlaceInInventory(activeSlot, heldItem);
@@ -57,10 +60,11 @@ public class MouseManager : MonoBehaviour
         }
         else
         {
-            if (heldItem != null)
+            // If there is a held item, place it into the slot only if it's valid
+            if (heldItem != null && activeSlot.IsItemAllowed(heldItem))
             {
                 activeSlot.inventoryManager.PlaceInInventory(activeSlot, heldItem);
-                heldItem = null;
+                heldItem = null;  // Clear held item only after placing it successfully
             }
         }
     }

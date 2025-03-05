@@ -13,6 +13,9 @@ public class Crop : MonoBehaviour
     private Vector3Int tilePosition;
     private HarvestManager harvestManager;
 
+    [SerializeField] private GameObject cornItemPrefab; // Prefab da clonare
+    [SerializeField] private Transform ParentReference; // Contenitore nella gerarchia
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -61,28 +64,42 @@ public class Crop : MonoBehaviour
         }
     }
 
-    void CropCut()
+void CropCut()
+{
+    if (currentStage == growthStages.Length - 1)
     {
-        if (currentStage == growthStages.Length - 1)
-        {
-            Debug.Log("Raccolto ottenuto!");
-            AddCropToInventory(playerInventory);
-            harvestManager.ResetTile(tilePosition); // Reset terreno
-            Destroy(gameObject);
-        }
-        else
-        {
-            Debug.Log("Il raccolto non è ancora pronto!");
-        }
+        Debug.Log("Raccolto ottenuto!");
+        AddCropToInventory(playerInventory);
+        harvestManager.ResetTile(tilePosition); // Reset terreno
+
+        // Clona il prefab dell'oggetto e imposta il suo genitore
+        GameObject clonedCrop = Instantiate(gameObject); // Crea una copia dell'oggetto
+        clonedCrop.transform.SetParent(harvestManager.transform); // Imposta il genitore (cambia 'harvestManager.transform' con l'oggetto che vuoi come genitore)
+        clonedCrop.transform.localPosition = Vector3.zero; // Imposta la posizione locale a (0,0,0) rispetto al genitore
+
+        // Distruggi l'oggetto originale
+        Destroy(gameObject);
     }
+    else
+    {
+        Debug.Log("Il raccolto non è ancora pronto!");
+    }
+}
+
+
+
 
     private void AddCropToInventory(InventoryManager inventory)
     {
-        if (cornItem == null || inventory == null)
+        if (cornItemPrefab == null || inventory == null || ParentReference == null)
         {
-            Debug.LogWarning("Corn item o inventario non validi!");
+            Debug.LogWarning("Prefab del raccolto, inventario o ParentReference non validi!");
             return;
         }
+
+        // Istanziare l'oggetto raccolto e posizionarlo dentro ParentReference
+        GameObject cropClone = Instantiate(cornItemPrefab, ParentReference);
+        cropClone.transform.localPosition = Vector3.zero; // Reset posizione locale
 
         Item cropCopy = cornItem.Clone();
         cropCopy.itemAmt = 1;

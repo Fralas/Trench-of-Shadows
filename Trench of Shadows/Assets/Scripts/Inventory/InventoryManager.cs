@@ -63,9 +63,9 @@ public class InventoryManager : MonoBehaviour
         }
 
         // Debug test: When T is pressed, call GetHeldSlotItem() to log its status.
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.L))
         {
-            Debug.Log("T key pressed - Testing GetHeldSlotItem...");
+            Debug.Log("L key pressed - Testing GetHeldSlotItem...");
             GetHeldSlotItem();
         }
 
@@ -79,12 +79,20 @@ public class InventoryManager : MonoBehaviour
 
     public void PlaceInInventory(UISlotHandler activeSlot, Item item)
     {
+        // Check if the slot allows this item
+        if (activeSlot != null && !activeSlot.IsItemAllowed(item))
+        {
+            Debug.Log($"Item '{item.name}' is not allowed in slot: {activeSlot.name}");
+            return; // Prevent placing restricted items
+        }
+
         activeSlot.item = item;
         activeSlot.slotImg.sprite = item.itemImg;
         activeSlot.itemCount.text = item.itemAmt.ToString();
         activeSlot.slotImg.gameObject.SetActive(true);
         ConfigureInventory();
     }
+
 
     public void StackInInventory(UISlotHandler activeSlot, Item item)
     {
@@ -400,7 +408,7 @@ public class InventoryManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("GetHeldSlotItem: Held slot is empty.");
+                //Debug.Log("GetHeldSlotItem: Held slot is empty.");
             }
             return heldSlot.item;
         }
