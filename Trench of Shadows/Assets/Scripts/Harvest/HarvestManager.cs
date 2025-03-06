@@ -13,12 +13,10 @@ public class HarvestManager : MonoBehaviour
     public GameObject seedPrefab;
 
     private Dictionary<Vector3Int, bool> plantedCrops = new Dictionary<Vector3Int, bool>();
-
     private Animator playerAnimator;
+    private PlayerController playerController;
 
-    
-
-     void Awake()
+    void Awake()
     {
         if (Instance == null)
         {
@@ -33,26 +31,20 @@ public class HarvestManager : MonoBehaviour
 
     void Start()
     {
-        // Get the player's animator to trigger harvesting and watering animations
-        playerAnimator = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        playerAnimator = player.GetComponent<Animator>();
+        playerController = player.GetComponent<PlayerController>();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && IsPlayerIdle())
         {
             Item heldItem = playerInventory?.GetHeldSlotItem();
-            Debug.Log("Oggetto in mano: " + (heldItem != null ? heldItem.itemID : "Nessuno"));
-            if (heldItem == null)
-            {
-                Debug.Log("Nessun oggetto in mano.");
-                return;
-            }
+            if (heldItem == null) return;
 
             Vector3Int playerTilePos = GetPlayerTilePosition();
             TileBase currentTile = groundTilemap.GetTile(playerTilePos);
-
-            Debug.Log("Tile corrente: " + (currentTile != null ? currentTile.name : "Nessuna tile trovata"));
 
             if (heldItem.itemID == "Hoe")
             {
@@ -61,6 +53,7 @@ public class HarvestManager : MonoBehaviour
             }
             else if (heldItem.itemID == "Wateringcan")
             {
+                StartWatering();
                 WaterGround(playerTilePos, currentTile);
             }
             else if (heldItem.itemID == "Seeds")
@@ -70,56 +63,43 @@ public class HarvestManager : MonoBehaviour
         }
     }
 
+    private bool IsPlayerIdle()
+    {
+        return !(playerAnimator.GetBool("isWalking") ||
+                 playerAnimator.GetBool("isWalkingUpwards") ||
+                 playerAnimator.GetBool("isWalkingDownwards") ||
+                 playerAnimator.GetBool("isAttackingHorizontal") ||
+                 playerAnimator.GetBool("isAttackingVertical") ||
+                 playerAnimator.GetBool("isMining") ||
+                 playerAnimator.GetBool("isCutting") ||
+                 playerAnimator.GetBool("isHarvesting") ||
+                 playerAnimator.GetBool("isWatering"));
+    }
+
     private void StartHarvesting()
     {
-        // Set the player's animator to harvesting state
-        if (playerAnimator != null)
-        {
-            playerAnimator.SetBool("isHarvesting", true);
-        }
-
-        // Disable movement
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().SetHarvestingOrWateringState(true);
-
-        // After a short delay, stop the harvesting animation and enable movement
-        Invoke("StopHarvesting", 1f); // Assuming harvesting takes 1 second
+        playerAnimator.SetBool("isHarvesting", true);
+        playerController.SetHarvestingOrWateringState(true);
+        Invoke("StopHarvesting", 1f);
     }
 
     private void StopHarvesting()
     {
-        if (playerAnimator != null)
-        {
-            playerAnimator.SetBool("isHarvesting", false);
-        }
-
-        // Enable movement again
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().SetHarvestingOrWateringState(false);
+        playerAnimator.SetBool("isHarvesting", false);
+        playerController.SetHarvestingOrWateringState(false);
     }
 
     private void StartWatering()
     {
-        // Set the player's animator to watering state
-        if (playerAnimator != null)
-        {
-            playerAnimator.SetBool("isWatering", true);
-        }
-
-        // Disable movement
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().SetHarvestingOrWateringState(true);
-
-        // After a short delay, stop the watering animation and enable movement
-        Invoke("StopWatering", 1f); // Assuming watering takes 1 second
+        playerAnimator.SetBool("isWatering", true);
+        playerController.SetHarvestingOrWateringState(true);
+        Invoke("StopWatering", 1f);
     }
 
     private void StopWatering()
     {
-        if (playerAnimator != null)
-        {
-            playerAnimator.SetBool("isWatering", false);
-        }
-
-        // Enable movement again
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().SetHarvestingOrWateringState(false);
+        playerAnimator.SetBool("isWatering", false);
+        playerController.SetHarvestingOrWateringState(false);
     }
 
     private void HoeGround(Vector3Int position, TileBase currentTile)
@@ -128,60 +108,35 @@ public class HarvestManager : MonoBehaviour
         {
             groundTilemap.SetTile(position, hoedTile);
         }
-        else
-        {
-            Debug.Log("Il terreno è già lavorato!");
-        }
     }
 
     private void WaterGround(Vector3Int position, TileBase currentTile)
     {
         if (currentTile == hoedTile)
         {
-            StartWatering();
             groundTilemap.SetTile(position, wateredTile);
-
-        }
-        else
-        {
-            Debug.Log("Puoi innaffiare solo terreno zappato!");
         }
     }
 
     private void PlantSeed(Vector3Int position, TileBase currentTile)
     {
-        if (plantedCrops.ContainsKey(position))
-        {
-            Debug.Log("Ci sono già dei semi piantati qui!");
-            return;
-        }
+        if (plantedCrops.ContainsKey(position) || currentTile != wateredTile) return;
 
-        if (currentTile == wateredTile)
-        {
-            Vector3 spawnPosition = groundTilemap.GetCellCenterWorld(position);
-            GameObject newCrop = Instantiate(seedPrefab, spawnPosition, Quaternion.identity);
-            plantedCrops[position] = true;
-            Debug.Log("Semi piantati in posizione: " + spawnPosition);
-        }
-        else
-        {
-            Debug.Log("Puoi piantare solo su terreno bagnato!");
-        }
+        Vector3 spawnPosition = groundTilemap.GetCellCenterWorld(position);
+        Instantiate(seedPrefab, spawnPosition, Quaternion.identity);
+        plantedCrops[position] = true;
     }
 
     public void ResetTile(Vector3Int position)
     {
-        if (plantedCrops.ContainsKey(position))
+        if (plantedCrops.Remove(position))
         {
-            plantedCrops.Remove(position);
             groundTilemap.SetTile(position, hoedTile);
-            Debug.Log("Terreno ripristinato dopo il raccolto.");
         }
     }
 
     private Vector3Int GetPlayerTilePosition()
     {
-        Vector3 playerWorldPos = transform.position;
-        return groundTilemap.WorldToCell(playerWorldPos);
+        return groundTilemap.WorldToCell(transform.position);
     }
 }
