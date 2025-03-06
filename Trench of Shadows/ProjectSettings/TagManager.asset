@@ -56,6 +56,9 @@ TagManager:
   - name: abovePlayer
     uniqueID: 2334293489
     locked: 0
+  - name: Middle
+    uniqueID: 2891130113
+    locked: 0
   - name: Foreground
     uniqueID: 552680991
     locked: 0
