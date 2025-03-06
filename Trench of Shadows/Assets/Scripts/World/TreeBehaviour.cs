@@ -8,13 +8,12 @@ public class TreeBehavior : MonoBehaviour
     private bool isCutDown = false;
     private Transform player;
     private Animator animator;
-    public InventoryManager playerInventory; // Reference to the player's inventory
+    public InventoryManager playerInventory;
     private PlayerController playerController;
 
     private float timeSinceLastPrint = 0f;
-    public float printDelay = 1f;  // Delay in seconds for prints
+    public float printDelay = 1f;
 
-    // Fields for sprite swapping
     public Sprite treeIdleSprite;
     public Sprite stumpSprite;
     private SpriteRenderer spriteRenderer;
@@ -25,7 +24,6 @@ public class TreeBehavior : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        // Ensure we are correctly referencing the player's inventory and controller
         playerInventory = GameObject.Find("Manager").GetComponent<InventoryManager>();
         playerController = player.GetComponent<PlayerController>();
     }
@@ -46,12 +44,29 @@ public class TreeBehavior : MonoBehaviour
                 timeSinceLastPrint = 0f;
             }
 
-            if (Input.GetKeyDown(KeyCode.E) && PlayerHasAxe())
+            if (Input.GetKeyDown(KeyCode.E) && PlayerHasAxe() && IsPlayerIdle())
             {
                 Debug.Log("Player pressed 'E'. Cutting the tree...");
                 CutDownTree();
             }
         }
+    }
+
+    private bool IsPlayerIdle()
+    {
+        if (playerController == null) return false;
+
+        bool isIdle = !playerController.animator.GetBool("isWalking") &&
+                      !playerController.animator.GetBool("isWalkingUpwards") &&
+                      !playerController.animator.GetBool("isWalkingDownwards") &&
+                      !playerController.animator.GetBool("isAttackingHorizontal") &&
+                      !playerController.animator.GetBool("isAttackingVertical") &&
+                      !playerController.animator.GetBool("isMining") &&
+                      !playerController.animator.GetBool("isCutting") &&
+                      !playerController.animator.GetBool("isHarvesting") &&
+                      !playerController.animator.GetBool("isWatering");
+
+        return isIdle;
     }
 
     private bool PlayerHasAxe()
@@ -71,17 +86,16 @@ public class TreeBehavior : MonoBehaviour
         if (woodItem == null || isCutDown) return;
 
         isCutDown = true;
-        // Set player cutting animation
+
         if (playerController != null)
         {
             playerController.animator.SetBool("isCutting", true);
+            playerController.SetHarvestingOrWateringState(true); // Lock player movement
         }
 
-        // Immediately set the tree's "isCut" state to true.
         animator.SetBool("isCut", true);
         Debug.Log("Tree is now in 'isCut' state.");
 
-        // Add wood to the player's inventory.
         if (playerInventory != null)
         {
             for (int i = 0; i < woodAmount; i++)
@@ -89,8 +103,6 @@ public class TreeBehavior : MonoBehaviour
                 AddWoodToInventory(playerInventory);
             }
             Debug.Log($"{woodAmount} Wood added to the player's inventory.");
-
-            // Decrease axe durability by 20 when cutting the tree.
             DecreaseAxeDurability();
         }
         else
@@ -98,50 +110,42 @@ public class TreeBehavior : MonoBehaviour
             Debug.LogWarning("Player inventory not found!");
         }
 
-        // Start the coroutine to handle state transitions.
         StartCoroutine(TreeStateCoroutine());
     }
 
     private IEnumerator TreeStateCoroutine()
     {
-        // Wait for 2 seconds before updating the state.
         yield return new WaitForSeconds(1.8f);
 
-        // Set "isCut" to false and "TreeDead" to true.
-        animator.SetBool("isCut", false); // This line should now be here to stop the cutting animation.
+        animator.SetBool("isCut", false);
         animator.SetBool("TreeDead", true);
         Debug.Log("Tree state updated: 'isCut' = false, 'TreeDead' = true.");
 
-        // Change the sprite to the stump.
         if (spriteRenderer != null && stumpSprite != null)
         {
             spriteRenderer.sprite = stumpSprite;
             Debug.Log("Tree sprite changed to stump.");
         }
 
-        // Reset player cutting animation immediately after the tree sprite changes.
         if (playerController != null)
         {
             playerController.animator.SetBool("isCutting", false);
+            playerController.SetHarvestingOrWateringState(false); // Unlock player movement
             Debug.Log("Player cutting animation stopped.");
         }
 
-        // Wait for 5 seconds while in the TreeDead state.
         yield return new WaitForSeconds(5f);
 
-        // Reset the animator's booleans back to idle (both false).
         animator.SetBool("TreeDead", false);
         animator.SetBool("isCut", false);
         Debug.Log("Tree state reset: 'TreeDead' and 'isCut' set to false.");
 
-        // Reset the sprite back to the idle tree sprite.
         if (spriteRenderer != null && treeIdleSprite != null)
         {
             spriteRenderer.sprite = treeIdleSprite;
             Debug.Log("Tree sprite reset to idle.");
         }
 
-        // Allow the tree to be cut again.
         isCutDown = false;
     }
 

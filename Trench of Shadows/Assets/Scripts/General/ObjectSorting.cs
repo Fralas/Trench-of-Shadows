@@ -37,6 +37,9 @@ public class ObjectSorting : MonoBehaviour
         if (player == null) return;
 
         UpdateSortingLayer();
+
+        // Apply sorting to all NPCs in the scene
+        ApplySortingToNPCs();
     }
 
     private void FindPlayer()
@@ -65,6 +68,19 @@ public class ObjectSorting : MonoBehaviour
         else if (!useTilemapRenderer && spriteRenderer != null)
         {
             spriteRenderer.sortingLayerName = newSortingLayer;
+        }
+    }
+
+    private void ApplySortingToNPCs()
+    {
+        GameObject[] npcs = GameObject.FindGameObjectsWithTag("NPC");
+        foreach (GameObject npc in npcs)
+        {
+            var npcSorting = npc.GetComponent<ObjectSorting>();
+            if (npcSorting != null)
+            {
+                npcSorting.UpdateSortingLayer();
+            }
         }
     }
 }
