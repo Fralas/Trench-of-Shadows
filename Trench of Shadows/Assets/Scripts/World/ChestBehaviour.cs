@@ -12,6 +12,10 @@ public class ChestInteraction : MonoBehaviour
     private GameObject playerInventoryBackground; // Reference to the player inventory background
     private GameObject chestInventoryBackground; // Reference to the chest inventory background
 
+    // New variables for sound
+    public AudioClip chestOpenSound;  // Sound to play when the chest is opened
+    private AudioSource audioSource; // Audio source to play the sound
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -21,6 +25,9 @@ public class ChestInteraction : MonoBehaviour
 
         // Reference to the chest inventory background
         chestInventoryBackground = GameObject.Find("ChestInventoryBackground");
+
+        // Add or get the AudioSource component
+        audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     private void Update()
@@ -65,6 +72,13 @@ public class ChestInteraction : MonoBehaviour
         {
             chestInventoryUI.SetActive(true);
             Debug.Log("Chest inventory opened.");
+
+            // Play the chest opening sound if it's set
+            if (chestOpenSound != null)
+            {
+                audioSource.clip = chestOpenSound;
+                audioSource.Play();
+            }
 
             // Ensure both player and chest inventories are active
             if (playerInventoryBackground != null && !playerInventoryBackground.activeSelf)

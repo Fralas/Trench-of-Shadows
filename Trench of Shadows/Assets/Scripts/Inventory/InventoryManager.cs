@@ -70,11 +70,13 @@ public class InventoryManager : MonoBehaviour
         }
 
         // When U is pressed, wipe the player's inventory (not the chest).
+        /* 
         if (Input.GetKeyDown(KeyCode.U))
         {
             Debug.Log("U key pressed - Clearing player's inventory...");
             ClearPlayerInventory();
         }
+        */
     }
 
     public void PlaceInInventory(UISlotHandler activeSlot, Item item)

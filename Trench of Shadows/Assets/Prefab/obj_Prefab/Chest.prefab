@@ -150,6 +150,7 @@ MonoBehaviour:
   chestInventoryUI: {fileID: 5383028741887958025}
   printDelay: 1
   interactionRange: 2
+  chestOpenSound: {fileID: 8300000, guid: b9e1b5c9497ddaa49a7d25c70ee1aa5c, type: 3}
 --- !u!114 &2849065173191463501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -629,6 +630,8 @@ MonoBehaviour:
   itemCount: {fileID: 2850658139151238564}
   healthBar: {fileID: 0}
   inventoryManager: {fileID: 8167595575666762505}
+  allowedItems: []
+  isArmorSlot: 0
 --- !u!1 &1713014233292852328
 GameObject:
   m_ObjectHideFlags: 0
@@ -992,6 +995,8 @@ MonoBehaviour:
   itemCount: {fileID: 3590330118379600853}
   healthBar: {fileID: 0}
   inventoryManager: {fileID: 8167595575666762505}
+  allowedItems: []
+  isArmorSlot: 0
 --- !u!1 &2565616058479024123
 GameObject:
   m_ObjectHideFlags: 0
@@ -1087,6 +1092,8 @@ MonoBehaviour:
   itemCount: {fileID: 2235527678895011905}
   healthBar: {fileID: 0}
   inventoryManager: {fileID: 8167595575666762505}
+  allowedItems: []
+  isArmorSlot: 0
 --- !u!1 &2814847791817710484
 GameObject:
   m_ObjectHideFlags: 0
@@ -1450,6 +1457,8 @@ MonoBehaviour:
   itemCount: {fileID: 4588420050104838305}
   healthBar: {fileID: 0}
   inventoryManager: {fileID: 8167595575666762505}
+  allowedItems: []
+  isArmorSlot: 0
 --- !u!1 &3168787299756206196
 GameObject:
   m_ObjectHideFlags: 0
@@ -1679,6 +1688,8 @@ MonoBehaviour:
   itemCount: {fileID: 3062517169075656570}
   healthBar: {fileID: 0}
   inventoryManager: {fileID: 8167595575666762505}
+  allowedItems: []
+  isArmorSlot: 0
 --- !u!1 &3440347841803461820
 GameObject:
   m_ObjectHideFlags: 0
@@ -1983,6 +1994,8 @@ MonoBehaviour:
   itemCount: {fileID: 8193863601871078035}
   healthBar: {fileID: 0}
   inventoryManager: {fileID: 8167595575666762505}
+  allowedItems: []
+  isArmorSlot: 0
 --- !u!1 &4194756139487371113
 GameObject:
   m_ObjectHideFlags: 0
@@ -2508,6 +2521,8 @@ MonoBehaviour:
   itemCount: {fileID: 1334546870571228953}
   healthBar: {fileID: 0}
   inventoryManager: {fileID: 8167595575666762505}
+  allowedItems: []
+  isArmorSlot: 0
 --- !u!1 &6642364680105189930
 GameObject:
   m_ObjectHideFlags: 0
@@ -2887,6 +2902,8 @@ MonoBehaviour:
   itemCount: {fileID: 455402403086045628}
   healthBar: {fileID: 0}
   inventoryManager: {fileID: 8167595575666762505}
+  allowedItems: []
+  isArmorSlot: 0
 --- !u!1 &7755508869372689547
 GameObject:
   m_ObjectHideFlags: 0
@@ -3057,6 +3074,8 @@ MonoBehaviour:
   itemCount: {fileID: 186404336377081232}
   healthBar: {fileID: 0}
   inventoryManager: {fileID: 8167595575666762505}
+  allowedItems: []
+  isArmorSlot: 0
 --- !u!1 &7845801166445915282
 GameObject:
   m_ObjectHideFlags: 0
@@ -3254,6 +3273,8 @@ MonoBehaviour:
   itemCount: {fileID: 8609552341306294720}
   healthBar: {fileID: 0}
   inventoryManager: {fileID: 8167595575666762505}
+  allowedItems: []
+  isArmorSlot: 0
 --- !u!1 &8608530087363463030
 GameObject:
   m_ObjectHideFlags: 0
