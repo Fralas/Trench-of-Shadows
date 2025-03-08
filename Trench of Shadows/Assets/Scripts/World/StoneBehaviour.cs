@@ -14,6 +14,8 @@ public class StoneBehavior : MonoBehaviour
     private Animator playerAnimator;
     private PlayerController playerController; // Reference to the player controller
 
+    public AudioSource miningSound; // Audio source for mining sound
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -62,6 +64,12 @@ public class StoneBehavior : MonoBehaviour
 
     private void StartMining()
     {
+        // Play mining sound
+        if (miningSound != null)
+        {
+            miningSound.Play();
+        }
+
         // Disable player movement
         if (playerController != null)
         {

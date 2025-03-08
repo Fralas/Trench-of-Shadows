@@ -9,16 +9,24 @@ public class FishingBehaviour : MonoBehaviour
     public TileBase fishingTile; // The tile where fishing is allowed
     public Item fishItem; // The item to add to the inventory
     public int fishAmount = 1; // Number of fish received per successful fishing
+    public AudioClip fishingSound; // Sound played when fishing starts
 
     private Animator playerAnimator;
     private Transform player;
     private PlayerController playerController;
+    private AudioSource audioSource;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerAnimator = player.GetComponent<Animator>();
         playerController = player.GetComponent<PlayerController>();
+        audioSource = GetComponent<AudioSource>();
+
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     private void Update()
@@ -61,8 +69,13 @@ public class FishingBehaviour : MonoBehaviour
             playerController.SetHarvestingOrWateringState(true);
         }
 
+        if (fishingSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(fishingSound);
+        }
+
         Debug.Log("Fishing...");
-        yield return new WaitForSeconds(2f); // Simulate fishing time
+        yield return new WaitForSeconds(8f); // Fishing animation now lasts 8 seconds
 
         AddFishToInventory();
 

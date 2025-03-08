@@ -85,8 +85,14 @@ public class PlayerDatas : MonoBehaviour
     {
         Debug.Log("UpdateBonusHealth called with value: " + bonusDelta);
 
-        // Add or subtract the bonus health based on the bonusDelta value
+        // Update bonus health but prevent exceeding max limit
         _bonusMaxHp += bonusDelta;
+
+        // Ensure MaxHp does not exceed 160
+        if (MaxHp > 160)
+        {
+            _bonusMaxHp = 160 - _maxHp; // Adjust bonus health accordingly
+        }
 
         // Ensure current health does not exceed the new MaxHp
         _hp = Mathf.Clamp(_hp, 0, MaxHp);
@@ -98,6 +104,7 @@ public class PlayerDatas : MonoBehaviour
         // Notify about the change in max HP
         MaxHealthChanged?.Invoke(MaxHp);
     }
+
 
 
 

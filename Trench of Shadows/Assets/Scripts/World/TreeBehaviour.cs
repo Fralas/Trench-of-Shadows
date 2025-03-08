@@ -18,6 +18,10 @@ public class TreeBehavior : MonoBehaviour
     public Sprite stumpSprite;
     private SpriteRenderer spriteRenderer;
 
+    // New variables for audio
+    public AudioClip cuttingSound;  // Reference to the cutting sound
+    private AudioSource audioSource; // Audio source to play the sound
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -26,6 +30,9 @@ public class TreeBehavior : MonoBehaviour
 
         playerInventory = GameObject.Find("Manager").GetComponent<InventoryManager>();
         playerController = player.GetComponent<PlayerController>();
+
+        // Get or add an AudioSource component
+        audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     private void Update()
@@ -95,6 +102,12 @@ public class TreeBehavior : MonoBehaviour
 
         animator.SetBool("isCut", true);
         Debug.Log("Tree is now in 'isCut' state.");
+
+        // Play the cutting sound
+        if (cuttingSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(cuttingSound);
+        }
 
         if (playerInventory != null)
         {

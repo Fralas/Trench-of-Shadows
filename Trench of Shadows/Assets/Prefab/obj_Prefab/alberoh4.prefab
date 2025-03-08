@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 552680991
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 1664091685, guid: 76ab2557fac66bc4a9809018c1b92ded, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -171,3 +171,4 @@ MonoBehaviour:
   printDelay: 1
   treeIdleSprite: {fileID: 1664091685, guid: 76ab2557fac66bc4a9809018c1b92ded, type: 3}
   stumpSprite: {fileID: 1170214441, guid: 76ab2557fac66bc4a9809018c1b92ded, type: 3}
+  cuttingSound: {fileID: 8300000, guid: 2359c3cf3de436643a3e15dbcafc2ee1, type: 3}
