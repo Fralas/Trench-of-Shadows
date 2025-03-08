@@ -20,5 +20,6 @@ MonoBehaviour:
   recipe:
   - ingredientItem: {fileID: 11400000, guid: 8bdd3074ea09cb54389bb8ac0a990d3d, type: 2}
     amountRequired: 1
-  - ingredientItem: {fileID: 11400000, guid: 17c07ab7cfa69ea4494516bcf51f37d2, type: 2}
+  - ingredientItem: {fileID: 11400000, guid: 5ec011d3238a13244bd2e5fcce293b37, type: 2}
     amountRequired: 1
+  bonusHealth: 0

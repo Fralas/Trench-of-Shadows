@@ -11,6 +11,10 @@ public class AIChase : MonoBehaviour
     [SerializeField] private float maxRoamTime = 5f;
     [SerializeField] private float stopDuration = 1f;  // Duration of stop between roaming
 
+    [SerializeField] private Item rawMeatItem; // RawMeat item to drop
+    [SerializeField] private int rawMeatAmount = 1; // Amount of RawMeat dropped
+    [SerializeField] private InventoryManager playerInventory; // Assign in Inspector
+
     private Transform player;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
@@ -172,6 +176,67 @@ public class AIChase : MonoBehaviour
             Debug.LogWarning("No EnemySpawner found! Defaulting to current position.");
             spawnPoint = transform.position;
         }
+    }
+
+    public void Die()
+    {
+        DropRawMeat();
+        Destroy(gameObject); // Destroy the AI object
+    }
+
+    private void DropRawMeat()
+    {
+        if (rawMeatItem == null || playerInventory == null) return;
+
+        for (int i = 0; i < rawMeatAmount; i++)
+        {
+            AddRawMeatToInventory(playerInventory);
+        }
+
+        Debug.Log(rawMeatAmount + " RawMeat added to the player's inventory.");
+    }
+
+    private void AddRawMeatToInventory(InventoryManager inventory)
+    {
+        // Create a copy of the RawMeat item.
+        Item rawMeatCopy = rawMeatItem.Clone();
+        rawMeatCopy.itemAmt = 1;
+
+        // Search for an existing slot with the same RawMeat item.
+        foreach (Transform child in inventory.inventoryGrid.transform)
+        {
+            UISlotHandler slot = child.GetComponent<UISlotHandler>();
+            if (slot.item != null && slot.item.itemID == rawMeatCopy.itemID)
+            {
+                // If found, stack the RawMeat in that slot.
+                inventory.StackInInventory(slot, rawMeatCopy);
+                Debug.Log("RawMeat stacked in existing slot.");
+                return; // Exit after stacking
+            }
+        }
+
+        UISlotHandler emptySlot = FindEmptySlot(inventory);
+        if (emptySlot != null)
+        {
+            inventory.PlaceInInventory(emptySlot, rawMeatCopy);
+        }
+        else
+        {
+            Debug.Log("Player's inventory is full!");
+        }
+    }
+
+    private UISlotHandler FindEmptySlot(InventoryManager inventory)
+    {
+        foreach (Transform child in inventory.inventoryGrid.transform)
+        {
+            UISlotHandler slot = child.GetComponent<UISlotHandler>();
+            if (slot.item == null)
+            {
+                return slot;
+            }
+        }
+        return null;
     }
 
     private void OnDrawGizmosSelected()
