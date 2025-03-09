@@ -2706,7 +2706,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &721359853
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5016,7 +5016,7 @@ RectTransform:
   m_Father: {fileID: 87933294}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5094,10 +5094,10 @@ RectTransform:
   - {fileID: 1427542521}
   m_Father: {fileID: 696966743}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 9.791835, y: -3.547885}
+  m_SizeDelta: {x: 20.92, y: 3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1319679062
 MonoBehaviour:
@@ -6482,10 +6482,10 @@ RectTransform:
   - {fileID: 87933294}
   m_Father: {fileID: 696966743}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 9.791835, y: -1.507885}
+  m_SizeDelta: {x: 20.92, y: 3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1701866664
 MonoBehaviour:
@@ -6953,7 +6953,7 @@ RectTransform:
   m_Father: {fileID: 1427542521}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7019,7 +7019,7 @@ MonoBehaviour:
   keybindsReturnButton: {fileID: 641050183}
   savesButton: {fileID: 891599395}
   savesReturnButton: {fileID: 1479358258}
-  targetSceneName: Game
+  targetSceneName: StartingCutScene
 --- !u!114 &1812644314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7678,10 +7678,10 @@ RectTransform:
   - {fileID: 1019238193}
   m_Father: {fileID: 696966743}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 9.791835, y: -5.587885}
+  m_SizeDelta: {x: 20.92, y: 3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1998011560
 MonoBehaviour:
@@ -7857,7 +7857,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Game
+          m_StringArgument: StartingCutScene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2019099912
