@@ -24,7 +24,9 @@ public class HousePersist : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Game" && gameObject.name == "House_lev1" ||
             SceneManager.GetActiveScene().name == "Game" && gameObject.name == "House_lev2" ||
             SceneManager.GetActiveScene().name == "Game" && gameObject.name == "House_lev3" ||
-            SceneManager.GetActiveScene().name == "Game" && gameObject.name == "House_lev4")
+            SceneManager.GetActiveScene().name == "Game" && gameObject.name == "House_lev4" 
+            
+            )
         {
             gameObject.SetActive(true);
             Debug.Log("AO ATTIVATO ER BAMBOCCIO: " + gameObject.name);

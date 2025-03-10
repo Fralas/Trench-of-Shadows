@@ -21,8 +21,8 @@ public class WorldLightActivation : MonoBehaviour
 
     void CheckScene()
     {
-        if (SceneManager.GetActiveScene().name == "HomeLv1" ||
-            SceneManager.GetActiveScene().name == "HomeLv2")
+        if (SceneManager.GetActiveScene().name != "Game")
+            
         {
             gameObject.SetActive(false);
         }

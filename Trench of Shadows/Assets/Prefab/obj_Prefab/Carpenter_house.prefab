@@ -11,10 +11,12 @@ GameObject:
   - component: {fileID: 1455146167057137122}
   - component: {fileID: 3300570868207981340}
   - component: {fileID: 3647895564115812140}
+  - component: {fileID: 3170727363370481890}
+  - component: {fileID: 1348985110926036114}
   m_Layer: 0
   m_Name: Carpenter_house
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -26,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7632865286162537534}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 66.9, y: 39, z: 0}
   m_LocalScale: {x: 2.7054553, y: 2.7054553, z: 2.7054553}
   m_ConstrainProportionsScale: 0
@@ -71,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 552680991
-  m_SortingLayer: 5
+  m_SortingLayerID: -1743924861
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 04ad10b115e60594da51b6f9f1d5a771, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -84,7 +86,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!50 &3647895564115812140
 Rigidbody2D:
   serializedVersion: 4
@@ -93,7 +95,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7632865286162537534}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -112,3 +114,79 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &3170727363370481890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7632865286162537534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e938ab4cc4eb2448bb83832c8ca4dbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useTilemapRenderer: 0
+--- !u!60 &1348985110926036114
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7632865286162537534}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4, y: 4.21875}
+    newSize: {x: 4, y: 4.21875}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.7973983, y: -0.28979662}
+      - {x: 0.47419763, y: -0.30273062}
+      - {x: -0.0027750134, y: -0.30255297}
+      - {x: -0.7897999, y: -0.3071157}
+      - {x: -1.5280446, y: -0.333542}
+      - {x: -1.5524094, y: -1.1751342}
+      - {x: -1.4543833, y: -1.1687143}
+      - {x: -1.4439546, y: -1.7183278}
+      - {x: -0.6708537, y: -1.7343916}
+      - {x: -0.6739246, y: -1.9203242}
+      - {x: -0.22576116, y: -1.9348712}
+      - {x: -0.22550738, y: -1.2759153}
+      - {x: 0.4600976, y: -1.280505}
+      - {x: 0.46530333, y: -1.9170052}
+      - {x: 0.891501, y: -1.9180311}
+      - {x: 0.9020345, y: -1.1672013}
+      - {x: 1.0347693, y: -1.1521087}
+      - {x: 1.0293716, y: -0.2956222}
+  m_UseDelaunayMesh: 0

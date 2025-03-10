@@ -63,3 +63,6 @@ TagManager:
   - name: Foreground
     uniqueID: 552680991
     locked: 0
+  - name: ForG2
+    uniqueID: 2617388333
+    locked: 0
