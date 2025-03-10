@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 5931034592747485957}
   - component: {fileID: -1302447448321859334}
   - component: {fileID: -1201381071887634942}
+  - component: {fileID: 2936639902119892787}
   m_Layer: 0
   m_Name: Chicken
   m_TagString: Untagged
@@ -152,7 +153,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 552680991
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: -2042178812, guid: 618facfce3e826248afeb1c17f38fc81, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -194,7 +195,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.008693844, y: -0.01117794}
@@ -246,7 +247,19 @@ MonoBehaviour:
   _maxHp: 30
   Damaged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9104621150012549393}
+        m_TargetAssemblyTypeName: EnemyHealthBar, Assembly-CSharp
+        m_MethodName: SetValue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   Died:
     m_PersistentCalls:
       m_Calls: []
@@ -297,7 +310,22 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
+--- !u!114 &2936639902119892787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785915962130106426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bfa0c40f5cf94a4ca7299a4060de922, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemToDrop: {fileID: 11400000, guid: bd966b08c5aa36347b977f1b398bdf5d, type: 2}
+  dropAmount: 1
+  playerInventory: {fileID: 0}
 --- !u!1 &4971365093971771260
 GameObject:
   m_ObjectHideFlags: 0

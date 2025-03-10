@@ -180,13 +180,18 @@ public class AIChase : MonoBehaviour
 
     public void Die()
     {
+        Debug.Log(gameObject.name + " is dying!");
         DropRawMeat();
         Destroy(gameObject); // Destroy the AI object
     }
 
     private void DropRawMeat()
     {
-        if (rawMeatItem == null || playerInventory == null) return;
+        if (rawMeatItem == null || playerInventory == null)
+        {
+            Debug.LogWarning("RawMeatItem or PlayerInventory is not assigned.");
+            return;
+        }
 
         for (int i = 0; i < rawMeatAmount; i++)
         {
@@ -196,10 +201,11 @@ public class AIChase : MonoBehaviour
         Debug.Log(rawMeatAmount + " RawMeat added to the player's inventory.");
     }
 
+
     private void AddRawMeatToInventory(InventoryManager inventory)
     {
         // Create a copy of the RawMeat item.
-        Item rawMeatCopy = rawMeatItem.Clone();
+        Item rawMeatCopy = rawMeatItem.Clone();  // Corrected reference to rawMeatItem
         rawMeatCopy.itemAmt = 1;
 
         // Search for an existing slot with the same RawMeat item.
@@ -225,6 +231,7 @@ public class AIChase : MonoBehaviour
             Debug.Log("Player's inventory is full!");
         }
     }
+
 
     private UISlotHandler FindEmptySlot(InventoryManager inventory)
     {

@@ -273,6 +273,7 @@ GameObject:
   - component: {fileID: 2077788082534410274}
   - component: {fileID: 5864932168009706181}
   - component: {fileID: 1970229674436133827}
+  - component: {fileID: 1685761679622698987}
   m_Layer: 10
   m_Name: EnemyDwarf
   m_TagString: Enemy
@@ -525,6 +526,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1685761679622698987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3603366414943885523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bfa0c40f5cf94a4ca7299a4060de922, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemToDrop: {fileID: 11400000, guid: f9bf212b40ecc8749b7aafce7980cd82, type: 2}
+  dropAmount: 1
+  playerInventory: {fileID: 0}
 --- !u!1 &5530615068478330501
 GameObject:
   m_ObjectHideFlags: 0

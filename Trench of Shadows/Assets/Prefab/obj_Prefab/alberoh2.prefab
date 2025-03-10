@@ -172,3 +172,4 @@ MonoBehaviour:
   treeIdleSprite: {fileID: 1441845901, guid: 76ab2557fac66bc4a9809018c1b92ded, type: 3}
   stumpSprite: {fileID: 1170214441, guid: 76ab2557fac66bc4a9809018c1b92ded, type: 3}
   cuttingSound: {fileID: 8300000, guid: 2359c3cf3de436643a3e15dbcafc2ee1, type: 3}
+  axeBreakSound: {fileID: 8300000, guid: 7b954a29af657fc4ab200a3c12a86bc5, type: 3}

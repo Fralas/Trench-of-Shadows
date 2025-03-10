@@ -15,6 +15,8 @@ public class StoneBehavior : MonoBehaviour
     private PlayerController playerController; // Reference to the player controller
 
     public AudioSource miningSound; // Audio source for mining sound
+    public AudioClip pickaxeBreakSound; // Sound for when the pickaxe breaks
+
 
     private void Start()
     {
@@ -177,18 +179,25 @@ public class StoneBehavior : MonoBehaviour
         return null;
     }
 
-    // New method: Decrease pickaxe durability by 20 each time the stone is mined.
+    // New method: Decrease pickaxe durability by 5 each time the stone is mined.
     private void DecreasePickaxeDurability()
     {
         Item heldItem = playerInventory.GetHeldSlotItem();
         if (heldItem != null && heldItem.itemID == "Pickaxe")
         {
-            heldItem.durability -= 20;
+            heldItem.durability -= 5;
             Debug.Log("Pickaxe durability decreased to: " + heldItem.durability);
+
             if (heldItem.durability <= 0)
             {
                 playerInventory.RemoveHeldItem();
                 Debug.Log("Pickaxe broke and has been removed from the inventory.");
+
+                // Play pickaxe breaking sound
+                if (pickaxeBreakSound != null && miningSound != null)
+                {
+                    miningSound.PlayOneShot(pickaxeBreakSound);
+                }
             }
             else
             {
@@ -196,6 +205,7 @@ public class StoneBehavior : MonoBehaviour
             }
         }
     }
+
 
     // Check if the player is idle (all animation booleans are false)
     private bool IsPlayerIdle()
