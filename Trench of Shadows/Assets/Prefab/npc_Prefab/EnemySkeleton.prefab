@@ -409,6 +409,7 @@ GameObject:
   - component: {fileID: 5111621102853723020}
   - component: {fileID: 7510990858938904693}
   - component: {fileID: 7888018645799817723}
+  - component: {fileID: -8471074009364338599}
   m_Layer: 10
   m_Name: EnemySkeleton
   m_TagString: Enemy
@@ -471,7 +472,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 552680991
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: -265170441, guid: 8c2ccc923c63f034fa0c3a9814a576ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -506,6 +507,9 @@ MonoBehaviour:
   minRoamTime: 3
   maxRoamTime: 6
   stopDuration: 2
+  rawMeatItem: {fileID: 0}
+  rawMeatAmount: 1
+  playerInventory: {fileID: 0}
 --- !u!114 &5640023134245689910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -658,6 +662,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-8471074009364338599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7556419960061379776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bfa0c40f5cf94a4ca7299a4060de922, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemToDrop: {fileID: 11400000, guid: 74c59bda3c1476140a972487d348905f, type: 2}
+  dropAmount: 1
+  playerInventory: {fileID: 0}
 --- !u!1 &7637244774299406366
 GameObject:
   m_ObjectHideFlags: 0

@@ -43,6 +43,7 @@ public class UISlotHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHand
     {
         if (item != null)
         {
+            item.itemAmt = Mathf.Min(item.itemAmt, 64); // Ensure it never exceeds 64
             slotImg.sprite = item.itemImg;
             slotImg.gameObject.SetActive(true);
             itemCount.text = item.itemAmt.ToString();
@@ -72,7 +73,7 @@ public class UISlotHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHand
         {
             slotImg.gameObject.SetActive(false);
             itemCount.text = string.Empty;
-            
+
             if (healthBar != null)
             {
                 healthBar.gameObject.SetActive(false);
@@ -123,58 +124,72 @@ public class UISlotHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHand
 
         UISlotHandler sourceSlot = eventData.pointerDrag?.GetComponent<UISlotHandler>();
 
-        if (sourceSlot != null)
+        if (sourceSlot != null && sourceSlot.item != null)
         {
             Debug.Log("Source Slot found, Item: " + sourceSlot.item.name);
 
             if (sourceSlot != this)
             {
-                // Check if the item is allowed
                 if (IsItemAllowed(sourceSlot.item))
                 {
-                    Debug.Log("Item allowed: " + sourceSlot.item.name); // Log allowed item
+                    Debug.Log("Item allowed: " + sourceSlot.item.name);
 
-                    // If the item is armor, increase max health
                     if (sourceSlot.item.type == ItemType.Armor)
                     {
                         int bonusHealth = sourceSlot.item.bonusHealth;
-                        PlayerDatas.Instance.UpdateBonusHealth(bonusHealth); // Update max HP
+                        PlayerDatas.Instance.UpdateBonusHealth(bonusHealth);
                         Debug.Log("Armor item dropped: " + sourceSlot.item.name + " with bonus health: " + bonusHealth);
                     }
 
-                    // Swap the items between source and this slot
-                    Item temp = this.item;
-                    inventoryManager.PlaceInInventory(this, sourceSlot.item);
-                    sourceSlot.inventoryManager.PlaceInInventory(sourceSlot, temp);
+                    // Check if both slots have the same item to stack
+                    if (this.item != null && this.item.itemID == sourceSlot.item.itemID)
+                    {
+                        int totalAmount = this.item.itemAmt + sourceSlot.item.itemAmt;
 
-                    // Update UI for both slots
+                        if (totalAmount > 64)
+                        {
+                            this.item.itemAmt = 64;
+                            sourceSlot.item.itemAmt = totalAmount - 64; // Keep the overflow in source slot
+                        }
+                        else
+                        {
+                            this.item.itemAmt = totalAmount;
+                            sourceSlot.item = null; // Remove item if fully stacked
+                        }
+                    }
+                    else
+                    {
+                        // Swap items if different
+                        Item temp = this.item;
+                        inventoryManager.PlaceInInventory(this, sourceSlot.item);
+                        sourceSlot.inventoryManager.PlaceInInventory(sourceSlot, temp);
+                    }
+
                     UpdateSlotUI();
                     sourceSlot.UpdateSlotUI();
-
-                    // Refresh health bars
                     RefreshHealthBar();
                     sourceSlot.RefreshHealthBar();
 
-                    // Clear the held item (if the drop is successful)
-                    MouseManager.instance.heldItem = null;  // Reset the held item
+                    MouseManager.instance.heldItem = null;
 
                     Debug.Log("Drop successful!");
                 }
                 else
                 {
-                    Debug.Log("Item not allowed: " + sourceSlot.item.name);  // Log when item is not allowed
+                    Debug.Log("Item not allowed: " + sourceSlot.item.name);
                 }
             }
             else
             {
-                Debug.Log("Source slot is the same as the target slot!");  // Log when source and target are the same
+                Debug.Log("Source slot is the same as the target slot!");
             }
         }
         else
         {
-            Debug.Log("No valid source slot found in the drop event.");  // Log if sourceSlot is null
+            Debug.Log("No valid source slot found in the drop event.");
         }
     }
+
 
     public bool IsItemAllowed(Item itemToCheck)
     {

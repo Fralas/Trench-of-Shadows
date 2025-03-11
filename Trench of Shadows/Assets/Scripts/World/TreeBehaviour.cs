@@ -22,6 +22,8 @@ public class TreeBehavior : MonoBehaviour
     public AudioClip cuttingSound;  // Reference to the cutting sound
     private AudioSource audioSource; // Audio source to play the sound
 
+    public AudioClip axeBreakSound; // Sound for when the axe breaks
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -209,12 +211,19 @@ public class TreeBehavior : MonoBehaviour
         Item heldItem = playerInventory.GetHeldSlotItem();
         if (heldItem != null && heldItem.itemID == "Axe")
         {
-            heldItem.durability -= 20;
+            heldItem.durability -= 5;
             Debug.Log("Axe durability decreased to: " + heldItem.durability);
+
             if (heldItem.durability <= 0)
             {
                 playerInventory.RemoveHeldItem();
                 Debug.Log("Axe broke and has been removed from the inventory.");
+
+                // Play axe breaking sound
+                if (axeBreakSound != null && audioSource != null)
+                {
+                    audioSource.PlayOneShot(axeBreakSound);
+                }
             }
             else
             {
@@ -222,4 +231,5 @@ public class TreeBehavior : MonoBehaviour
             }
         }
     }
+
 }
