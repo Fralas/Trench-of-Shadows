@@ -39,7 +39,12 @@ public class PlayerDatas : MonoBehaviour
                 Healed?.Invoke(_hp);
 
             if (_hp <= 0)
-                Died?.Invoke();
+        {
+            Died?.Invoke();
+            Hunger = MaxHunger; // Reset della fame alla morte
+            Debug.Log("Il player è morto. Fame resettata!"); // Debug per controllare
+        }
+            
         }
     }
 
