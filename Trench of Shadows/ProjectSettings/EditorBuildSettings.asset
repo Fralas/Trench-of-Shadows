@@ -6,51 +6,54 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Prefab/Scenes/Home.unity
+    path: Assets/Scenes/Home.unity
     guid: c3e69b5251b864447b7d25024c6829d4
   - enabled: 1
-    path: Assets/Prefab/Scenes/Cutscene/StartingCutScene.unity
+    path: Assets/Scenes/Cutscene/StartingCutScene.unity
     guid: 8d9c21905a4e38b44933b6b7d66a2353
   - enabled: 1
-    path: Assets/Prefab/Scenes/Cutscene/TutorialCutScene.unity
+    path: Assets/Scenes/Cutscene/TutorialCutScene.unity
     guid: 4cbf7c989017cec47afb3a83aea36dc5
   - enabled: 1
-    path: Assets/Prefab/Scenes/Game.unity
+    path: Assets/Scenes/Cutscene/GroceryCutScene.unity
+    guid: 1b5629a1d8dc2954280b09b08ac5415a
+  - enabled: 1
+    path: Assets/Scenes/Game.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Prefab/Scenes/House/HomeLv1.unity
+    path: Assets/Scenes/House/HomeLv1.unity
     guid: f9c72bb07a0a57b41a68021009ad02de
   - enabled: 1
-    path: Assets/Prefab/Scenes/Test/Game_fra_nuovo.unity
+    path: Assets/Scenes/Test/Game_fra_nuovo.unity
     guid: ca46b4a2cf50da745aabea1511ba2bf1
   - enabled: 1
-    path: Assets/Prefab/Scenes/Saves/Save2.unity
+    path: Assets/Scenes/Saves/Save2.unity
     guid: d62fb2c0d1c23594198e5f0533f83626
   - enabled: 1
-    path: Assets/Prefab/Scenes/Saves/Save1.unity
+    path: Assets/Scenes/Saves/Save1.unity
     guid: 3e01244eda4a25443a8314f8952d451f
   - enabled: 1
-    path: Assets/Prefab/Scenes/Saves/Save3.unity
+    path: Assets/Scenes/Saves/Save3.unity
     guid: 677ef5b24d29a314baf6e12c45dd3c0a
   - enabled: 1
-    path: Assets/Prefab/Scenes/Cave/Cave.unity
+    path: Assets/Scenes/Cave/Cave.unity
     guid: 1d52d47dd095b1c44a71d499f5649b54
   - enabled: 1
-    path: Assets/Prefab/Scenes/Shop/Grocery_Shop.unity
+    path: Assets/Scenes/Shop/Grocery_Shop.unity
     guid: cff9169c852c8ab45b3f270263c7eed1
   - enabled: 1
-    path: Assets/Prefab/Scenes/Shop/Carpenter_Shop.unity
+    path: Assets/Scenes/Shop/Carpenter_Shop.unity
     guid: 06fb90dede5fb6440803de6402d003c1
   - enabled: 1
-    path: Assets/Prefab/Scenes/Shop/Blacksmith_Shop.unity
+    path: Assets/Scenes/Shop/Blacksmith_Shop.unity
     guid: 348fbb4b5fead0f4aaa678ad5180497d
   - enabled: 1
-    path: Assets/Prefab/Scenes/House/HomeLv2.unity
+    path: Assets/Scenes/House/HomeLv2.unity
     guid: 92ffe880c7c40cc45babae967a20edab
   - enabled: 1
-    path: Assets/Prefab/Scenes/House/HomeLv3.unity
+    path: Assets/Scenes/House/HomeLv3.unity
     guid: dde6f677871cceb40998c651f7087ae5
   - enabled: 1
-    path: Assets/Prefab/Scenes/House/HomeLv4.unity
+    path: Assets/Scenes/House/HomeLv4.unity
     guid: 5baa9e30f6298254697f83d27c90d9c8
   m_configObjects: {}
