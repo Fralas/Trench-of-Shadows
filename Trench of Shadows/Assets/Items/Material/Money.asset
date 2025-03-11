@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: Money
   itemImg: {fileID: 21300000, guid: d205a9db049c0284eaa02d73d0ce6156, type: 3}
-  itemAmt: 100
+  itemAmt: 1
   type: 5
   durability: 100
   recipe: []
+  bonusHealth: 0

@@ -9,48 +9,35 @@ public class SellSlotHandler : MonoBehaviour, IPointerClickHandler
     public Image slotImg;
     public TextMeshProUGUI itemCount;
     public InventoryManager inventoryManager; // Reference to InventoryManager
+    public Item moneyItem; // Selectable money item from inspector
 
     private MerchBehaviour merchantBehaviour; // Reference to the merchant's behavior
+    private int slotIndex; // Index of this slot in the merchant UI
 
-/*
     void Awake()
     {
+        // Cerca InventoryManager nella scena se non è assegnato
         if (inventoryManager == null)
         {
-            Debug.LogError("InventoryManager reference is not assigned in " + gameObject.name);
+            inventoryManager = FindObjectOfType<InventoryManager>();
+            if (inventoryManager == null)
+            {
+                Debug.LogError("rcavacca InventoryManager non trovato nella scena!");
+            }
         }
+
+        // Cerca MerchBehaviour nella scena se non è assegnato
         if (merchantBehaviour == null)
         {
-            Debug.LogError("MerchantBehaviour reference is not assigned in " + gameObject.name);
+            merchantBehaviour = FindObjectOfType<MerchBehaviour>();
+            if (merchantBehaviour == null)
+            {
+                Debug.LogError("rcavacca MerchantBehaviour non trovato nella scena!");
+            }
         }
+
         UpdateSlotUI();
-    }*/
-
-    void Awake()
-{
-    // Cerca InventoryManager nella scena se non è assegnato
-    if (inventoryManager == null)
-    {
-        inventoryManager = FindObjectOfType<InventoryManager>();
-        if (inventoryManager == null)
-        {
-            Debug.LogError("rcavacca InventoryManager non trovato nella scena!");
-        }
     }
-
-    // Cerca MerchBehaviour nella scena se non è assegnato
-    if (merchantBehaviour == null)
-    {
-        merchantBehaviour = FindObjectOfType<MerchBehaviour>();
-        if (merchantBehaviour == null)
-        {
-            Debug.LogError("rcavacca MerchantBehaviour non trovato nella scena!");
-        }
-    }
-
-    UpdateSlotUI();
-}
-
 
     // Update the UI for this sell slot
     private void UpdateSlotUI()
@@ -71,15 +58,31 @@ public class SellSlotHandler : MonoBehaviour, IPointerClickHandler
     // On click, try to sell the item to the merchant
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (item == null) return;
+        if (item == null || merchantBehaviour == null || moneyItem == null) return;
+
+        int moneyReward = 2; // Default value
+        
+        // Find the correct money reward if slot index is valid
+        for (int i = 0; i < merchantBehaviour.sellSlots.Length; i++)
+        {
+            if (merchantBehaviour.sellSlots[i] == gameObject)
+            {
+                slotIndex = i;
+                if (slotIndex < merchantBehaviour.moneyPerSale.Length)
+                {
+                    moneyReward = merchantBehaviour.moneyPerSale[slotIndex];
+                }
+                break;
+            }
+        }
 
         if (inventoryManager.GetItemCount(item.itemID) >= 1) // Check if the player has the item to sell
         {
             // Perform the transaction: remove 1 item from the inventory and give money
             inventoryManager.RemoveItem(item.itemID, 1);
-            inventoryManager.AddItemToInventory(new Item { itemID = "Money", itemAmt = 2 });
+            inventoryManager.AddItemToInventory(new Item { itemID = moneyItem.itemID, itemAmt = moneyReward, itemImg = moneyItem.itemImg });
 
-            Debug.Log($"Sold 1 {item.itemID} and received 2 money.");
+            Debug.Log($"Sold 1 {item.itemID} and received {moneyReward} {moneyItem.itemID}.");
         }
         else
         {
@@ -101,4 +104,3 @@ public class SellSlotHandler : MonoBehaviour, IPointerClickHandler
         UpdateSlotUI();
     }
 }
-

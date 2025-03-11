@@ -4,20 +4,21 @@ using UnityEngine.UI;
 public class MerchBehaviour : MonoBehaviour
 {
     [Header("Merchant UI Settings")]
-    public GameObject merchantUI;  // Reference to the merchant's UI
-    public GameObject interactionPrompt; // UI prompt when near merchant
+    public GameObject merchantUI;
+    public GameObject interactionPrompt;
     
     private Transform player;
-    public float interactionRange = 2f; // Distance required to interact
-    private InventoryManager inventoryManager; // Reference to the InventoryManager
+    public float interactionRange = 2f;
+    private InventoryManager inventoryManager;
 
     // UI elements for sell slots
-    public GameObject sellSlot1;
-    public GameObject sellSlot2;
-    public GameObject sellSlot3;
+    public GameObject[] sellSlots = new GameObject[8];
 
     // Inventory items the merchant sells
-    private string[] itemsForSale = { "Wheat", "Wood", "Stone"}; // Example items, adjust as needed
+    private string[] itemsForSale = { "Stone", "Wheat", "Wood", "RawFish", "RawMeat", "Skull", "Gold", "Copper"};
+    
+    // Money received per item sold
+    public int[] moneyPerSale = { 2, 3, 5, 10, 15, 4, 6, 7 }; // Adjustable money values per slot
 
     private void Start()
     {
@@ -27,9 +28,10 @@ public class MerchBehaviour : MonoBehaviour
         inventoryManager = GameObject.Find("Manager")?.GetComponent<InventoryManager>();
         if (inventoryManager == null) Debug.LogError("InventoryManager not found!");
 
-        AssignSellSlot(sellSlot1, 0);
-        AssignSellSlot(sellSlot2, 1);
-        AssignSellSlot(sellSlot3, 2);
+        for (int i = 0; i < sellSlots.Length; i++)
+        {
+            AssignSellSlot(sellSlots[i], i);
+        }
         
         if (merchantUI == null) Debug.LogError("Merchant UI is not assigned!");
         if (interactionPrompt != null) interactionPrompt.SetActive(false);
@@ -70,7 +72,7 @@ public class MerchBehaviour : MonoBehaviour
     {
         if (sellSlot == null)
         {
-            Debug.LogError($"SellSlot{itemIndex + 1} is not assigned!");
+            Debug.LogError($"SellSlot {itemIndex + 1} is not assigned!");
             return;
         }
         sellSlot.GetComponent<Button>().onClick.AddListener(() => HandleTransaction(itemIndex));
@@ -78,14 +80,16 @@ public class MerchBehaviour : MonoBehaviour
 
     private void HandleTransaction(int itemIndex)
     {
+        if (itemIndex >= itemsForSale.Length || itemIndex >= moneyPerSale.Length) return;
+
         string itemToSell = itemsForSale[itemIndex];
         int itemCount = inventoryManager.GetItemCount(itemToSell);
 
         if (itemCount >= 1)
         {
             inventoryManager.RemoveItem(itemToSell, 1);
-            inventoryManager.AddItemToInventory(new Item { itemID = "Money", itemAmt = 2 });
-            Debug.Log($"Transaction successful! You received 2 money for selling {itemToSell}.");
+            inventoryManager.AddItemToInventory(new Item { itemID = "Money", itemAmt = moneyPerSale[itemIndex] });
+            Debug.Log($"Transaction successful! You received {moneyPerSale[itemIndex]} money for selling {itemToSell}.");
         }
         else
         {
