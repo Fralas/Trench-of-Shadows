@@ -9,6 +9,7 @@ public class EnemySpawnerLimited : MonoBehaviour
     public float spawnRadius = 5f; // Raggio di spawn casuale
     public int maxEnemiesToSpawn = 10; // Numero massimo di nemici totali da spawnare
     public float spawnInterval = 60f; // Tempo tra ogni spawn
+    public InventoryManager playerInventory; // Riferimento all'inventario del giocatore
 
     private int totalSpawnedEnemies = 0; // Conta il numero totale di nemici spawnati
     private EnemyManager enemyManager;   // Reference to the EnemyManager
@@ -39,6 +40,13 @@ public class EnemySpawnerLimited : MonoBehaviour
             Vector2 randomPosition = (Vector2)spawnPoint.position + Random.insideUnitCircle * spawnRadius;
             GameObject spawnedEnemy = Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
             totalSpawnedEnemies++;
+
+            // Assign the player's inventory to the spawned enemy
+            EnemyDropItem enemyDrop = spawnedEnemy.GetComponent<EnemyDropItem>();
+            if (enemyDrop != null)
+            {
+                enemyDrop.playerInventory = playerInventory;
+            }
 
             // Add the spawned enemy to the EnemyManager's list
             if (enemyManager != null)

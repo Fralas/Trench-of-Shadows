@@ -4,7 +4,7 @@ public class EnemyDropItem : MonoBehaviour
 {
     [SerializeField] private Item itemToDrop; // The item to drop
     [SerializeField] private int dropAmount = 1; // Amount of the item to drop
-    [SerializeField] private InventoryManager playerInventory; // Reference to the player's inventory
+    [SerializeField] public InventoryManager playerInventory; // Reference to the player's inventory
 
     private void Start()
     {
