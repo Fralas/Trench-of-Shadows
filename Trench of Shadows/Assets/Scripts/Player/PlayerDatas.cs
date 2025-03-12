@@ -113,9 +113,6 @@ public class PlayerDatas : MonoBehaviour
         MaxHealthChanged?.Invoke(MaxHp);
     }
 
-
-
-
     public void Damage(int amount) => Hp -= amount;
     public void Heal(int amount) => Hp += amount;
     public void HealFull() => Hp = MaxHp;  // Use MaxHp here to account for bonus health
@@ -125,6 +122,12 @@ public class PlayerDatas : MonoBehaviour
     public void ConsumeHunger(int amount) => Hunger -= amount;
     public void RestoreHunger(int amount) => Hunger += amount;
     public void AdjustHunger(int value) => Hunger = value;
+
+    public void HealAndRestoreHunger(int healAmount, int hungerAmount)
+    {
+        Heal(healAmount);
+        RestoreHunger(hungerAmount);
+    }
 
     private IEnumerator ConsumeHungerOverTime()
     {
