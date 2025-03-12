@@ -86,3 +86,11 @@ public class DeathHomeButton : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
+
+
+
+
+
+
+
+

@@ -42,7 +42,7 @@ public class PlayerDatas : MonoBehaviour
 
             if (_hp <= 0)
         {
-            SceneManager.LoadScene("Game");
+            //SceneManager.LoadScene("Game");
             Died?.Invoke();
             Hunger = MaxHunger; // Reset della fame alla morte
             Debug.Log("Il player è morto. Fame resettata!"); // Debug per controllare

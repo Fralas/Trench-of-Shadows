@@ -23,10 +23,10 @@ public class UIActivation : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Game" ||
             SceneManager.GetActiveScene().name == "Cave" ||
-            SceneManager.GetActiveScene().name == "HouseLv1" ||
-            SceneManager.GetActiveScene().name == "HouseLv2" ||
-            SceneManager.GetActiveScene().name == "HouseLv3" ||
-            SceneManager.GetActiveScene().name == "HouseLv4" ||
+            SceneManager.GetActiveScene().name == "HomeLv1" ||
+            SceneManager.GetActiveScene().name == "HomeLv2" ||
+            SceneManager.GetActiveScene().name == "HomeLv3" ||
+            SceneManager.GetActiveScene().name == "HomeLv4" ||
             SceneManager.GetActiveScene().name == "Blacksmith_Shop" ||
             SceneManager.GetActiveScene().name == "Carpenter_Shop" ||
             SceneManager.GetActiveScene().name == "Grocery_Shop" ||
