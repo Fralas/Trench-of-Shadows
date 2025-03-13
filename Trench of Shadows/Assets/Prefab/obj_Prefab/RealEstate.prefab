@@ -3150,7 +3150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   craftInventoryUI: {fileID: 70091354867934926}
   printDelay: 1
-  interactionRange: 2
+  interactionRange: 4
   interactionPrompt: {fileID: 1101701996873598118}
 --- !u!95 &8964392421389147461
 Animator:

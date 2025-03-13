@@ -96,6 +96,7 @@ MonoBehaviour:
   slotImg: {fileID: 5426531309930893005}
   itemCount: {fileID: 6639694531378073441}
   inventoryManager: {fileID: 0}
+  moneyItem: {fileID: 0}
 --- !u!1 &7801618535398806
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,6 +670,7 @@ MonoBehaviour:
   slotImg: {fileID: 7255946531245786813}
   itemCount: {fileID: 3723232277717526263}
   inventoryManager: {fileID: 0}
+  moneyItem: {fileID: 0}
 --- !u!1 &1084029959082946348
 GameObject:
   m_ObjectHideFlags: 0
@@ -1594,6 +1596,7 @@ MonoBehaviour:
   slotImg: {fileID: 2016606625639825459}
   itemCount: {fileID: 6500010912195563769}
   inventoryManager: {fileID: 0}
+  moneyItem: {fileID: 0}
 --- !u!1 &2216458331923940605
 GameObject:
   m_ObjectHideFlags: 0
@@ -1831,7 +1834,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   merchantUI: {fileID: 6477743741285420609}
   interactionPrompt: {fileID: 1507605789399415257}
-  interactionRange: 2
+  interactionRange: 3
   sellSlots:
   - {fileID: 991602679338037872}
   - {fileID: 3139729949734193491}
@@ -2206,6 +2209,7 @@ MonoBehaviour:
   slotImg: {fileID: 3843525151372605852}
   itemCount: {fileID: 3287498172905819799}
   inventoryManager: {fileID: 0}
+  moneyItem: {fileID: 0}
 --- !u!1 &3401952784579366271
 GameObject:
   m_ObjectHideFlags: 0
@@ -2720,6 +2724,7 @@ MonoBehaviour:
   slotImg: {fileID: 6428321031350288990}
   itemCount: {fileID: 4667937430380350673}
   inventoryManager: {fileID: 0}
+  moneyItem: {fileID: 0}
 --- !u!1 &4023114257114198802
 GameObject:
   m_ObjectHideFlags: 0
@@ -2891,6 +2896,7 @@ MonoBehaviour:
   slotImg: {fileID: 565026477255126859}
   itemCount: {fileID: 3877192523038354117}
   inventoryManager: {fileID: 0}
+  moneyItem: {fileID: 0}
 --- !u!1 &4252503807364023077
 GameObject:
   m_ObjectHideFlags: 0
@@ -3271,6 +3277,7 @@ MonoBehaviour:
   slotImg: {fileID: 4305732539114027796}
   itemCount: {fileID: 3974412774652497684}
   inventoryManager: {fileID: 0}
+  moneyItem: {fileID: 0}
 --- !u!1 &4949949249553464643
 GameObject:
   m_ObjectHideFlags: 0
@@ -4547,6 +4554,7 @@ MonoBehaviour:
   slotImg: {fileID: 4419479427262595947}
   itemCount: {fileID: 8466899505210752849}
   inventoryManager: {fileID: 0}
+  moneyItem: {fileID: 0}
 --- !u!1 &8775082324343992818
 GameObject:
   m_ObjectHideFlags: 0
