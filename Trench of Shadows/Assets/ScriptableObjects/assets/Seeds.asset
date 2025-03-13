@@ -17,4 +17,7 @@ MonoBehaviour:
   itemAmt: 1
   type: 0
   durability: 100
-  recipe: []
+  recipe:
+  - ingredientItem: {fileID: 11400000, guid: d597be2556668cb4cb5ae171b0df6523, type: 2}
+    amountRequired: 1
+  bonusHealth: 0

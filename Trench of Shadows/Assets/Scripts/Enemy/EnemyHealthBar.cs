@@ -8,7 +8,7 @@ public class EnemyHealthBar : MonoBehaviour
     [SerializeField] private RectMask2D _mask;
     [SerializeField] private TMP_Text _hpIndicator;
     private EnemyHealth _enemyHealth;
-
+    
     private float _maxRightMask;
     private float _initialRightMask;
     private bool _initialized = false;
@@ -23,7 +23,7 @@ public class EnemyHealthBar : MonoBehaviour
             return;
         }
 
-        // Assicura il calcolo corretto della dimensione
+        // Initialize bar after a short delay
         Invoke(nameof(InitializeBar), 0.1f);
     }
 
@@ -34,6 +34,9 @@ public class EnemyHealthBar : MonoBehaviour
 
         _enemyHealth.Damaged.AddListener(SetValue);
         SetValue(_enemyHealth.Hp);
+
+        // Set initial visibility
+        gameObject.SetActive(_enemyHealth.Hp < _enemyHealth.MaxHp);
 
         _initialized = true;
     }
@@ -50,5 +53,8 @@ public class EnemyHealthBar : MonoBehaviour
         _mask.padding = padding;
 
         _hpIndicator.SetText($"{currentHealth}/{_enemyHealth.MaxHp}");
+
+        // Enable the health bar only when health is not full
+        gameObject.SetActive(currentHealth < _enemyHealth.MaxHp);
     }
 }

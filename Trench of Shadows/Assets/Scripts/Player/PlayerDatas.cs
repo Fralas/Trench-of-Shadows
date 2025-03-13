@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
+using UnityEngine.SceneManagement;
+
 
 public class PlayerDatas : MonoBehaviour
 {
@@ -39,7 +41,13 @@ public class PlayerDatas : MonoBehaviour
                 Healed?.Invoke(_hp);
 
             if (_hp <= 0)
-                Died?.Invoke();
+        {
+            //SceneManager.LoadScene("Game");
+            Died?.Invoke();
+            Hunger = MaxHunger; // Reset della fame alla morte
+            Debug.Log("Il player è morto. Fame resettata!"); // Debug per controllare
+        }
+            
         }
     }
 
@@ -85,8 +93,14 @@ public class PlayerDatas : MonoBehaviour
     {
         Debug.Log("UpdateBonusHealth called with value: " + bonusDelta);
 
-        // Add or subtract the bonus health based on the bonusDelta value
+        // Update bonus health but prevent exceeding max limit
         _bonusMaxHp += bonusDelta;
+
+        // Ensure MaxHp does not exceed 160
+        if (MaxHp > 160)
+        {
+            _bonusMaxHp = 160 - _maxHp; // Adjust bonus health accordingly
+        }
 
         // Ensure current health does not exceed the new MaxHp
         _hp = Mathf.Clamp(_hp, 0, MaxHp);
@@ -99,8 +113,6 @@ public class PlayerDatas : MonoBehaviour
         MaxHealthChanged?.Invoke(MaxHp);
     }
 
-
-
     public void Damage(int amount) => Hp -= amount;
     public void Heal(int amount) => Hp += amount;
     public void HealFull() => Hp = MaxHp;  // Use MaxHp here to account for bonus health
@@ -110,6 +122,12 @@ public class PlayerDatas : MonoBehaviour
     public void ConsumeHunger(int amount) => Hunger -= amount;
     public void RestoreHunger(int amount) => Hunger += amount;
     public void AdjustHunger(int value) => Hunger = value;
+
+    public void HealAndRestoreHunger(int healAmount, int hungerAmount)
+    {
+        Heal(healAmount);
+        RestoreHunger(hungerAmount);
+    }
 
     private IEnumerator ConsumeHungerOverTime()
     {

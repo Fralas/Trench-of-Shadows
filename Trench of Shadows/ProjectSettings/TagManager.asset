@@ -7,6 +7,7 @@ TagManager:
   - solido
   - Enemy
   - Plant
+  - NPC
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Player
   - Enemy
   - NoPass
-  - 
+  - NPC
   - 
   - 
   - 
@@ -56,6 +57,12 @@ TagManager:
   - name: abovePlayer
     uniqueID: 2334293489
     locked: 0
+  - name: Middle
+    uniqueID: 2891130113
+    locked: 0
   - name: Foreground
     uniqueID: 552680991
+    locked: 0
+  - name: ForG2
+    uniqueID: 2617388333
     locked: 0

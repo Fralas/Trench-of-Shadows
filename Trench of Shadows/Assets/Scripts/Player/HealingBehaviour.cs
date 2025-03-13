@@ -5,6 +5,7 @@ public class HealingBehaviour : MonoBehaviour
     public InventoryManager playerInventory;
     public string[] healingItemIDs; // Array of item IDs that can heal the player
     public int healAmount = 10; // Amount of HP restored per use
+    public int hungerRestoreAmount = 5; // Amount of hunger restored per use
 
     private void Update()
     {
@@ -35,8 +36,8 @@ public class HealingBehaviour : MonoBehaviour
 
     private void HealPlayer()
     {
-        PlayerDatas.Instance.Heal(healAmount);
-        Debug.Log($"Player healed by {healAmount} HP!");
+        PlayerDatas.Instance.HealAndRestoreHunger(healAmount, hungerRestoreAmount);
+        Debug.Log($"Player healed by {healAmount} HP and restored {hungerRestoreAmount} hunger points!");
 
         // Remove one instance of the healing item from inventory
         Item heldItem = playerInventory.GetHeldSlotItem();

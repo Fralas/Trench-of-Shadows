@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Hoe
   m_EditorClassIdentifier: 
   itemID: Hoe
-  itemImg: {fileID: 21300000, guid: b958c5d79cb44b5428cb1f8f3111f856, type: 3}
+  itemImg: {fileID: 21300000, guid: bcc593dedf39b46418dac1f763765a42, type: 3}
   itemAmt: 1
   type: 0
   durability: 100
   recipe:
-  - ingredientItem: {fileID: 11400000, guid: 8bdd3074ea09cb54389bb8ac0a990d3d, type: 2}
+  - ingredientItem: {fileID: 11400000, guid: e8e0d4b7f27c9494b8eaa3f7df6790f8, type: 2}
     amountRequired: 2
-  - ingredientItem: {fileID: 11400000, guid: 17c07ab7cfa69ea4494516bcf51f37d2, type: 2}
+  - ingredientItem: {fileID: 11400000, guid: 5ec011d3238a13244bd2e5fcce293b37, type: 2}
     amountRequired: 3
+  bonusHealth: 0

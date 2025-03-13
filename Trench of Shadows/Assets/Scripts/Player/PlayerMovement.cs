@@ -11,12 +11,16 @@ public class PlayerController : MonoBehaviour
     private float lastAttackTime = 0f;
     private bool isEditMode = false;
     private InventoryManager playerInventory;
-    private int enemyLayer; // ✅ Fixed missing semicolon
+    private int enemyLayer;
 
     [SerializeField] private int attackDamage = 10;  // Danno inflitto ai nemici
     [SerializeField] private float attackRange = 1f; // Distanza massima per colpire il nemico
 
     private bool isHarvestingOrWatering = false; // Flag to check if the player is harvesting or watering
+
+    // New variables for sound
+    public AudioClip movementSound;  // Sound to play while moving
+    private AudioSource audioSource; // Audio source to play the sound
 
     void Start()
     {
@@ -26,6 +30,10 @@ public class PlayerController : MonoBehaviour
         rb.gravityScale = 0f;
         playerInventory = GameObject.Find("Manager").GetComponent<InventoryManager>();
         enemyLayer = LayerMask.GetMask("Enemy");
+
+        // Add or get the AudioSource component
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.loop = true;  // Enable looping for the movement sound
     }
 
     void Update()
@@ -39,11 +47,33 @@ public class PlayerController : MonoBehaviour
         Vector2 movement = new Vector2(horizontalInput, verticalInput).normalized * moveSpeed;
         rb.velocity = movement;
 
+        // Flip sprite based on movement direction
         if (horizontalInput < 0) spriteRenderer.flipX = true;
         else if (horizontalInput > 0) spriteRenderer.flipX = false;
 
         animator.SetBool("isWalking", horizontalInput != 0 || verticalInput != 0);
 
+        // Play movement sound if the player is moving
+        if (horizontalInput != 0 || verticalInput != 0)
+        {
+            if (!audioSource.isPlaying)  // Only play the sound if it's not already playing
+            {
+                if (movementSound != null)
+                {
+                    audioSource.clip = movementSound;
+                    audioSource.Play();
+                }
+            }
+        }
+        else
+        {
+            if (audioSource.isPlaying)  // Stop the sound when the player stops moving
+            {
+                audioSource.Stop();
+            }
+        }
+
+        // Attack handling
         if (Time.time - lastAttackTime >= attackCooldown && PlayerHasSword())
         {
             if (Input.GetKeyDown(KeyCode.Space))

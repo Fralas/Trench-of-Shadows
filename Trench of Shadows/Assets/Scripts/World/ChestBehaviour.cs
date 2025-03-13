@@ -12,6 +12,13 @@ public class ChestInteraction : MonoBehaviour
     private GameObject playerInventoryBackground; // Reference to the player inventory background
     private GameObject chestInventoryBackground; // Reference to the chest inventory background
 
+    [Header("Interaction Prompt")]
+    public GameObject interactionPrompt; // UI or object that appears when near the chest
+
+    [Header("Chest Sound Settings")]
+    public AudioClip chestOpenSound;  // Sound to play when the chest is opened
+    private AudioSource audioSource; // Audio source to play the sound
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -21,6 +28,15 @@ public class ChestInteraction : MonoBehaviour
 
         // Reference to the chest inventory background
         chestInventoryBackground = GameObject.Find("ChestInventoryBackground");
+
+        // Add or get the AudioSource component
+        audioSource = gameObject.AddComponent<AudioSource>();
+
+        // Ensure the interaction prompt starts disabled
+        if (interactionPrompt != null)
+        {
+            interactionPrompt.SetActive(false);
+        }
     }
 
     private void Update()
@@ -33,6 +49,12 @@ public class ChestInteraction : MonoBehaviour
         // Check if the player is within interaction range
         if (distance < interactionRange)
         {
+            // Show interaction prompt
+            if (interactionPrompt != null && !interactionPrompt.activeSelf)
+            {
+                interactionPrompt.SetActive(true);
+            }
+
             timeSinceLastPrint += Time.deltaTime;
 
             // Show the interaction message with a delay
@@ -45,12 +67,18 @@ public class ChestInteraction : MonoBehaviour
             // Trigger the chest inventory toggle when 'I' is pressed
             if (Input.GetKeyDown(KeyCode.I))
             {
-                OpenChestInventory();  // Open the chest inventory if near the chest
+                OpenChestInventory();
             }
         }
         else
         {
-            // If the player is not near a chest, just ensure the chest inventory is closed
+            // Hide interaction prompt if player is out of range
+            if (interactionPrompt != null && interactionPrompt.activeSelf)
+            {
+                interactionPrompt.SetActive(false);
+            }
+
+            // Ensure the chest inventory is closed
             if (chestInventoryUI != null && chestInventoryUI.activeSelf)
             {
                 chestInventoryUI.SetActive(false);
@@ -65,6 +93,13 @@ public class ChestInteraction : MonoBehaviour
         {
             chestInventoryUI.SetActive(true);
             Debug.Log("Chest inventory opened.");
+
+            // Play the chest opening sound if it's set
+            if (chestOpenSound != null)
+            {
+                audioSource.clip = chestOpenSound;
+                audioSource.Play();
+            }
 
             // Ensure both player and chest inventories are active
             if (playerInventoryBackground != null && !playerInventoryBackground.activeSelf)

@@ -15,45 +15,39 @@ public class CraftingInteraction : MonoBehaviour
     private GameObject craftingInventoryBackground; // Reference to the crafting table inventory background
     private GameObject recipeBackground; // Reference to the recipe background
 
-    /*private void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-
-        // Reference to the player inventory background
-        playerInventoryBackground = GameObject.Find("InventoryBackground");
-
-        // Reference to the crafting inventory background
-        craftingInventoryBackground = GameObject.Find("CraftingBackground");
-
-        // Reference to the recipe inventory background
-        recipeBackground = GameObject.Find("RecipeBackground");
-    }*/
+    [Header("Interaction Prompt")]
+    public GameObject interactionPrompt; // UI or object that appears when near the crafting table
 
     private void Start()
-{
-    player = GameObject.FindGameObjectWithTag("Player")?.transform;
+    {
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
 
-    // Trova dinamicamente i GameObject nella scena corrente
-    FindUIElements();
-}
+        // Find UI elements dynamically
+        FindUIElements();
 
-private void FindUIElements()
-{
-    playerInventoryBackground = GameObject.Find("InventoryBackground");
-    craftingInventoryBackground = GameObject.Find("CraftingBackground");
-    recipeBackground = GameObject.Find("RecipeBackground");
+        // Ensure the interaction prompt starts disabled
+        if (interactionPrompt != null)
+        {
+            interactionPrompt.SetActive(false);
+        }
+    }
 
-    // Debug log per verificare che gli elementi siano stati trovati
-    if (playerInventoryBackground == null)
-        Debug.LogWarning("InventoryBackground non trovato nella scena.");
+    private void FindUIElements()
+    {
+        playerInventoryBackground = GameObject.Find("InventoryBackground");
+        craftingInventoryBackground = GameObject.Find("CraftingBackground");
+        recipeBackground = GameObject.Find("RecipeBackground");
+
+        // Debug log to verify elements were found
+        if (playerInventoryBackground == null)
+            Debug.LogWarning("InventoryBackground not found in the scene.");
     
-    if (craftingInventoryBackground == null)
-        Debug.LogWarning("CraftingBackground non trovato nella scena.");
+        if (craftingInventoryBackground == null)
+            Debug.LogWarning("CraftingBackground not found in the scene.");
     
-    if (recipeBackground == null)
-        Debug.LogWarning("RecipeBackground non trovato nella scena.");
-}
-
+        if (recipeBackground == null)
+            Debug.LogWarning("RecipeBackground not found in the scene.");
+    }
 
     private void Update()
     {
@@ -65,6 +59,12 @@ private void FindUIElements()
         // Check if the player is within interaction range
         if (distance < interactionRange)
         {
+            // Show interaction prompt
+            if (interactionPrompt != null && !interactionPrompt.activeSelf)
+            {
+                interactionPrompt.SetActive(true);
+            }
+
             timeSinceLastPrint += Time.deltaTime;
 
             // Show the interaction message with a delay
@@ -82,7 +82,13 @@ private void FindUIElements()
         }
         else
         {
-            // If the player is not near the crafting table, just ensure the crafting inventory is closed
+            // Hide interaction prompt if player is out of range
+            if (interactionPrompt != null && interactionPrompt.activeSelf)
+            {
+                interactionPrompt.SetActive(false);
+            }
+
+            // Ensure the crafting inventory is closed
             if (craftInventoryUI != null && craftInventoryUI.activeSelf)
             {
                 craftInventoryUI.SetActive(false);

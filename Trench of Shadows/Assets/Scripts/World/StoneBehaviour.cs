@@ -12,14 +12,20 @@ public class StoneBehavior : MonoBehaviour
     public float printDelay = 1f;  // Delay in seconds for prints
 
     private Animator playerAnimator;
+    private PlayerController playerController; // Reference to the player controller
+
+    public AudioSource miningSound; // Audio source for mining sound
+    public AudioClip pickaxeBreakSound; // Sound for when the pickaxe breaks
+
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerInventory = GameObject.Find("Manager").GetComponent<InventoryManager>();
 
-        // Get the player's animator
+        // Get the player's animator and controller
         playerAnimator = player.GetComponent<Animator>();
+        playerController = player.GetComponent<PlayerController>();
     }
 
     private void Update()
@@ -38,7 +44,7 @@ public class StoneBehavior : MonoBehaviour
                 timeSinceLastPrint = 0f;
             }
 
-            if (Input.GetKeyDown(KeyCode.E) && PlayerHasPickaxe())
+            if (Input.GetKeyDown(KeyCode.E) && PlayerHasPickaxe() && IsPlayerIdle())
             {
                 Debug.Log("Player pressed 'E'. Mining the stone...");
                 StartMining();
@@ -60,6 +66,18 @@ public class StoneBehavior : MonoBehaviour
 
     private void StartMining()
     {
+        // Play mining sound
+        if (miningSound != null)
+        {
+            miningSound.Play();
+        }
+
+        // Disable player movement
+        if (playerController != null)
+        {
+            playerController.SetHarvestingOrWateringState(true);
+        }
+
         // Set the player's animator to mining state
         if (playerAnimator != null)
         {
@@ -69,7 +87,7 @@ public class StoneBehavior : MonoBehaviour
         // Begin mining stone
         MineStone();
 
-        // After a short time, stop the mining animation
+        // After a short time, stop the mining animation and re-enable movement
         Invoke("StopMining", 1f); // Assuming the mining takes 1 second
     }
 
@@ -78,6 +96,12 @@ public class StoneBehavior : MonoBehaviour
         if (playerAnimator != null)
         {
             playerAnimator.SetBool("isMining", false);
+        }
+        
+        // Re-enable player movement
+        if (playerController != null)
+        {
+            playerController.SetHarvestingOrWateringState(false);
         }
     }
 
@@ -155,23 +179,45 @@ public class StoneBehavior : MonoBehaviour
         return null;
     }
 
-    // New method: Decrease pickaxe durability by 20 each time the stone is mined.
+    // New method: Decrease pickaxe durability by 5 each time the stone is mined.
     private void DecreasePickaxeDurability()
     {
         Item heldItem = playerInventory.GetHeldSlotItem();
         if (heldItem != null && heldItem.itemID == "Pickaxe")
         {
-            heldItem.durability -= 20;
+            heldItem.durability -= 5;
             Debug.Log("Pickaxe durability decreased to: " + heldItem.durability);
+
             if (heldItem.durability <= 0)
             {
                 playerInventory.RemoveHeldItem();
                 Debug.Log("Pickaxe broke and has been removed from the inventory.");
+
+                // Play pickaxe breaking sound
+                if (pickaxeBreakSound != null && miningSound != null)
+                {
+                    miningSound.PlayOneShot(pickaxeBreakSound);
+                }
             }
             else
             {
                 playerInventory.UpdateHeldSlotUI();
             }
         }
+    }
+
+
+    // Check if the player is idle (all animation booleans are false)
+    private bool IsPlayerIdle()
+    {
+        return !(playerAnimator.GetBool("isWalking") ||
+                 playerAnimator.GetBool("isAttackingHorizontal") ||
+                 playerAnimator.GetBool("isAttackingVertical") ||
+                 playerAnimator.GetBool("isWalkingUpwards") ||
+                 playerAnimator.GetBool("isWalkingDownwards") ||
+                 playerAnimator.GetBool("isMining") ||
+                 playerAnimator.GetBool("isCutting") ||
+                 playerAnimator.GetBool("isHarvesting") ||
+                 playerAnimator.GetBool("isWatering"));
     }
 }

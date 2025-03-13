@@ -6,14 +6,23 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Home.unity
+    guid: c3e69b5251b864447b7d25024c6829d4
+  - enabled: 1
+    path: Assets/Scenes/Cutscene/StartingCutScene.unity
+    guid: 8d9c21905a4e38b44933b6b7d66a2353
+  - enabled: 1
+    path: Assets/Scenes/Cutscene/TutorialCutScene.unity
+    guid: 4cbf7c989017cec47afb3a83aea36dc5
+  - enabled: 1
+    path: Assets/Scenes/Cutscene/GroceryCutScene.unity
+    guid: 1b5629a1d8dc2954280b09b08ac5415a
+  - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/House/HomeLv1.unity
     guid: f9c72bb07a0a57b41a68021009ad02de
-  - enabled: 1
-    path: Assets/Scenes/Home.unity
-    guid: c3e69b5251b864447b7d25024c6829d4
   - enabled: 1
     path: Assets/Scenes/Test/Game_fra_nuovo.unity
     guid: ca46b4a2cf50da745aabea1511ba2bf1

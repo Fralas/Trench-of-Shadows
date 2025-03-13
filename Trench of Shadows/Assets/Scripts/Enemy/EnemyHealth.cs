@@ -62,11 +62,11 @@ public class EnemyHealth : MonoBehaviour
         Died?.Invoke();
         Debug.Log($"{gameObject.name} è morto!");
 
-        // Check if the AIRoam component exists and call DropRawMeat if it does.
-        AIRoam aiRoam = GetComponent<AIRoam>();
-        if (aiRoam != null)
+        // Check if the EnemyDropItem component exists and call DropItem if it does.
+        EnemyDropItem enemyDropItem = GetComponent<EnemyDropItem>();
+        if (enemyDropItem != null)
         {
-            aiRoam.DropRawMeat(); // Drop RawMeat first
+            enemyDropItem.DropItem(); // Drop the item
         }
 
         // Now, destroy the enemy object after handling the drop.

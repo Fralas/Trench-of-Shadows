@@ -21,7 +21,10 @@ public class DeathHomeButton : MonoBehaviour
         }
     }
 
-    public void LoadHomeScene()
+    /// <summary>
+    /// Respawn nella stessa scena
+    /// </summary>
+    public void RespawnInGame()
     {
         Debug.Log("🔄 Attempting to respawn...");
 
@@ -29,6 +32,7 @@ public class DeathHomeButton : MonoBehaviour
         if (player != null)
         {
             player.HealFull();
+            player.ConsumeHunger(-player.MaxHunger); // Reset della fame
         }
 
         // Reset player position to the starting point
@@ -42,7 +46,7 @@ public class DeathHomeButton : MonoBehaviour
         if (deathScreen != null)
         {
             deathScreen.SetActive(false);
-            Time.timeScale = 1f; // Freeze the game when the player dies
+            Time.timeScale = 1f; // Unpause the game
         }
 
         // Signal that the player has respawned
@@ -55,18 +59,38 @@ public class DeathHomeButton : MonoBehaviour
         StartCoroutine(ReloadSceneAfterDelay(1f));
     }
 
+    /// <summary>
+    /// Torna alla schermata home
+    /// </summary>
+    public void LoadHomeScene()
+    {
+        Debug.Log("🏠 Returning to Home Screen...");
+        
+        // Ripristina il tempo di gioco
+        Time.timeScale = 1f;
+
+        // Carica la scena della home (sostituisci "HomeScene" con il nome corretto della tua scena home)
+        SceneManager.LoadScene("Home");
+    }
+
     private IEnumerator ReloadSceneAfterDelay(float delay)
     {
-        // Make sure this GameObject is active before starting the coroutine
         if (!gameObject.activeSelf)
         {
             yield break; // Exit if the GameObject is inactive
         }
 
-        // Wait for the specified delay
         yield return new WaitForSeconds(delay);
 
         // Reload the scene to reset everything
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
+
+
+
+
+
+
+
+
