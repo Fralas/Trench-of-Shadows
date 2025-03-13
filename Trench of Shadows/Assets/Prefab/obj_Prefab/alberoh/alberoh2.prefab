@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 5980527164810653497}
   - component: {fileID: 5739461498996810769}
   - component: {fileID: 2569134068948607928}
-  m_Layer: 0
+  - component: {fileID: 7734394034999639851}
+  m_Layer: 7
   m_Name: alberoh2
-  m_TagString: Untagged
+  m_TagString: solido
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4127967730078952705}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5, y: 0, z: 0}
   m_LocalScale: {x: 4.4118, y: 4.4118, z: 4.4118}
   m_ConstrainProportionsScale: 0
@@ -119,7 +120,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0033138543, y: -0.27836725}
+  m_Offset: {x: -0.0039266646, y: -0.1675311}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -130,7 +131,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.23233223, y: 0.15361516}
+  m_Size: {x: 0.21785119, y: 0.21042567}
   m_EdgeRadius: 0
 --- !u!95 &5739461498996810769
 Animator:
@@ -173,3 +174,16 @@ MonoBehaviour:
   stumpSprite: {fileID: 1170214441, guid: 76ab2557fac66bc4a9809018c1b92ded, type: 3}
   cuttingSound: {fileID: 8300000, guid: 2359c3cf3de436643a3e15dbcafc2ee1, type: 3}
   axeBreakSound: {fileID: 8300000, guid: 7b954a29af657fc4ab200a3c12a86bc5, type: 3}
+--- !u!114 &7734394034999639851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4127967730078952705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e938ab4cc4eb2448bb83832c8ca4dbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useTilemapRenderer: 0

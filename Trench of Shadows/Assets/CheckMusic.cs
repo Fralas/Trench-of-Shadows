@@ -49,7 +49,10 @@ public class CheckMusic : MonoBehaviour
 
     void CheckScene()
     {
-        if (SceneManager.GetActiveScene().name == "Cave")
+        if (SceneManager.GetActiveScene().name == "Cave" ||
+            SceneManager.GetActiveScene().name == "Blacksmith_Shop" ||
+            SceneManager.GetActiveScene().name == "Carpenter_Shop" ||
+            SceneManager.GetActiveScene().name == "Grocery_Shop")
         {
             gameObject.SetActive(false);
         }

@@ -480,6 +480,14 @@ PrefabInstance:
       propertyPath: _targetSceneName
       value: Game
       objectReference: {fileID: 0}
+    - target: {fileID: 2395478447941312818, guid: 8980e56be7ab05948aacf1db29b2e54d, type: 3}
+      propertyPath: _targetSceneSpawnName
+      value: SP_lv1House
+      objectReference: {fileID: 0}
+    - target: {fileID: 2395478447941312818, guid: 8980e56be7ab05948aacf1db29b2e54d, type: 3}
+      propertyPath: _currentSceneSpawnName
+      value: SP_GameLv1
+      objectReference: {fileID: 0}
     - target: {fileID: 2482281369222351949, guid: 8980e56be7ab05948aacf1db29b2e54d, type: 3}
       propertyPath: m_Name
       value: SP_GameLv1

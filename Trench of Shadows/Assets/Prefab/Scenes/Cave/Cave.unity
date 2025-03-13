@@ -12005,6 +12005,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ironStone (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7222271850715126947, guid: 8adf807bd15bf324484bb0978db4c955, type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 862661985}
     - target: {fileID: 8692056862486431998, guid: 8adf807bd15bf324484bb0978db4c955, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.71
@@ -13722,6 +13726,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: copperStone (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7222271850715126947, guid: 9abdf6ac694e7404981ec3392c038c13, type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 862661985}
     - target: {fileID: 8692056862486431998, guid: 9abdf6ac694e7404981ec3392c038c13, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.45
@@ -15332,6 +15340,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: copperStone (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7222271850715126947, guid: 9abdf6ac694e7404981ec3392c038c13, type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 862661985}
     - target: {fileID: 8692056862486431998, guid: 9abdf6ac694e7404981ec3392c038c13, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.45
@@ -15513,6 +15525,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ironStone
       objectReference: {fileID: 0}
+    - target: {fileID: 7222271850715126947, guid: 8adf807bd15bf324484bb0978db4c955, type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 862661985}
     - target: {fileID: 8692056862486431998, guid: 8adf807bd15bf324484bb0978db4c955, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.978333
@@ -15909,6 +15925,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: copperStone
       objectReference: {fileID: 0}
+    - target: {fileID: 7222271850715126947, guid: 9abdf6ac694e7404981ec3392c038c13, type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 862661985}
     - target: {fileID: 8692056862486431998, guid: 9abdf6ac694e7404981ec3392c038c13, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.7653522
@@ -16696,6 +16716,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ironStone (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7222271850715126947, guid: 8adf807bd15bf324484bb0978db4c955, type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 862661985}
     - target: {fileID: 8692056862486431998, guid: 8adf807bd15bf324484bb0978db4c955, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.75062
@@ -16753,6 +16777,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: copperStone (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7222271850715126947, guid: 9abdf6ac694e7404981ec3392c038c13, type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 862661985}
     - target: {fileID: 8692056862486431998, guid: 9abdf6ac694e7404981ec3392c038c13, type: 3}
       propertyPath: m_LocalPosition.x
       value: -18.81
@@ -18346,6 +18374,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6017396697428887746, guid: fd711b3c4eb9d6544ac5e1db5b5711a7, type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 862661985}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -21600,6 +21632,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: goldStone (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7222271850715126947, guid: 90a8781bd2e97974788cfeed807acd9d, type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 862661985}
     - target: {fileID: 8692056862486431998, guid: 90a8781bd2e97974788cfeed807acd9d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15.042235
@@ -22061,6 +22097,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ironStone (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 7222271850715126947, guid: 8adf807bd15bf324484bb0978db4c955, type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 862661985}
     - target: {fileID: 8692056862486431998, guid: 8adf807bd15bf324484bb0978db4c955, type: 3}
       propertyPath: m_LocalPosition.x
       value: -24.29
@@ -22824,6 +22864,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: goldStone
       objectReference: {fileID: 0}
+    - target: {fileID: 7222271850715126947, guid: 90a8781bd2e97974788cfeed807acd9d, type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 862661985}
     - target: {fileID: 8692056862486431998, guid: 90a8781bd2e97974788cfeed807acd9d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.833641
@@ -55349,7 +55393,7 @@ MonoBehaviour:
   m_Intensity: 0.29
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 0000000081b947d583d10d98793a9f91f17d228b012553ac1f3ef120
+  m_ApplyToSortingLayers: 0000000081b947d583d10d98793a9f91f17d228b012553ac1f3ef1202d2d029c
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -56551,6 +56595,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ironStone (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7222271850715126947, guid: 8adf807bd15bf324484bb0978db4c955, type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 862661985}
     - target: {fileID: 8692056862486431998, guid: 8adf807bd15bf324484bb0978db4c955, type: 3}
       propertyPath: m_LocalPosition.x
       value: 22.44
@@ -56987,6 +57035,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stoneSmall_2
       objectReference: {fileID: 0}
+    - target: {fileID: 7222271850715126947, guid: 5ff3331b21549d647b8a450d37edf082, type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 862661985}
     - target: {fileID: 8692056862486431998, guid: 5ff3331b21549d647b8a450d37edf082, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.5452924
@@ -59989,6 +60041,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2112065634}
   m_CullTransparentMesh: 1
+--- !u!1001 &2122730958
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7102058949572649907, guid: 2d631e712fcb0a7469d87ac6c1453e78, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -19.981468
+      objectReference: {fileID: 0}
+    - target: {fileID: 7102058949572649907, guid: 2d631e712fcb0a7469d87ac6c1453e78, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -36.59278
+      objectReference: {fileID: 0}
+    - target: {fileID: 7102058949572649907, guid: 2d631e712fcb0a7469d87ac6c1453e78, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7102058949572649907, guid: 2d631e712fcb0a7469d87ac6c1453e78, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7102058949572649907, guid: 2d631e712fcb0a7469d87ac6c1453e78, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7102058949572649907, guid: 2d631e712fcb0a7469d87ac6c1453e78, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7102058949572649907, guid: 2d631e712fcb0a7469d87ac6c1453e78, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7102058949572649907, guid: 2d631e712fcb0a7469d87ac6c1453e78, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7102058949572649907, guid: 2d631e712fcb0a7469d87ac6c1453e78, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7102058949572649907, guid: 2d631e712fcb0a7469d87ac6c1453e78, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7556419960061379776, guid: 2d631e712fcb0a7469d87ac6c1453e78, type: 3}
+      propertyPath: m_Name
+      value: EnemySkeleton
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2d631e712fcb0a7469d87ac6c1453e78, type: 3}
 --- !u!1 &2129994267
 GameObject:
   m_ObjectHideFlags: 0
@@ -60332,3 +60441,4 @@ SceneRoots:
   - {fileID: 257349108}
   - {fileID: 447278373}
   - {fileID: 1155625378}
+  - {fileID: 2122730958}
