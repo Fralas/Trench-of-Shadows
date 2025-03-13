@@ -13,3 +13,13 @@ A 2D survival game where the player must gather resources, build shelters and su
 
 **How will you keep players engaged for 30 minutes? What's the general scope of your game (will change as you go)?**
 Players will remain engaged thanks to the dynamic development of the game, the user has endless ways of developing his character, base and equipment.
+
+GAME WEBSITE -------------------------------
+
+https://fralas.github.io/Trench-of-shadows-website/homepage.html
+
+GAME DIRECT DOWNLOAD -----------------------
+
+https://memma-137.itch.io/trench-of-shadows
+
+-------------------------------------------
